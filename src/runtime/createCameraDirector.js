@@ -143,8 +143,8 @@ export function createCameraDirector({
       ground: world.ground?.mesh ?? null,
       baseFov: getBaseFovForLayout(),
       settings: {
-        moveSpeed: 3,
-        sprintMultiplier: 3,
+        moveSpeed: 4.5,
+        sprintMultiplier: 2,
         eyeHeight: cameraParams.walkEyeHeight,
         acceleration: cameraParams.walkAcceleration,
         deceleration: cameraParams.walkDeceleration,
