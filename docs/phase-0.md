@@ -19,7 +19,9 @@ flags, HTML metadata, and Vite configuration remain unchanged.
 
 The separate experimental prototype and mouse-control patch have **not** been
 supplied or imported. Phase 1 is not started. [Plan.md](../Plan.md) records the
-review boundary and requirements for later work.
+review boundary and requirements for later work. The Phase 0 changes are
+available in [draft PR #1](https://github.com/chingchechung/engineering-cyberpunk-lab/pull/1)
+against the target repository's empty `main` baseline; it has not been merged.
 
 ## Runtime and dependencies
 
@@ -43,11 +45,15 @@ parallelism uses Vite's defaults; no high-cost multi-target build is needed.
 
 Network destinations needed now: `nodejs.org`, `registry.npmjs.org`, `github.com`,
 and `raw.githubusercontent.com` for tool/source inspection. `api.github.com` is
-needed to create a GitHub PR. Git read access works through the platform's
-existing HTTPS authentication. GitHub API requests currently receive a proxy
-CONNECT 403; this is not evidence that a new token is needed. Its domain addition
-is saved in the environment configuration draft and still needs user application.
-No YouTube or Google Forms access is needed until later phases have real inputs.
+needed to create a GitHub PR. Git read/push access works through the platform's
+existing HTTPS authentication. Initial GitHub API requests received a proxy
+CONNECT 403; later PR creation and readback both succeeded using existing
+authentication, without supplying a new token. The domain addition is saved in
+the environment draft. Runtime policy observations still report an unknown
+enforcement state and omit the domain, so those observations do not establish
+that the saved policy was applied or published. The successful API operations
+establish access for those operations only. No YouTube or Google Forms access is
+needed until later phases have real inputs.
 
 ## Architecture and extension boundaries
 
@@ -136,6 +142,7 @@ command was run.
 | Walk, collision, rain, visual parity | Unverified | Requires a functioning WebGPU GPU/browser; HTTP checks and intro UI do not validate gameplay |
 | Unit tests/lint/typecheck | Not provided | Upstream has no scripts for these; no zero-test run claimed as validation |
 | Asset license clearance | Unresolved | All five GLBs inventoried; no sufficient model-specific rights evidence |
+| Target branches and draft PR | Passed | Target `main` and Phase 0 branch pushed; PR #1 read back as OPEN and draft |
 
 Browser failure detail: production `dist/` was served by a loopback static
 server. Playwright used system Chromium 154 with a SwiftShader software path.
@@ -159,9 +166,13 @@ separate reviewed change. No dependency security audit was performed.
 
 ## Review and outstanding work
 
-Review `AGENTS.md`, `Plan.md`, the import provenance, and
-[asset-licenses.md](asset-licenses.md). Apply the saved GitHub API network domain
-to allow PR creation. Confirm rendering/gameplay on a capable WebGPU device and
-resolve asset redistribution rights before release. These limits are separate
-from the successful build and static-serving setup. Stop here for user review;
-do not proceed into Phase 1 automatically.
+Review draft PR #1, `AGENTS.md`, `Plan.md`, the import provenance, and
+[asset-licenses.md](asset-licenses.md). Installation/startup instructions, the
+exact checkout commit/path, and the GitHub API domain addition are saved in the
+environment draft. Review and save environment settings, then publish the
+environment to retain the prepared snapshot for later tasks; draft persistence
+does not establish publication or successful restoration in a fresh task.
+Confirm rendering/gameplay on a capable WebGPU device and resolve asset
+redistribution rights before release. These limits are separate from the
+successful build and static-serving setup. Stop here for user review; do not
+proceed into Phase 1 automatically.
