@@ -1,3 +1,59 @@
+# Engineering Cyberpunk Lab project requirements
+
+Read [Plan.md](Plan.md), [docs/phase-0.md](docs/phase-0.md), and
+[docs/asset-licenses.md](docs/asset-licenses.md) before changing this fork.
+The original upstream instructions are retained below.
+
+## Authorized phase and Git workflow
+
+- This change implements Phase 0 only. Stop for user review before Phase 1;
+  do not implement mouse fixes, question terminals, quizzes, or integrations yet.
+- Use feature branches and GitHub pull requests against
+  `chingchechung/engineering-cyberpunk-lab`. Do not modify or push to
+  `ektogamat/threejs-conference`.
+- Do not merge PRs, publish releases, or deploy without explicit user approval.
+  In particular, do not execute the upstream `npm run deploy` script.
+- Cloud tasks are already isolated. Use the existing checkout; do not create a
+  Git worktree unless explicitly requested. Preserve existing local changes.
+
+## Baseline and environment
+
+- Baseline: `8cc20593b2270e2ce832e7b7b44356705daddec4` from Threejs-Punk.
+  Its imported tree is recorded in the dedicated baseline import commit.
+- Use Node.js 22 LTS, pinned by `.nvmrc`, and npm. Use `npm ci`; keep the
+  upstream package declarations and lockfile unchanged during Phase 0.
+- `bash scripts/cloud-install.sh` installs a checksum-verified Node runtime
+  outside the checkout, installs dependencies, and runs the production build.
+  Activate that runtime's `bin` directory in each new shell; PATH changes inside
+  the install script do not persist in the caller.
+- Start Vite with `BROWSER=none npm run dev -- --host 127.0.0.1 --port 5173 --strictPort`.
+  Vite uses HTTPS. Trust its specific local certificate for automated requests;
+  do not disable TLS verification. See the validation commands in the Phase 0 doc.
+- There is no upstream automated test, lint, or typecheck script. Do not claim
+  such suites passed. Build and HTTP checks do not prove visual/gameplay parity.
+
+## Requirements for later phases
+
+- Preserve the original city, walking, collision, rain, lighting, shaders,
+  post-processing, and visual quality. Prefer small factory modules composed
+  through existing APIs; minimize changes to rendering, physics, and collision.
+- The local prototype and separate mouse-control fix have not been supplied.
+  Never assume they are in this workspace. Once Phase 1 is authorized, preserve
+  a supplied fix or reimplement and regression-test stable mouse look, including
+  the reported unwanted upward rotation and pointer-lock transitions.
+- Q01–Q05 terminals require visible labels as well as yellow indicators; X opens
+  the nearby terminal. An open quiz must block background clicks, global input,
+  movement, mouse look, and underlying controls, with appropriate focus handling.
+- JSON v1/v2 compatibility must be based on supplied Engineering City Lab
+  fixtures. No assignment schema, YouTube IDs, or Google Forms URL is available
+  yet. Do not invent them or implement integrations in Phase 0.
+- Retain the MIT notice, original author credits, and adapted shader attribution.
+  Public assets have separate rights. All five GLB models currently lack
+  sufficient license evidence; resolve redistribution rights before release or
+  deployment. Never describe the entire repository as MIT-licensed.
+
+---
+
 # Instructions for coding agents
 
 Use this file when you are asked to **modify**, **extend**, or **replicate** techniques from Threejs-Punk. Human-oriented narrative lives in [README.md](README.md). **If README or AGENTS disagree with source code, the code wins.**
