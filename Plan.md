@@ -6,11 +6,11 @@ Target: `chingchechung/engineering-cyberpunk-lab`.
 Upstream: `ektogamat/threejs-conference` (Threejs-Punk), pinned to
 `8cc20593b2270e2ce832e7b7b44356705daddec4`.
 
-Phase 0 is complete and merged through PR #1. Phase 1 is explicitly authorized
-by the instructor on 2026-10-27; earlier Phase 0-only restrictions are historical.
-Work from the latest `main` on `feature/phase-1-education-interaction` with a
-Draft GitHub pull request. Finish Phase 1, report the checks, then stop for
-Windows 11 Chrome/Edge acceptance before Phase 2.
+Phase 0, Phase 1 and the walking-speed adjustment are complete and merged
+through PRs #1–#3. Phase 1 passed instructor Windows 11 acceptance; walking is
+4.5 m/s and maximum sprint is 9 m/s. Phase 2 is explicitly authorized on
+`feature/phase-2-assignment-integration` from merged `main` (`d6b6702`). Finish
+Phase 2, open a Draft PR, then stop for instructor acceptance before Phase 3.
 Never modify the upstream repository, merge a PR, publish a release, or deploy
 without explicit approval. Retain the city, walking, BVH collision, rain,
 lighting, shaders, post-processing, and original visual quality.
@@ -34,7 +34,7 @@ Exit: reproducible build, recorded runtime evidence and limitations, complete
 asset inventory, reviewable changes, and an explicit stop before Phase 1.
 Unresolved asset permissions block public distribution, release, and deployment.
 
-## Phase 1 — stable mouse controls and educational terminals (implemented; acceptance pending)
+## Phase 1 — stable mouse controls and educational terminals (accepted and merged)
 
 The separately tested local prototype and mouse-fix files are **not available**
 in this repository or the cloud workspace. Do not claim they were imported.
@@ -58,48 +58,61 @@ the intended behavior with focused regression tests before educational changes.
 - Preserve baseline visual effects and compare gameplay before/after.
 - Provide synthetic multiple-choice questions, retry, retained session passes,
   and 0/5–5/5 progress for end-to-end terminal testing. Assignment JSON and
-  cross-reload persistence remain Phase 2; remote integrations remain Phase 3.
+  in-memory unit management remain Phase 2; remote integrations remain Phase 3.
 
-Progress: mouse/input logic and browser interaction/decoded-geometry regression
-checks pass. Terminal locations, exact commands, build/startup results, remaining
-cloud GPU limits, and the physical Windows acceptance checklist are recorded in
-[docs/phase-1-results.md](docs/phase-1-results.md). Original visual effects and
-assets are retained; physical visual/gameplay acceptance is still required.
+Progress: Phase 1 was accepted through instructor Windows 11 testing and merged
+via PR #2. Its results remain historical in [docs/phase-1-results.md](docs/phase-1-results.md).
+The speed adjustment was merged via PR #3 after automated validation; the
+instructor explicitly waived another manual test for that minor adjustment.
 
-Exit: create a Draft PR and stop. The instructor must verify mouse stability,
-modal click blocking, readable Q01–Q05 labels, and original scene visuals on
-Windows 11 Chrome/Edge before authorizing Phase 2. Asset redistribution remains
-unresolved; no release or public deployment is authorized.
+## Phase 2 — assignment JSON integration and unit management (implemented; acceptance pending)
 
-## Phase 2 — assignment JSON, validation, and quiz logic (not started)
+- Reuse the Engineering City Lab `v1.0.0` contract/loader/session patterns at
+  `38b1dfdd73d766ec1d01999216b24dfca2126fad` and the approved authoring source
+  `70cc35d9ce828bcd5357f16fe85f303aa2d30cd9`. Preserve exact v1/v2 schemas,
+  URL/normalization/unknown-field rules and single-label accepted-answer logic.
+- Support exactly S01–S12, four/five questions, v1 four choices and v2 three/four
+  choices. V2 accepts any one selected label in `correctOptions`; no hidden D,
+  multiple selections or implicit schema migration. Teacher exports work unchanged.
+- Use only relative, manifest-allowlisted files. Keep manifest version 1 and
+  default public `units: []`; synthetic fixtures never enter production assets.
+- Provide a unit selector and refresh, explicit replacement confirmation,
+  validate-before-commit, abort/generation checks and useful errors. Canceled,
+  failed and stale requests preserve active content, progress and player position.
+- Reuse the quiz input/focus barrier for the selector. Preserve terminal
+  coordinates, yellow indicators, labels and X. Four-question units hide Q05
+  and remove its casing from the collider list; five-question units restore it.
+- Show validated titles/prompts/options safely, permit immediate retry, keep
+  prior passes, and reset progress only on a successful replacement. Keep the
+  original five-question Demo Mode usable when no unit is selected/published.
+- **Progress is session-only, in memory. Reload/reopen resets it.** Do not add
+  localStorage, sessionStorage or backend progress, identity/answer collection,
+  analytics or tracking. This explicitly supersedes the former reload-persistence
+  plan; the active unit's progress does not survive a replacement or page refresh.
+- Reproduce the reference's 364 validation and 76 answer cases, cross-language
+  parity, schemas, loader/session/UI cases and original control/speed regressions.
 
-- Obtain representative Engineering City Lab v1/v2 assignment JSON and define
-  compatibility from actual fixtures. The schema and sample files are currently
-  unavailable; do not invent compatibility or silently reinterpret fields.
-- Load and validate data with clear errors; normalize supported versions into a
-  small internal model. Treat titles, URLs, choices, and imported text as data.
-- Extend the Phase 1 synthetic grading/progress to real assignments, explanation state, reload
-  persistence, and reset behavior. Scope stored progress to assignment identity
-  and version so different assignments cannot inherit completion accidentally.
-- Test invalid/missing/duplicate questions, malformed input, scoring, reload,
-  reset, and v1/v2 examples. Keep error and empty states usable.
+Results, provenance, commands, remaining limits and the physical acceptance
+checklist are in [docs/phase-2-results.md](docs/phase-2-results.md). Exit: open a
+Draft PR and stop for instructor acceptance. No Phase 3, merge, release or deployment.
 
 ## Phase 3 — videos, Google Forms, and UI (not started)
 
-- Integrate YouTube question/explanation videos with validated supported URLs,
-  lazy embed creation, and useful fallback links if embeds are unavailable.
-- Unlock the configured Google Forms destination only after all five questions
-  satisfy the agreed completion rule. Avoid credentials in the static bundle.
-- Improve accessible modal focus/labels, progress UI, small-screen layouts, and
-  assignment feedback while preserving the city and existing effects.
-- Check keyboard/touch operation, autoplay restrictions, blocked/invalid video
-  URLs, and external navigation. Determine exact remote destinations from the
-  supplied assignments before extending network configuration.
+- After separate authorization, expose question videos in a new browser tab
+  only after an explicit learner action. After a pass, offer the optional English
+  explanation video action and supplied explanation text. Preserve supplied URLs.
+- Make that unit's Google Form available only after all required questions pass.
+  Google Forms controls submission availability; no travel/exit requirement.
+- No autoplay, required embeds, viewing-time checks or tracking. Use safe text
+  and validated HTTPS links with `target="_blank"` and `rel="noopener noreferrer"`.
+- Preserve Phase 2's in-memory state and failure/cancellation semantics. Test
+  external actions with provider destinations mocked before navigation; do not
+  treat fixture URLs as real coursework. These features are not implemented in Phase 2.
 
 ## Phase 4 — regression and release preparation (not started)
 
 - Run behavioral tests for mouse controls, collision, movement, terminals,
-  modal isolation, assignment loading, grading, persistence, videos, and Forms.
+  modal isolation, assignment loading, grading, session-only progress, videos, and Forms.
 - Verify real WebGPU gameplay and visual parity on supported desktop/mobile
   hardware. Software rendering smoke checks do not establish GPU performance.
 - Build static `dist/`, test a production-like static host, and verify asset

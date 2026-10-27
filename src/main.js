@@ -205,7 +205,6 @@ async function init(loaderOverlay) {
     domElement: renderer.domElement,
     colliders: world.colliders,
   });
-  world.colliders.push(...education.terminals.colliders);
   world.educationLabels = education.terminals.entries.map((terminal) => terminal.label);
 
   const devApp = createDevAppApi({

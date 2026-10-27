@@ -6,15 +6,14 @@ The original upstream instructions are retained below.
 
 ## Authorized phase and Git workflow
 
-- Phase 0 is complete and merged into `main` through PR #1. The instructor
-  explicitly authorized Phase 1 on 2026-10-27; the earlier Phase 0-only stop is
-  historical and superseded for this work.
-- Phase 1 implements stable mouse look, R/P recovery, Q01–Q05 terminals,
-  isolated quiz input/focus, and synthetic multiple-choice questions with
-  session progress. See [docs/phase-1-results.md](docs/phase-1-results.md).
-- Finish Phase 1 tests, open a **Draft PR** against `main`, and stop for the
-  instructor's Windows 11 Chrome/Edge acceptance. Do not begin Phase 2,
-  merge, tag, release, deploy, or change repository visibility.
+- Phase 0, Phase 1, and the walking-speed adjustment are complete and merged
+  through PRs #1–#3. The instructor accepted Phase 1 on Windows 11.
+- Phase 2 (assignment JSON integration and unit management) is explicitly
+  authorized. Work from merged `main` on `feature/phase-2-assignment-integration`.
+  See [docs/phase-2-results.md](docs/phase-2-results.md).
+- Complete automated checks, open a **Draft PR** against `main`, then stop for
+  instructor acceptance. Do not begin Phase 3, merge, tag, release, deploy,
+  or change repository visibility.
 - Use feature branches and GitHub pull requests against
   `chingchechung/engineering-cyberpunk-lab`. Do not modify or push to
   `ektogamat/threejs-conference`.
@@ -47,17 +46,27 @@ The original upstream instructions are retained below.
 - Preserve the original city, walking, collision, rain, lighting, shaders,
   post-processing, and visual quality. Prefer small factory modules composed
   through existing APIs; minimize changes to rendering, physics, and collision.
-- The local prototype and separate mouse-control fix have not been supplied.
-  Never assume they are in this workspace. Once Phase 1 is authorized, preserve
-  a supplied fix or reimplement and regression-test stable mouse look, including
-  the reported unwanted upward rotation and pointer-lock transitions.
+- Preserve Phase 1's tested mouse filtering, pitch limits, Pointer Lock/focus
+  lifecycle, R/P recovery, WASD/sprint/crouch and modal input/focus barrier.
+  Effective walking speed is 4.5 m/s and maximum sprint is 9 m/s.
 - Q01–Q05 terminals require visible labels as well as yellow indicators; X opens
   the nearby terminal. An open quiz must block background clicks, global input,
   movement, mouse look, and underlying controls, with appropriate focus handling.
-- JSON v1/v2 compatibility must be based on supplied Engineering City Lab
-  fixtures. No assignment schema, YouTube IDs, or Google Forms URL is available
-  yet. Do not invent them or implement assignment loading or external
-  integrations in Phase 1. Synthetic examples are authorized for Phase 1 only.
+- Reuse the approved Engineering City Lab `v1.0.0` assignment contract, pinned
+  to `38b1dfdd73d766ec1d01999216b24dfca2126fad`, with authoring source
+  `ece_hw_webproject@70cc35d9ce828bcd5357f16fe85f303aa2d30cd9`.
+  Read [docs/assignment-integration.md](docs/assignment-integration.md) and
+  [docs/assignment-reuse.md](docs/assignment-reuse.md). Do not redesign schemas,
+  change the teacher GUI, migrate versions, or loosen the copied validators.
+- Support S01–S12 from a version-1 manifest allowlist; default public manifest
+  stays empty. Fixtures remain under tests, outside production assets. A new
+  unit must be explicitly confirmed and fully validated before activation;
+  canceled/failed/stale loads preserve the active unit, progress and position.
+- Four-question units hide/deactivate Q05; five-question units use all five
+  original fixed sites. Wrong answers permit retry without revoking passes.
+- Progress exists only in memory during the current page visit. No assignment
+  progress in localStorage/sessionStorage/backend; no student identity, answer
+  collection, analytics, video/Form actions or automatic publication in Phase 2.
 - Retain the MIT notice, original author credits, and adapted shader attribution.
   Public assets have separate rights. All five GLB models currently lack
   sufficient license evidence; resolve redistribution rights before release or
