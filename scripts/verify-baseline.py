@@ -6,7 +6,7 @@ import json
 from html.parser import HTMLParser
 from pathlib import Path
 import ssl
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlsplit
 from urllib.request import urlopen
 
 
@@ -43,7 +43,7 @@ def main():
         raise RuntimeError("The upstream document was not served")
     entries = EntryParser()
     entries.feed(html.decode())
-    if not any(path.endswith(".js") for path in entries.resources):
+    if not any(urlsplit(path).path.endswith(".js") for path in entries.resources):
         raise RuntimeError("No module entry was found")
     for path in entries.resources:
         body, mime = fetch(path)

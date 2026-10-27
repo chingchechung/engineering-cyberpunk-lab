@@ -49,10 +49,36 @@ export function createCameraDirector({
   const dofRaycaster = new THREE.Raycaster();
   const dofPointerCoords = new THREE.Vector2();
   const orbitLookTarget = new THREE.Vector3();
+  const savedOrbitPosition = new THREE.Vector3();
+  const savedOrbitTarget = new THREE.Vector3();
+  const savedOrbitRotation = new THREE.Quaternion();
   const cameraModeState = { orbitEnabled: false };
   let focusTween = null;
   let walkControls = null;
   let footstepAudio = null;
+  let inputSuspended = true;
+
+  function clearOrbitMotion() {
+    // Drain OrbitControls' damping/zoom using its public update API, then
+    // restore the visible pose. Old orbit deltas must not replay after walking
+    // or a modal. No private OrbitControls fields or second camera writer.
+    savedOrbitPosition.copy(camera.position);
+    savedOrbitRotation.copy(camera.quaternion);
+    savedOrbitTarget.copy(controls.target);
+    const zoom = camera.zoom;
+    const damping = controls.enableDamping;
+    const autoRotate = controls.autoRotate;
+    controls.enableDamping = controls.autoRotate = false;
+    controls.update(0);
+    controls.enableDamping = damping;
+    controls.autoRotate = autoRotate;
+    camera.position.copy(savedOrbitPosition);
+    camera.quaternion.copy(savedOrbitRotation);
+    camera.zoom = zoom;
+    camera.updateProjectionMatrix();
+    camera.updateMatrixWorld();
+    controls.target.copy(savedOrbitTarget);
+  }
 
   function focusOnPoint(point) {
     focusTween?.kill();
@@ -81,6 +107,7 @@ export function createCameraDirector({
   function onDofPointerDown(event) {
     if (
       !getFinishedIntro?.() ||
+      inputSuspended ||
       walkControls?.isActive() ||
       isCameraModeInputBlocked(event.target)
     ) {
@@ -131,10 +158,11 @@ export function createCameraDirector({
   }
 
   function setCameraMode(mode) {
+    if (controls.enabled) clearOrbitMotion();
     const walk = mode === "walk";
     cameraModeState.orbitEnabled = !walk;
     walkControls?.setActive(walk);
-    controls.enabled = !walk && getFinishedIntro?.();
+    controls.enabled = !walk && !inputSuspended && getFinishedIntro?.();
     onWalkModeChange?.(walk);
 
     if (walk) {
@@ -171,12 +199,17 @@ export function createCameraDirector({
     // pose. Movement stays gated in update() until getFinishedIntro().
     cameraModeState.orbitEnabled = false;
     walkControls?.setActive(true);
+    walkControls?.setInputSuspended(true);
     walkControls?.setBaseFov(getBaseFovForLayout());
     walkControls?.syncEulerFromCamera();
     syncWalkFocusPoint();
   }
 
   function update(delta) {
+    if (inputSuspended) {
+      footstepAudio?.update?.(delta, { moving: false, speed: 0 });
+      return;
+    }
     if (walkControls?.isActive()) {
       // Keep the camera frozen during the title/glass sequence — walk is
       // active only so the pose matches revealAppUi without a late snap.
@@ -196,6 +229,15 @@ export function createCameraDirector({
   function destroy() {
     renderer.domElement.removeEventListener("pointerdown", onDofPointerDown);
     focusTween?.kill();
+    walkControls?.dispose();
+    controls.dispose();
+  }
+
+  function setInputSuspended(value) {
+    if (value && controls.enabled) clearOrbitMotion();
+    inputSuspended = Boolean(value);
+    walkControls?.setInputSuspended(inputSuspended);
+    controls.enabled = !inputSuspended && cameraModeState.orbitEnabled && Boolean(getFinishedIntro?.());
   }
 
   function setFootstepAudio(audio) {
@@ -209,6 +251,8 @@ export function createCameraDirector({
     cameraModeState,
     setFootstepAudio,
     setCameraMode,
+    setInputSuspended,
+    isInputSuspended: () => inputSuspended,
     syncWalkFocusPoint,
     resetCameraPose,
     preparePreRevealPose,

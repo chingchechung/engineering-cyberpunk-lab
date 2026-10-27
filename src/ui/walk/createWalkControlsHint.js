@@ -115,7 +115,7 @@ export function createWalkControlsHint({ state, domElement } = {}) {
           <h2 class="walk-controls__title">Navigation</h2>
         </header>
         ${renderExpandedDiagram()}
-        <p class="walk-controls__footer">Esc to close</p>
+        <p class="walk-controls__footer">X: nearby question · R: level view · P: horizontal look · Esc: close / release mouse</p>
       </div>
     </div>
   `;

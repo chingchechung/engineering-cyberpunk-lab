@@ -1,0 +1,59 @@
+.education-hud,
+.education-prompt,
+.education-quiz {
+  font: 15px/1.5 system-ui, sans-serif;
+  color: #edf8fa;
+  background: #101c25f2;
+  border: 1px solid #68bdbd;
+  border-radius: 8px;
+}
+.education-hud[hidden], .education-prompt[hidden], .education-quiz [hidden] { display: none; }
+.education-hud {
+  position: fixed;
+  top: 155px;
+  left: 20px;
+  z-index: 600;
+  padding: 12px 16px;
+  max-width: min(340px, calc(100vw - 40px));
+  pointer-events: none;
+}
+.education-hud p { margin: 3px 0; }
+.education-kicker { color: #ffdf49; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+.education-prompt {
+  position: fixed;
+  bottom: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 700;
+  max-width: calc(100vw - 24px);
+  padding: 12px 20px;
+  border-color: #ffdf49;
+  color: #ffdf49;
+  cursor: pointer;
+}
+.education-quiz {
+  box-sizing: border-box;
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  padding: 24px;
+  overscroll-behavior: contain;
+}
+.education-quiz::backdrop { background: #020810d9; }
+.education-quiz header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.education-quiz h2 { margin: 8px 0; color: #ffdf49; font-size: 30px; }
+.education-quiz fieldset { border: 0; padding: 0; margin: 24px 0 0; min-width: 0; }
+.education-quiz legend { margin-bottom: 16px; font-size: 19px; font-weight: 600; }
+.education-quiz label { display: flex; align-items: center; gap: 12px; padding: 12px; margin: 8px 0; border: 1px solid #52727c; border-radius: 4px; cursor: pointer; }
+.education-quiz input { accent-color: #ffdf49; width: 18px; height: 18px; flex-shrink: 0; }
+.education-quiz button { padding: 10px 16px; background: #ffdf49; color: #101c25; border: 0; border-radius: 4px; font: inherit; font-weight: 600; cursor: pointer; }
+.education-quiz button:focus-visible, .education-prompt:focus-visible,
+.education-quiz input:focus-visible { outline: 3px solid #80f5ff; outline-offset: 4px; }
+.education-quiz [data-feedback] { min-height: 24px; color: #ffdf49; }
+.education-resume, #education-demo-note { font-size: 13px; color: #bdcdd3; }
+.education-resume { margin-top: 24px; }
+@media (max-width: 600px) {
+  .education-hud { top: 110px; left: 12px; padding: 8px 12px; font-size: 12px; }
+  .education-prompt { bottom: 120px; font-size: 14px; }
+  .education-quiz { padding: 18px; }
+}

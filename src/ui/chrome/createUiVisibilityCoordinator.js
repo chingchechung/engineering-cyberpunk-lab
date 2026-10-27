@@ -103,10 +103,7 @@ export function createUiVisibilityCoordinator({
       return;
     }
 
-    const overlayOpen =
-      openedPanel === "settings" ||
-      openedPanel === "about" ||
-      openedPanel === "walk-controls";
+    const overlayOpen = Boolean(openedPanel);
 
     if (!uiVisible) {
       header?.setForceHidden?.(true);

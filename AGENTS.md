@@ -6,8 +6,15 @@ The original upstream instructions are retained below.
 
 ## Authorized phase and Git workflow
 
-- This change implements Phase 0 only. Stop for user review before Phase 1;
-  do not implement mouse fixes, question terminals, quizzes, or integrations yet.
+- Phase 0 is complete and merged into `main` through PR #1. The instructor
+  explicitly authorized Phase 1 on 2026-10-27; the earlier Phase 0-only stop is
+  historical and superseded for this work.
+- Phase 1 implements stable mouse look, R/P recovery, Q01–Q05 terminals,
+  isolated quiz input/focus, and synthetic multiple-choice questions with
+  session progress. See [docs/phase-1-results.md](docs/phase-1-results.md).
+- Finish Phase 1 tests, open a **Draft PR** against `main`, and stop for the
+  instructor's Windows 11 Chrome/Edge acceptance. Do not begin Phase 2,
+  merge, tag, release, deploy, or change repository visibility.
 - Use feature branches and GitHub pull requests against
   `chingchechung/engineering-cyberpunk-lab`. Do not modify or push to
   `ektogamat/threejs-conference`.
@@ -20,8 +27,9 @@ The original upstream instructions are retained below.
 
 - Baseline: `8cc20593b2270e2ce832e7b7b44356705daddec4` from Threejs-Punk.
   Its imported tree is recorded in the dedicated baseline import commit.
-- Use Node.js 22 LTS, pinned by `.nvmrc`, and npm. Use `npm ci`; keep the
-  upstream package declarations and lockfile unchanged during Phase 0.
+- Use Node.js **22.23.4**, pinned by `.nvmrc`, and npm. Use `npm ci`; keep the
+  upstream dependency declarations and lockfile unchanged. Phase 1 adds only a
+  test script to `package.json`.
 - `bash scripts/cloud-install.sh` installs a checksum-verified Node runtime
   outside the checkout, installs dependencies, and runs the production build.
   Activate that runtime's `bin` directory in each new shell; PATH changes inside
@@ -29,8 +37,10 @@ The original upstream instructions are retained below.
 - Start Vite with `BROWSER=none npm run dev -- --host 127.0.0.1 --port 5173 --strictPort`.
   Vite uses HTTPS. Trust its specific local certificate for automated requests;
   do not disable TLS verification. See the validation commands in the Phase 0 doc.
-- There is no upstream automated test, lint, or typecheck script. Do not claim
-  such suites passed. Build and HTTP checks do not prove visual/gameplay parity.
+- Upstream has no test, lint, or typecheck script. Phase 1 adds `npm test`
+  (Node regression tests) and `scripts/browser-phase-1.py` (Playwright with the
+  real DOM/Pointer Lock and decoded GLB geometry, independent of GPU rendering).
+  Build, HTTP, and geometry/input checks do not prove rendered visual parity.
 
 ## Requirements for later phases
 
@@ -46,7 +56,8 @@ The original upstream instructions are retained below.
   movement, mouse look, and underlying controls, with appropriate focus handling.
 - JSON v1/v2 compatibility must be based on supplied Engineering City Lab
   fixtures. No assignment schema, YouTube IDs, or Google Forms URL is available
-  yet. Do not invent them or implement integrations in Phase 0.
+  yet. Do not invent them or implement assignment loading or external
+  integrations in Phase 1. Synthetic examples are authorized for Phase 1 only.
 - Retain the MIT notice, original author credits, and adapted shader attribution.
   Public assets have separate rights. All five GLB models currently lack
   sufficient license evidence; resolve redistribution rights before release or
