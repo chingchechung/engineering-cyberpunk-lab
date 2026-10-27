@@ -2,6 +2,7 @@ import { test, beforeEach } from "node:test";
 import assert from "node:assert/strict";
 import * as THREE from "three/webgpu";
 import { createWalkControls } from "../src/controls/createWalkControls.js";
+import { createCameraDirector } from "../src/runtime/createCameraDirector.js";
 
 class FakeElement extends EventTarget { closest() { return null; } }
 let doc, win, canvas, camera, controls, focused, coarse;
@@ -53,6 +54,47 @@ test("WASD, sprint, and crouch retain their movement behavior", () => {
   assert.ok(camera.position.y < 1);
   key("KeyC"); assert.equal(camera.position.y, 1.55);
   controls.dispose();
+});
+
+test("camera director configures 4.5 m/s walking and a smooth 9 m/s sprint ceiling", () => {
+  controls.dispose();
+  canvas.style = {};
+  canvas.ownerDocument = doc;
+  canvas.getRootNode = () => doc;
+  const director = createCameraDirector({
+    camera,
+    renderer: { domElement: canvas },
+    world: { ground: {}, colliders: [new THREE.Group()] },
+    getFinishedIntro: () => true,
+  });
+  controls = director.walkControls;
+  try {
+    assert.equal(controls.settings.moveSpeed, 4.5);
+    assert.equal(controls.settings.moveSpeed * controls.settings.sprintMultiplier, 9);
+    director.setCameraMode("walk");
+    director.setInputSuspended(false);
+    lock();
+    key("KeyW"); step(1);
+    assert.ok(controls.getHorizontalSpeed() > 0 && controls.getHorizontalSpeed() < 4.5);
+    step(600);
+    assert.ok(Math.abs(controls.getHorizontalSpeed() - 4.5) < 1e-6);
+    step(600);
+    assert.ok(Math.abs(controls.getHorizontalSpeed() - 4.5) < 1e-6, "holding W must not increase walking speed");
+    key("ShiftLeft", "keydown", { shiftKey: true }); step(1);
+    assert.ok(controls.getHorizontalSpeed() > 4.5 && controls.getHorizontalSpeed() < 9);
+    step(900);
+    assert.ok(Math.abs(controls.getHorizontalSpeed() - 9) < 1e-6);
+    key("ShiftLeft", "keyup"); step(1);
+    assert.ok(controls.getHorizontalSpeed() > 4.5 && controls.getHorizontalSpeed() < 9);
+    step(900);
+    assert.ok(Math.abs(controls.getHorizontalSpeed() - 4.5) < 1e-6);
+    key("KeyW", "keyup"); step(1);
+    assert.ok(controls.getHorizontalSpeed() > 0 && controls.getHorizontalSpeed() < 4.5);
+    step(120);
+    assert.ok(controls.getHorizontalSpeed() < 0.01);
+  } finally {
+    director.destroy();
+  }
 });
 
 test("unlock, blur, and hidden tabs discard held input and velocity", () => {
