@@ -80,6 +80,9 @@ export function createAppShell({
   let finishedIntro = false;
   let settingsPanelRef = null;
   let aboutPanelRef = null;
+  uiState.subscribe(({ openedPanel }) => {
+    cameraDirector.setInputSuspended(!finishedIntro || Boolean(openedPanel));
+  });
 
   const header = FEATURES.chromeUi
     ? createHeader({
@@ -241,6 +244,7 @@ export function createAppShell({
   function revealAppUi() {
     finishedIntro = true;
     cameraDirector.setCameraMode("walk");
+    cameraDirector.setInputSuspended(Boolean(uiState.openedPanel));
     uiVisibilityCoordinator?.refresh();
     header?.show();
     audioButton?.setVisible(true);
@@ -253,9 +257,12 @@ export function createAppShell({
   function onWalkModeChange(walk) {
     walkControlsHint?.setVisible(walk && finishedIntro);
     virtualJoystick?.setVisible(walk && finishedIntro);
+    walkPrompt?.setEnabled(walk && finishedIntro);
+    moveHint?.setEnabled(walk && finishedIntro);
   }
 
   return {
+    uiState,
     header,
     settingsPanel,
     aboutPanel,

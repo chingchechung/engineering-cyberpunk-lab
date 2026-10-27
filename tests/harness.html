@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <title>Phase 1 input and geometry test harness</title>
+  <body>
+    <button id="background" style="position:fixed;left:20px;top:20px;z-index:2000">Background control</button>
+    <canvas id="canvas" width="800" height="600" tabindex="-1"></canvas>
+    <script type="module">
+      import "../src/ui/core/global.css";
+      import * as THREE from "three/webgpu";
+      import { loadGeometry } from "./helpers/loadGeometry.js";
+      import { createWalkControls } from "../src/controls/createWalkControls.js";
+      import { createCameraDirector } from "../src/runtime/createCameraDirector.js";
+      import { createAppShell } from "../src/app/createAppShell.js";
+      import { createEducationSystem } from "../src/education/createEducationSystem.js";
+      import { TERMINAL_LAYOUT, findNearbyTerminal } from "../src/education/terminalLayout.js";
+      import { FREE_CAMERA_START } from "../src/bootstrap/createCamera.js";
+      window.harness = { THREE, loadGeometry, createWalkControls, TERMINAL_LAYOUT, findNearbyTerminal, FREE_CAMERA_START,
+        async setup() {
+          const geometry = await loadGeometry();
+          const scene = new THREE.Scene();
+          scene.add(geometry.city, geometry.bounds, geometry.car);
+          const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshBasicMaterial());
+          ground.rotation.x = -Math.PI / 2;
+          ground.position.y = -5.4;
+          scene.add(ground);
+          scene.updateMatrixWorld(true);
+          const camera = new THREE.PerspectiveCamera(65, 4 / 3, 0.1, 300);
+          camera.position.set(...FREE_CAMERA_START.position);
+          camera.lookAt(...FREE_CAMERA_START.target);
+          const world = { ...geometry, ground: { mesh: ground } };
+          const canvas = document.querySelector("canvas");
+          canvas.style.zIndex = "14";
+          const renderer = { domElement: canvas };
+          let shell;
+          const director = createCameraDirector({ camera, renderer, world,
+            getFinishedIntro: () => shell?.isFinishedIntro() ?? false,
+            onWalkModeChange: (walk) => shell?.onWalkModeChange(walk) });
+          shell = createAppShell({ renderer, camera, cameraDirector: director, world,
+            pipeline: { look: { getCurrentPresetId: () => "neutral" }, applyLookPreset() {} },
+            inspectorSession: { revealInspector() {}, applyDevelopmentMode() {} } });
+          const education = createEducationSystem({ scene, camera, cameraDirector: director,
+            uiState: shell.uiState, isReady: shell.isFinishedIntro, domElement: canvas, colliders: world.colliders });
+          world.colliders.push(...education.terminals.colliders);
+          director.preparePreRevealPose();
+          shell.revealAppUi();
+          education.update();
+          window.app = { scene, camera, director, education, shell, world, canvas, geometry };
+        }
+      };
+    </script>
+  </body>
+</html>

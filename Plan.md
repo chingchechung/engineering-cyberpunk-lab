@@ -6,13 +6,16 @@ Target: `chingchechung/engineering-cyberpunk-lab`.
 Upstream: `ektogamat/threejs-conference` (Threejs-Punk), pinned to
 `8cc20593b2270e2ce832e7b7b44356705daddec4`.
 
-Only Phase 0 is authorized for implementation in this change. Stop for user
-review before Phase 1. Work on feature branches with GitHub pull requests.
+Phase 0 is complete and merged through PR #1. Phase 1 is explicitly authorized
+by the instructor on 2026-10-27; earlier Phase 0-only restrictions are historical.
+Work from the latest `main` on `feature/phase-1-education-interaction` with a
+Draft GitHub pull request. Finish Phase 1, report the checks, then stop for
+Windows 11 Chrome/Edge acceptance before Phase 2.
 Never modify the upstream repository, merge a PR, publish a release, or deploy
 without explicit approval. Retain the city, walking, BVH collision, rain,
 lighting, shaders, post-processing, and original visual quality.
 
-## Phase 0 — import and establish the baseline
+## Phase 0 — import and establish the baseline (complete)
 
 - Import the exact upstream tree without application or lockfile changes; keep
   the original MIT license, README, credits, and bundled asset bytes.
@@ -31,7 +34,7 @@ Exit: reproducible build, recorded runtime evidence and limitations, complete
 asset inventory, reviewable changes, and an explicit stop before Phase 1.
 Unresolved asset permissions block public distribution, release, and deployment.
 
-## Phase 1 — stable mouse controls and educational terminals (not started)
+## Phase 1 — stable mouse controls and educational terminals (implemented; acceptance pending)
 
 The separately tested local prototype and mouse-fix files are **not available**
 in this repository or the cloud workspace. Do not claim they were imported.
@@ -53,9 +56,20 @@ the intended behavior with focused regression tests before educational changes.
   UI clicks and global keyboard handlers, and contain keyboard focus. Test click
   through, Escape, held WASD, and explicit pointer-lock reacquisition on close.
 - Preserve baseline visual effects and compare gameplay before/after.
+- Provide synthetic multiple-choice questions, retry, retained session passes,
+  and 0/5–5/5 progress for end-to-end terminal testing. Assignment JSON and
+  cross-reload persistence remain Phase 2; remote integrations remain Phase 3.
 
-Exit: mouse regression checks and terminal/modal interaction checks pass; no
-unintended rendering or collision changes. Review before expanding the phase.
+Progress: mouse/input logic and browser interaction/decoded-geometry regression
+checks pass. Terminal locations, exact commands, build/startup results, remaining
+cloud GPU limits, and the physical Windows acceptance checklist are recorded in
+[docs/phase-1-results.md](docs/phase-1-results.md). Original visual effects and
+assets are retained; physical visual/gameplay acceptance is still required.
+
+Exit: create a Draft PR and stop. The instructor must verify mouse stability,
+modal click blocking, readable Q01–Q05 labels, and original scene visuals on
+Windows 11 Chrome/Edge before authorizing Phase 2. Asset redistribution remains
+unresolved; no release or public deployment is authorized.
 
 ## Phase 2 — assignment JSON, validation, and quiz logic (not started)
 
@@ -64,7 +78,7 @@ unintended rendering or collision changes. Review before expanding the phase.
   unavailable; do not invent compatibility or silently reinterpret fields.
 - Load and validate data with clear errors; normalize supported versions into a
   small internal model. Treat titles, URLs, choices, and imported text as data.
-- Add multiple-choice grading, explanation state, Q01–Q05 progress, reload
+- Extend the Phase 1 synthetic grading/progress to real assignments, explanation state, reload
   persistence, and reset behavior. Scope stored progress to assignment identity
   and version so different assignments cannot inherit completion accidentally.
 - Test invalid/missing/duplicate questions, malformed input, scoring, reload,

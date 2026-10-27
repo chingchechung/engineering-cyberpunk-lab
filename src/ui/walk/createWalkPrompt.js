@@ -87,7 +87,7 @@ export function createWalkPrompt({ domElement, walkControls, state } = {}) {
       return;
     }
 
-    domElement.requestPointerLock();
+    walkControls?.requestPointerLock?.();
   }
 
   function onWalkChange({ hasTouchLooked: nextHasTouchLooked } = {}) {

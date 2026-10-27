@@ -18,6 +18,7 @@ import {
   resizeRenderer,
 } from "./bootstrap/createRenderer.js";
 import { createCameraDirector } from "./runtime/createCameraDirector.js";
+import { createEducationSystem } from "./education/createEducationSystem.js";
 import { createRenderLoop } from "./runtime/createRenderLoop.js";
 import {
   compileDeferredStartup,
@@ -197,6 +198,16 @@ async function init(loaderOverlay) {
 
   walkModeBridge.onChange = appShell.onWalkModeChange;
 
+  const education = createEducationSystem({
+    scene, camera, cameraDirector,
+    uiState: appShell.uiState,
+    isReady: appShell.isFinishedIntro,
+    domElement: renderer.domElement,
+    colliders: world.colliders,
+  });
+  world.colliders.push(...education.terminals.colliders);
+  world.educationLabels = education.terminals.entries.map((terminal) => terminal.label);
+
   const devApp = createDevAppApi({
     scene,
     world,
@@ -236,7 +247,10 @@ async function init(loaderOverlay) {
     renderer,
     getRainGlassIntro: introFlow.getRainGlassIntro,
     getIntroActive: introFlow.isIntroActive,
-    onFrame: (delta) => appShell.updateHud(delta),
+    onFrame: (delta) => {
+      appShell.updateHud(delta);
+      education.update();
+    },
   });
 
   await finalizeStartupLighting({
