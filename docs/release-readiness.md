@@ -89,7 +89,31 @@ outside site/, and optionally writes a reproducible **internal** ZIP. No build
 or ZIP is committed or uploaded to Actions/Release attachments. CI has no deployment
 or artifact-upload job and uses a read-only token with checkout credentials disabled.
 
-Draft notes for a future **separately approved** release:
+## Intended private v1.0.0 release workflow
+
+After instructor acceptance, the intended formal release is **v1.0.0 while the
+repository remains Private**. This task prepares that workflow only: no tag,
+GitHub Release, attachment or deployment is created. Private access does not
+grant redistribution rights or resolve the inventory's missing permissions.
+
+| Item | Intended treatment and approval boundary |
+| --- | --- |
+| Private Git tag and GitHub Release metadata | After acceptance and explicit release authorization, identify the accepted commit with v1.0.0 and prepare release notes for authorized repository collaborators. Record unresolved rights and allowed audience/use; a tag/metadata approval does not authorize optional binaries or public deployment. |
+| GitHub-generated source ZIP/tar.gz | GitHub exposes source archives for tags/releases to users with repository access. These can include the bundled models, textures, media and fonts already tracked in Git. A metadata-only Release is therefore not asset-free: review the exact tagged tree, recipient scope and applicable permissions before authorizing the release. |
+| Optional release ZIP attachments | A separately reviewed distribution: inspect the exact compiled contents, asset grants/conditions, hashes, notices and recipient scope, then obtain explicit authorization before attaching/uploading. Local internal validation ZIPs are not approved Release attachments. |
+| Public Apache deployment | A separate publication decision with its own asset-rights review, real HTTPS/access policy, Windows production acceptance, approved candidate/rollback plan and explicit deployment authorization. Private GitHub release approval does not authorize it. |
+
+**Release Blocked — Asset Rights Pending** remains visible. The five GLBs and
+34 other original artifacts are not cleared by repository privacy, educational
+intent, a tag or passing CI. Resolve or explicitly review the outstanding
+permissions/conditions for the proposed release's contents and audience before
+release authorization. Do not publish or attach distribution archives without
+the required review and explicit instructor authorization. Keep source-archive
+exposure in that review even when no optional ZIP is attached.
+
+## Release-notes draft
+
+Draft notes for the future **separately approved private v1.0.0** release:
 
 - Engineering Cyberpunk Lab, based on Threejs-Punk by Anderson Mancini and Sunag.
 - Accepted city, stable 4.5/9 m/s movement and fixed educational terminals, native

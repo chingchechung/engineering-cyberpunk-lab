@@ -16,7 +16,7 @@ import subprocess
 from urllib.parse import urlsplit
 
 from playwright.sync_api import sync_playwright, Error
-from pointer_lock_diagnostics import observe_pointer_lock, wait_for_pointer_lock
+from pointer_lock_diagnostics import observe_pointer_lock, prepare_pointer_lock_gesture, wait_for_pointer_lock
 
 ROOT = Path(__file__).resolve().parents[1]
 phase1 = runpy.run_path(str(ROOT / "scripts/browser-phase-1.py"))
@@ -46,6 +46,7 @@ def resume_checks(browser, origin):
         check(quiz.is_visible() and close.inner_text() == "Close & Resume", "Locked opening lost resume eligibility")
         check(page.evaluate("document.pointerLockElement===null && app.director.isInputSuspended()"), "Quiz did not unlock/suspend")
         before = page.evaluate("({position:app.camera.position.toArray(),rotation:app.camera.quaternion.toArray(),attempts:lockAttempts})")
+        prepare_pointer_lock_gesture(page)
         if index % 2:
             close.focus()
             page.keyboard.press("Enter")
@@ -74,6 +75,7 @@ def resume_checks(browser, origin):
             page.evaluate("app.education.modal.dialog.querySelector('[data-close]').dispatchEvent(new MouseEvent('click',{bubbles:true}))")
         check(page.evaluate("document.pointerLockElement===null && lockAttempts===%d" % attempts), f"{method} forced lock")
         check(page.locator(".walk-prompt").is_visible(), "No explicit resume fallback")
+        prepare_pointer_lock_gesture(page)
         page.locator(".walk-prompt").click()
         wait_for_pointer_lock(page, f"explicit prompt after {method} close")
     # A browser refusal is handled once by the existing request API.
@@ -94,6 +96,7 @@ def resume_checks(browser, origin):
     # Headless Chromium focuses every page by default. CDP focus emulation
     # produces actual browser focus/blur events without pretending this is a
     # physical OS/browser-tab acceptance test.
+    prepare_pointer_lock_gesture(page)
     page.locator(".walk-prompt").click()
     wait_for_pointer_lock(page, "explicit prompt after mocked denial", timeout=5000)
     page.keyboard.press("x")

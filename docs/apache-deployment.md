@@ -223,3 +223,8 @@ copies out of public directories and retain the relevant licenses.
 Do not disable original graphics, change the validator or use insecure TLS flags
 to conceal a hosting problem. Deployment, public ZIPs and GitHub Releases still
 require explicit authorization **and** resolution of outstanding rights.
+The intended private `v1.0.0` tag/Release is a separate workflow described in
+[release readiness](release-readiness.md#intended-private-v100-release-workflow).
+Review GitHub's automatically downloadable tagged source archives, which can
+contain bundled assets, even if no optional distribution ZIP is attached.
+Private release metadata approval never authorizes public Apache deployment.

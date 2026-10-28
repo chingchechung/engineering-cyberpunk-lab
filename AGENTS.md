@@ -29,6 +29,10 @@ The original upstream instructions are retained below.
 - Candidates/ZIPs are PRIVATE INTERNAL validation only. Complete content/hash/
   notice checks; never include course/private/test data. Original asset rights
   remain unresolved: **Release Blocked — Asset Rights Pending**.
+- After acceptance the instructor intends a private `v1.0.0` tag/GitHub Release.
+  Review bundled assets in GitHub-generated source archives separately from
+  optional ZIP attachments and public Apache hosting; privacy grants no rights.
+  See docs/release-readiness.md. No tag/Release/upload is authorized by CI repair.
 - Complete tests/docs, open a **Draft PR**, then stop for Phase 4 Windows production
   acceptance. Do not merge, release, deploy externally, publish coursework, change
   visibility or execute npm run deploy. See docs/phase-4-results.md.

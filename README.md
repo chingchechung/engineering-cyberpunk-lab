@@ -9,6 +9,9 @@ not this project's deployment URL.
 Phase 0–3.5 are accepted/merged; Phase 4 prepares static hosting and awaits production
 acceptance. **Release Blocked — Asset Rights Pending.** Keep this repository and
 internal candidates private; no public deployment/release is approved.
+After acceptance, the instructor intends a private `v1.0.0` tag/GitHub Release;
+see the [release workflow and source-archive review](docs/release-readiness.md#intended-private-v100-release-workflow).
+No Release or archive upload is authorized by the current CI investigation.
 
 Build locally with Node **22.23.4** / npm **10.9.9**:
 

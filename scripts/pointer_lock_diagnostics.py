@@ -51,3 +51,16 @@ def wait_for_pointer_lock(page, stage, timeout=30000):
             "stage": stage, "diagnostics": page.evaluate("pointerLockDiagnostics()")
         }), flush=True)
         raise
+
+
+def prepare_pointer_lock_gesture(page):
+    # Chromium 151 allows four requests, then refuses further requests until
+    # two seconds after the last successful lock. Pace independent test cases
+    # BEFORE trusted input; never retry a rejected request or delay the app's
+    # synchronous Close & Resume handler. 100 ms accommodates IPC scheduling.
+    # Source: Chromium 151.0.7922.34 pointer_lock_controller.h/.cc.
+    page.wait_for_function("""() => {
+      const last = pointerLockDiagnostics().events.filter(
+        event => ['request','resolved'].includes(event.type)).at(-1);
+      return !last || performance.now() - last.time >= 2100;
+    }""")

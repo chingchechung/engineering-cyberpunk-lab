@@ -146,12 +146,68 @@ pull_request_target, deployment, artifact upload or archive-publication job is
 added. Npm cache is dependency cache, not a distribution upload. Geometry/DOM and
 software-renderer results never stand in for real Windows visual/FPS acceptance.
 
-Before Draft PR creation, no GitHub-hosted run for this new workflow is observable;
-the same validation commands have been executed locally with the browser difference
-noted above. The PR checks page records the first hosted run; the final handoff
-reports its observed state rather than claiming it ran in advance. If hosted
-execution is unavailable (billing/approval/runner/network policy), that is a CI
-limitation, not a passing result.
+### PR #7 CI failure investigation (2026-10-28)
+
+The first hosted run [40626648613](https://github.com/chingchechung/engineering-cyberpunk-lab/actions/runs/40626648613)
+at `3f25860b944d52c8d1ec3f6b65af83772caca201` passed installation, all 506 Node
+tests, production build, 10 Python tests and Phase 1/2 browser regressions, then
+timed out after 30 seconds in Phase 3 `resume_checks()` waiting for
+`document.pointerLockElement===app.canvas` after Close & Resume. The remaining
+Matrix/Unicode and Apache suites were skipped; this was not a successful CI run.
+An unchanged rerun (attempt 2, job `122658389106`) reproduced the same failure.
+
+Diagnostic commit `529c2b1c0f15639496e2c64b1ade5e064e90f9f1` observes native
+requests/results, trusted click/key events, Pointer Lock change/error events,
+document focus/visibility, user activation and controller/modal state. It retains
+the original deadlines and actual Pointer Lock assertions. No browser permission
+is granted and no production input logic changes. A headed Chromium CLI option
+allows comparison under a real Xvfb display.
+
+The diagnostic [run 40641121133](https://github.com/chingchechung/engineering-cyberpunk-lab/actions/runs/40641121133)
+(job `122659267275`, Chromium **151.0.7922.34**, headless) reproduced the failure
+on Close & Resume **cycle 4, keyboard activation**. Initial lock and the first
+three relocks resolved. The failing request returned a Promise, then rejected
+with **NotAllowedError: Too many pointer lock requests in a short window of
+time.** A trusted `pointerlockerror` followed. At request time: document focused,
+visibility `visible`, trusted Enter and native button click, user activation
+active, controller active/not suspended, modal closed and canvas focused. Thus
+missing focus, permission/user-activation loss and a slow pending request are
+not the cause of this observed failure. Waiting 30 more seconds cannot make the
+already rejected request succeed.
+
+Chromium's pinned source explains the version difference:
+
+- [151 header](https://github.com/chromium/chromium/blob/151.0.7922.34/third_party/blink/renderer/core/page/pointer_lock_controller.h#L129):
+  `kMaxLocksInWindow = 4`, `kLockRateLimitWindow = base::Seconds(2)`.
+- [151 implementation](https://github.com/chromium/chromium/blob/151.0.7922.34/third_party/blink/renderer/core/page/pointer_lock_controller.cc#L117):
+  counts fresh requests and rejects the burst after four until the window since
+  the last successful lock expires; the exact diagnostic string matches.
+- [151 feature policy](https://github.com/chromium/chromium/blob/151.0.7922.34/third_party/blink/renderer/platform/runtime_enabled_features.json5#L4933):
+  `RateLimitPointerLockRequests` is stable. This check is in Blink, independent of
+  a headed/headless display; changing to Xvfb alone does not remove the limit.
+- [154 header](https://github.com/chromium/chromium/blob/154.0.8037.57/third_party/blink/renderer/core/page/pointer_lock_controller.h#L130):
+  ten requests in a trailing two-second window, using timestamp pruning rather
+  than the older counter. This matches the successful system-browser comparison;
+  local success was not evidence that the older runner policy was absent.
+
+The harness now spaces **independent trusted test gestures** until 2.1 seconds
+after the last observed native request/resolution (the documented two-second
+policy plus 100 ms scheduling margin). This happens before clicking/pressing
+Enter, never inside the production Close & Resume handler. Each close still
+makes exactly one synchronous request; actual canvas Pointer Lock remains
+mandatory. There are no automatic retries, increased reacquisition deadlines,
+permission grants, rate-limit-disabling flags or accepted rejection-as-success.
+All four alternating mouse/keyboard cycles, held-W cleanup, first-event filtering,
+idle/orientation stability, Escape/programmatic/synthetic/unlocked safety,
+focus return and the deliberate browser-denial fallback remain covered.
+
+The normal five-suite job remains headless; CI also repeats the full Phase 3
+suite headed under Xvfb with the same pinned Chromium and assertions. This
+evaluates a supported display configuration without depending on it to bypass
+the browser policy. Both modes must pass before the actual built Apache checks.
+Production mouse controls and all src/public/tests/schema/dependency bytes are
+unchanged by this investigation. Successful hosted evidence is recorded after
+the corrected run completes.
 
 ## Packaging, rights and dependency review
 
