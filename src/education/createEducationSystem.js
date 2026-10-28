@@ -6,6 +6,7 @@ import { createQuizModal } from "./createQuizModal.js";
 import { createAssignmentSession } from "./assignments/assignment-session.js";
 import { createAssignmentLoader } from "./assignments/assignment-loader.js";
 import { createAssignmentSelector } from "./assignments/createAssignmentSelector.js";
+import { completionFormUrl, setExternalLink } from "./learningResources.js";
 
 export function createEducationSystem({ scene, camera, cameraDirector, uiState, isReady, domElement, colliders = [] }) {
   const progress = createAssignmentSession();
@@ -24,7 +25,9 @@ export function createEducationSystem({ scene, camera, cameraDirector, uiState, 
   hud.innerHTML = `<p class="education-kicker">Engineering lab · demo</p>
     <p data-progress role="status" aria-live="polite"></p>
     <p data-look></p><p data-terminal-help>Find the yellow Q01–Q05 terminals.</p>
-    <button type="button" data-select-units data-ui-block-look="true">Assignments</button>`;
+    <button type="button" data-select-units data-ui-block-look="true">Assignments</button>
+    <p data-completion hidden>Unit complete. Continue exploring, or open your Form.</p>
+    <a data-hud-form class="education-form-link" data-ui-block-look="true" hidden>Open Google Form</a>`;
   const prompt = document.createElement("button");
   prompt.type = "button";
   prompt.className = "education-prompt";
@@ -38,6 +41,9 @@ export function createEducationSystem({ scene, camera, cameraDirector, uiState, 
     hud.querySelector(".education-kicker").textContent = progress.mode === "demo" ? "Engineering lab · Demo Mode"
       : `${progress.unitId} · ${progress.unit.title}`;
     hud.querySelector("[data-terminal-help]").textContent = `Find the yellow Q01–Q0${progress.total} terminals.`;
+    const formUrl = completionFormUrl(progress);
+    setExternalLink(hud.querySelector("[data-hud-form]"), formUrl);
+    hud.querySelector("[data-completion]").hidden = !formUrl;
   }
   refreshProgress();
 
@@ -50,13 +56,15 @@ export function createEducationSystem({ scene, camera, cameraDirector, uiState, 
   const modal = createQuizModal({
     progress,
     focusFallback: domElement,
+    requestPointerLock: () => cameraDirector.walkControls?.requestPointerLock(),
     onOpen() {
       cameraDirector.setInputSuspended(true);
       uiState.openPanel("quiz");
       prompt.hidden = true;
     },
     onClose() {
-      // clear again on close; resumption always needs a new pointer-lock click.
+      // The barrier calls the gated lock API after this cleanup only for an
+      // eligible, trusted Close & Resume activation. Escape never requests it.
       resume("quiz");
     },
     onProgress: refreshProgress,
@@ -80,6 +88,7 @@ export function createEducationSystem({ scene, camera, cameraDirector, uiState, 
     for (const entry of terminals.entries) {
       const enabled = Boolean(progress.getQuestion(entry.id));
       entry.group.visible = enabled;
+      terminals.setPassed(entry.id, progress.hasPassed(entry.id));
       const index = colliders.indexOf(entry.collider);
       if (!enabled && index !== -1) colliders.splice(index, 1);
       if (enabled && index === -1) colliders.push(entry.collider);
@@ -125,6 +134,10 @@ export function createEducationSystem({ scene, camera, cameraDirector, uiState, 
   }
   window.addEventListener("keydown", onKeyDown);
   prompt.addEventListener("click", interact);
+  const formLink = hud.querySelector("[data-hud-form]");
+  for (const type of ["keydown", "keyup"]) formLink.addEventListener(type, (event) => {
+    if (event.code === "Enter" || event.code === "Space") event.stopPropagation();
+  });
 
   function update() {
     hud.hidden = !isReady() || Boolean(uiState.openedPanel);

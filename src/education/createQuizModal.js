@@ -1,6 +1,7 @@
 import { createModalBarrier } from "./createModalBarrier.js";
+import { questionResources, completionFormUrl, setExternalLink } from "./learningResources.js";
 
-export function createQuizModal({ progress, onOpen, onClose, onProgress, focusFallback }) {
+export function createQuizModal({ progress, onOpen, onClose, onProgress, focusFallback, requestPointerLock }) {
   const dialog = document.createElement("dialog");
   dialog.className = "education-quiz";
   dialog.setAttribute("aria-labelledby", "education-question-title");
@@ -9,15 +10,21 @@ export function createQuizModal({ progress, onOpen, onClose, onProgress, focusFa
   dialog.setAttribute("data-ui-block-look", "true");
   dialog.innerHTML = `
     <header><p class="education-kicker">Engineering lab · synthetic demo</p>
-      <button type="button" data-close aria-label="Close question">Close</button></header>
+      <button type="button" data-close>Close</button></header>
     <h2 id="education-question-title"></h2>
     <p id="education-demo-note">Practice questions only. Progress lasts for this visit.</p>
+    <div class="education-actions"><a data-question-video hidden>Watch Question Video</a></div>
     <form><fieldset><legend></legend><div data-options></div></fieldset>
       <p data-feedback role="status" aria-live="polite"></p>
       <button type="submit">Check answer</button>
       <button type="button" data-retry hidden>Try again</button>
     </form>
-    <p class="education-resume">Close, then click the city to resume mouse look. Escape also closes this question.</p>`;
+    <section data-explanation hidden aria-label="Optional explanation">
+      <a data-explanation-video hidden>Watch English Explanation</a>
+      <p data-explanation-text hidden></p>
+    </section>
+    <p><a data-dialog-form class="education-form-link" hidden>Open Google Form</a></p>
+    <p class="education-resume">Close &amp; Resume restores mouse look if this question was opened while locked. If blocked, click to resume looking around. Escape closes without locking.</p>`;
   document.body.append(dialog);
   const closeButton = dialog.querySelector("[data-close]");
   const form = dialog.querySelector("form");
@@ -26,8 +33,21 @@ export function createQuizModal({ progress, onOpen, onClose, onProgress, focusFa
   const submitButton = dialog.querySelector("[type=submit]");
   const retryButton = dialog.querySelector("[data-retry]");
   let question = null;
-  const barrier = createModalBarrier({ dialog, onOpen, onClose, focusFallback, initialFocus: closeButton });
-  closeButton.addEventListener("click", barrier.close);
+  const barrier = createModalBarrier({ dialog, onOpen, onClose, focusFallback, initialFocus: closeButton, requestPointerLock });
+  closeButton.addEventListener("click", barrier.closeAndResume);
+
+  function renderResources() {
+    const resources = questionResources(progress, question);
+    setExternalLink(dialog.querySelector("[data-question-video]"), resources.questionVideoUrl);
+    setExternalLink(dialog.querySelector("[data-explanation-video]"), resources.explanationVideoUrl);
+    dialog.querySelector("[data-explanation]").hidden = !resources.explanationVideoUrl;
+    const text = dialog.querySelector("[data-explanation-text]");
+    text.textContent = resources.explanationText ?? "";
+    text.hidden = !resources.explanationText;
+    setExternalLink(dialog.querySelector("[data-dialog-form]"), completionFormUrl(progress));
+  }
+  const unsubscribe = progress.subscribe?.(renderResources);
+  renderResources();
 
   function renderPassed() {
     const passed = progress.hasPassed(question.id);
@@ -35,6 +55,7 @@ export function createQuizModal({ progress, onOpen, onClose, onProgress, focusFa
     submitButton.hidden = passed;
     retryButton.hidden = true;
     feedback.textContent = passed ? "Correct. This question is passed." : "";
+    renderResources();
   }
 
   form.addEventListener("submit", (event) => {
@@ -86,8 +107,10 @@ export function createQuizModal({ progress, onOpen, onClose, onProgress, focusFa
         return label;
       }));
       renderPassed();
-      return barrier.open();
+      const opened = barrier.open();
+      closeButton.textContent = barrier.canResume() ? "Close & Resume" : "Close";
+      return opened;
     },
-    destroy: barrier.destroy,
+    destroy() { unsubscribe?.(); barrier.destroy(); },
   };
 }

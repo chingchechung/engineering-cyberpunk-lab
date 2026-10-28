@@ -35,6 +35,7 @@ export function createTerminals({ scene }) {
   const screenMaterial = new THREE.MeshBasicMaterial({ color: 0x67d5d0, toneMapped: false });
   const indicatorGeometry = new THREE.SphereGeometry(0.12, 12, 8);
   const indicatorMaterial = new THREE.MeshBasicMaterial({ color: 0xffdf24, toneMapped: false });
+  const passedIndicatorMaterial = new THREE.MeshBasicMaterial({ color: 0x48e38b, toneMapped: false });
   const colliders = [];
   const entries = TERMINAL_LAYOUT.map((terminal) => {
     const group = new THREE.Group();
@@ -58,13 +59,17 @@ export function createTerminals({ scene }) {
   return {
     entries,
     colliders,
+    setPassed(id, passed) {
+      const entry = entries.find((terminal) => terminal.id === id);
+      if (entry) entry.indicator.material = passed ? passedIndicatorMaterial : indicatorMaterial;
+    },
     destroy() {
       root.removeFromParent();
       for (const entry of entries) {
         entry.label.material.map.dispose();
         entry.label.material.dispose();
       }
-      for (const resource of [casingGeometry, casingMaterial, screenGeometry, screenMaterial, indicatorGeometry, indicatorMaterial]) resource.dispose();
+      for (const resource of [casingGeometry, casingMaterial, screenGeometry, screenMaterial, indicatorGeometry, indicatorMaterial, passedIndicatorMaterial]) resource.dispose();
     },
   };
 }

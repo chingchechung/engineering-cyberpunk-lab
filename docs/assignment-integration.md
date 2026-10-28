@@ -49,7 +49,9 @@ reference and preserves option order/language, IDs, labels and version.
 A three-choice question has three radios, never a fabricated D. Mixed answer
 fields, unknown fields, missing required fields, bad question order and invalid
 URLs are rejected using the original ordered path/code/message diagnostics.
-Phase 2 validates and retains URL fields but exposes **no video/Form action**.
+Phase 3 uses those validated URL fields for native explicit new-tab actions.
+The required `explanationVideoUrl` field stays required even though watching an
+explanation is optional. No schema or URL rule was changed.
 
 ## Runtime behavior
 
@@ -64,13 +66,21 @@ A failed refresh revokes the obsolete allowlist while keeping active content.
 Only a successful replacement resets question progress, including restarting
 the same unit deliberately. The original city position, camera and movement
 systems are not reset. Both dialogs share the Phase 1 native modal, inert
-background, input suspension and focus barrier. Reacquiring Pointer Lock always
-requires an explicit click after closing.
+background, input suspension and focus barrier. A quiz opened while game Pointer
+Lock was active offers **Close & Resume**,
+which attempts one lock request synchronously from that trusted click/keyboard
+activation. Escape and an originally unlocked opening never force lock. Browser
+rejection or throttling leaves **Click to resume looking around**; there is no
+retry loop. Assignments retains normal Close/Escape. External-tab focus return
+never locks the mouse.
 
 Q01 maps directly to the fixed Q01 terminal, etc. Four-question units hide Q05,
 remove only its own casing from the collider list and exclude it from proximity
-interaction; five-question units restore it at the original coordinates. Other
-geometry/collision code is unchanged. An incorrect choice permits retry and
+interaction; five-question units restore it at its fixed Phase 3 site. Passed
+indicators become green; unpassed indicators remain yellow. Phase 3
+redistributes the five fixed sites using the original reachable-city survey;
+see [the layout report](phase-3-results.md). City/collision code is unchanged.
+An incorrect choice permits retry and
 never revokes an existing pass. Completion is 4/4 or 5/5 for the active unit.
 
 Demo Mode retains the original synthetic questions, with no fabricated links.
@@ -102,13 +112,22 @@ parity/schema check is `python -m unittest tests.test_assignment_contract -v`
 
 With the normal HTTPS Vite dev server and its exported public certificate, run
 `python scripts/browser-phase-1.py --cafile <certificate>` and
-`python scripts/browser-phase-2.py --cafile <certificate>`. Python Playwright and
+`python scripts/browser-phase-2.py --cafile <certificate>`, followed by
+`python scripts/browser-phase-3.py --cafile <certificate>`. Python Playwright and
 system Chromium are required. Both trust only the specific certificate's SPKI.
-The latter intercepts synthetic assignment responses before loading them; no
-fixture unit or dummy provider URL is published or contacted. Geometry/DOM/input
+Phase 2/3 tests intercept synthetic assignment responses. Phase 3 also intercepts
+all fixture provider navigations before opening native new tabs; no fixture unit
+or dummy provider destination is published or contacted. Geometry/DOM/input
 checks are separate from GPU rendering and physical Windows acceptance.
 
-Phase 3 may later add explicit new-tab question videos, optional post-pass
-explanation actions, and a Form only after completion. No autoplay, required
-embedded playback or viewing-time tracking is planned. This phase stops at its
-Draft PR and instructor acceptance, with no release or deployment.
+Phase 3 now exposes **Watch Question Video** on real questions, **Watch English
+Explanation** and literal multiline `explanationText` after a pass, and **Open
+Google Form** in the HUD and completed quiz at 4/4 or 5/5. Video viewing is not a
+prerequisite for answering or completion. All actions use the exact validated
+URL, `target="_blank"` and `rel="noopener noreferrer"`. Native navigation needs
+an explicit action; no autoplay, embeds, backend, submissions or viewing-time
+tracking. Completed explanations/Form survive exploration and failed/canceled/
+stale unit requests; valid replacement clears their old hrefs. Demo Mode has
+none of these URLs. See [Phase 3 results](phase-3-results.md) for tests and browser
+resume restrictions. Stop after its Draft PR; Phase 4, release and deployment
+remain unapproved.

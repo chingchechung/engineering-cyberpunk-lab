@@ -1,10 +1,11 @@
 const BLOCKED_EVENTS = ["pointerdown", "pointerup", "pointermove", "pointercancel", "mousedown", "mouseup", "mousemove", "click", "dblclick", "contextmenu", "wheel", "touchstart", "touchmove", "touchend", "keydown", "keyup", "keypress"];
 
 // Phase 1 native-dialog input/focus barrier, shared by quiz and unit selector.
-export function createModalBarrier({ dialog, onOpen, onClose, focusFallback, initialFocus }) {
+export function createModalBarrier({ dialog, onOpen, onClose, focusFallback, initialFocus, requestPointerLock }) {
   const inertState = new Map();
   let returnFocus = null;
   let opened = false;
+  let resumeEligible = false;
   function isolateBackground() {
     for (const element of document.body.children) {
       if (element === dialog || inertState.has(element)) continue;
@@ -56,6 +57,7 @@ export function createModalBarrier({ dialog, onOpen, onClose, focusFallback, ini
   function finishClose() {
     if (!opened) return;
     opened = false;
+    resumeEligible = false;
     observer.disconnect();
     for (const [element, wasInert] of inertState) element.inert = wasInert;
     inertState.clear();
@@ -73,6 +75,19 @@ export function createModalBarrier({ dialog, onOpen, onClose, focusFallback, ini
     finishClose();
   }
 
+  function closeAndResume(event) {
+    if (!opened) return;
+    // Capture eligibility before close clears it. Invoke synchronously in this
+    // trusted click (including native keyboard activation), never on focus/tab
+    // return, Escape, programmatic close, or an originally unlocked opening.
+    const resume = resumeEligible && event?.isTrusted && Boolean(requestPointerLock);
+    close();
+    if (resume && document.hasFocus() && !document.hidden) {
+      focusFallback?.focus({ preventScroll: true });
+      requestPointerLock(); // Existing gated API catches rejection; no retry loop.
+    }
+  }
+
   dialog.addEventListener("cancel", (event) => { event.preventDefault(); close(); });
   dialog.addEventListener("close", () => {
     // A queued close event from an earlier opening must not close a new quiz.
@@ -81,9 +96,12 @@ export function createModalBarrier({ dialog, onOpen, onClose, focusFallback, ini
   return {
     isOpen: () => opened,
     close,
+    closeAndResume,
+    canResume: () => resumeEligible && Boolean(requestPointerLock),
     open() {
       if (opened || document.querySelector("dialog[open]")) return false;
       returnFocus = document.activeElement;
+      resumeEligible = document.pointerLockElement === focusFallback;
       opened = true;
       onOpen?.();
       isolateBackground();

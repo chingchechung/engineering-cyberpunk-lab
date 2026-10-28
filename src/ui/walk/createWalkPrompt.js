@@ -44,8 +44,8 @@ export function createWalkPrompt({ domElement, walkControls, state } = {}) {
       root.setAttribute("aria-label", "Drag to look around");
       root.classList.add("walk-prompt--passive");
     } else {
-      titleEl.textContent = "Click to look around";
-      root.setAttribute("aria-label", "Click to activate walk mode");
+      titleEl.textContent = "Click to resume looking around";
+      root.setAttribute("aria-label", "Click to resume looking around");
       root.classList.remove("walk-prompt--passive");
     }
   }

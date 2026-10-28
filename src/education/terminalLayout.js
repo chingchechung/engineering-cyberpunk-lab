@@ -1,11 +1,12 @@
 // Positions use the original city's -20 Y transform and wet ground at -5.4.
-// Actual GLB clearance and a control-driven walking route are checked in tests.
+// Phase 3 sites selected from the actual GLB/controller connected-region survey.
+// See tests/fixtures/terminal-survey.json and docs/phase-3-results.md.
 export const TERMINAL_LAYOUT = Object.freeze([
-  { id: "Q01", position: [-136, -5.4, 29] },
-  { id: "Q02", position: [-130, -5.4, 27] },
-  { id: "Q03", position: [-123, -5.4, 27] },
-  { id: "Q04", position: [-116, -5.4, 30] },
-  { id: "Q05", position: [-111, -5.4, 34] },
+  { id: "Q01", position: [-166.564, -5.4, 36.181] },
+  { id: "Q02", position: [-94.564, -5.4, 14.181] },
+  { id: "Q03", position: [-34.564, -5.4, 48.181] },
+  { id: "Q04", position: [87.436, -5.4, 20.181] },
+  { id: "Q05", position: [17.436, -5.4, -1.819] },
 ].map((entry) => Object.freeze({ ...entry, position: Object.freeze(entry.position) })));
 
 export const INTERACTION_RADIUS = 2.6;

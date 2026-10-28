@@ -6,11 +6,13 @@ Target: `chingchechung/engineering-cyberpunk-lab`.
 Upstream: `ektogamat/threejs-conference` (Threejs-Punk), pinned to
 `8cc20593b2270e2ce832e7b7b44356705daddec4`.
 
-Phase 0, Phase 1 and the walking-speed adjustment are complete and merged
-through PRs #1–#3. Phase 1 passed instructor Windows 11 acceptance; walking is
-4.5 m/s and maximum sprint is 9 m/s. Phase 2 is explicitly authorized on
-`feature/phase-2-assignment-integration` from merged `main` (`d6b6702`). Finish
-Phase 2, open a Draft PR, then stop for instructor acceptance before Phase 3.
+Phase 0–2 and the walking-speed adjustment are complete, accepted and merged.
+Phase 2 PR #4 merged at `3142bd30534519669f545e835a078c8f4739ed1f`.
+Phase 3 is explicitly authorized on `feature/phase-3-learning-workflow` from
+latest main: distribute five terminals across the existing reachable city,
+complete native video/explanation/Form actions, and improve trusted quiz resume.
+Finish tests/docs and open a Draft PR; stop for instructor acceptance before
+Phase 4. Keep the repository Private; no public release/deployment is authorized.
 Never modify the upstream repository, merge a PR, publish a release, or deploy
 without explicit approval. Retain the city, walking, BVH collision, rain,
 lighting, shaders, post-processing, and original visual quality.
@@ -65,7 +67,7 @@ via PR #2. Its results remain historical in [docs/phase-1-results.md](docs/phase
 The speed adjustment was merged via PR #3 after automated validation; the
 instructor explicitly waived another manual test for that minor adjustment.
 
-## Phase 2 — assignment JSON integration and unit management (implemented; acceptance pending)
+## Phase 2 — assignment JSON integration and unit management (accepted and merged)
 
 - Reuse the Engineering City Lab `v1.0.0` contract/loader/session patterns at
   `38b1dfdd73d766ec1d01999216b24dfca2126fad` and the approved authoring source
@@ -93,21 +95,40 @@ instructor explicitly waived another manual test for that minor adjustment.
   parity, schemas, loader/session/UI cases and original control/speed regressions.
 
 Results, provenance, commands, remaining limits and the physical acceptance
-checklist are in [docs/phase-2-results.md](docs/phase-2-results.md). Exit: open a
-Draft PR and stop for instructor acceptance. No Phase 3, merge, release or deployment.
+checklist are in [docs/phase-2-results.md](docs/phase-2-results.md). The instructor
+accepted this phase and merged PR #4; its earlier stop is historical.
 
-## Phase 3 — videos, Google Forms, and UI (not started)
+## Phase 3 — complete workflow, terminal redistribution and resume (implemented; acceptance pending)
 
-- After separate authorization, expose question videos in a new browser tab
-  only after an explicit learner action. After a pass, offer the optional English
-  explanation video action and supplied explanation text. Preserve supplied URLs.
-- Make that unit's Google Form available only after all required questions pass.
-  Google Forms controls submission availability; no travel/exit requirement.
-- No autoplay, required embeds, viewing-time checks or tracking. Use safe text
-  and validated HTTPS links with `target="_blank"` and `rel="noopener noreferrer"`.
-- Preserve Phase 2's in-memory state and failure/cancellation semantics. Test
-  external actions with provider destinations mocked before navigation; do not
-  treat fixture URLs as real coursework. These features are not implemented in Phase 2.
+- Decode the original city/collision GLBs and determine a conservative connected
+  walking region from the unchanged spawn using actual movement/BVH rules.
+  Choose five safe fixed sites using walking-graph separation, then continuously
+  verify five spawn routes and all ten terminal pairs at 60 Hz. Retain the
+  interaction radius, labels, Q05 four/five-unit rules and original city bounds.
+- Keep yellow indicators before a pass and show green afterward with simple
+  shared materials. No new lights, expensive shaders, city geometry or districts.
+- Use explicit native new-tab question videos from the validated original URL.
+  Keep answering independent of video viewing. Offer the English explanation
+  video/text only after a pass, including revisits; render text literally with
+  line breaks preserved. No autoplay, embeds or viewing-time tracking.
+- Unlock the active unit Form at 4/4 or 5/5 in both HUD and completed quiz, without
+  a return-to-start requirement. Use `_blank` and `noopener noreferrer` for every
+  external action. Clear stale links only on valid replacement; failed/canceled/
+  stale requests preserve the old unit and completion. Demo Mode has no URLs.
+- A trusted Close & Resume activation may make one synchronous gated lock request
+  only if the quiz originally opened in game Pointer Lock. Keep orientation,
+  filtering, pitch limits, settling and held-key cleanup. Escape closes safely;
+  blocked requests show explicit click-to-resume, without automatic retries.
+  Returning from a video/Form tab never locks. Assignments keeps its safe close.
+- Preserve schemas/validation/answer logic, S01–S12 allowlisting, teacher GUI,
+  empty public manifest, in-memory-only progress and all original rendering.
+- Run Node/install/build, Python parity, all three browser suites and geometry
+  checks; intercept synthetic provider URLs. Separate automated DOM/geometry
+  evidence from physical Windows/WebGPU acceptance.
+
+See [docs/phase-3-results.md](docs/phase-3-results.md) for final coordinates,
+distance table/diagram, methods, source preservation, tests and Windows checklist.
+Exit: a Draft PR and a stop for instructor acceptance. Phase 4 is not authorized.
 
 ## Phase 4 — regression and release preparation (not started)
 
