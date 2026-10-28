@@ -8,8 +8,9 @@ instructor and merged through PR #4** at
 **`3142bd30534519669f545e835a078c8f4739ed1f`**. No new browser/GPU/version
 measurements were supplied with that acceptance. The existing checkout was used
 without creating a worktree. The tests/checklist below preserve Phase 2's
-historical evidence; current Phase 3 work and its pending acceptance are in
-[phase-3-results.md](phase-3-results.md).
+historical evidence. Phase 3 and 3.5 were subsequently accepted and merged;
+current production preparation and its separate acceptance are in
+[phase-4-results.md](phase-4-results.md).
 
 The former stop before Phase 3 is superseded by the instructor's explicit Phase 3
 authorization. No merge/release/deployment/visibility action is authorized for

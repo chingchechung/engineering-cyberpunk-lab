@@ -6,7 +6,7 @@ Started `feature/phase-4-release-preparation` from latest merged main
 **`85b07ff506dde3a58b0422340b2787f139ee17c2`**, verified PR #6 merged and complete
 (including commit `6dbdf42` real multilingual text). The instructor reports
 Windows 11 acceptance of Phase 0–3.5; this does not claim new Codex hardware tests.
-Ending implementation commit: **IMPLEMENTATION_COMMIT_PENDING**. The final PR head
+Ending implementation commit: **789ce6ad8538b3ddd356a09cb77a725fee6225c4**. The final PR head
 also includes the documentation/evidence follow-up; its immutable SHA is recorded
 by GitHub/PR description. The clean-checkout test below uses the implementation SHA.
 
@@ -116,8 +116,8 @@ standard runner; GitHub execution status is reported separately below.
 | Controller/geometry evidence | Original 15 terminal routes unchanged; 20,214 supported Matrix movement samples, 8,458 retained wall samples, all 18 exterior edges plus 8 corners, 20-resource disposal; original controls/car/modal regressions preserved |
 | Unicode evidence | 96 real unique rasters, bundled font coverage, safe cells/UVs, single font load, deterministic mixed sequences, stable 600 updates, clean blocked-font failure; ratios 25.01/20.29/29.40/25.29% |
 | Static Apache tests | All three bases passed, with base containment, real resources, types/cache/404/ranges, font and v1/v2 DOM switching; known cloud GPU failure recorded separately |
-| Fresh clean checkout | VALIDATION_PENDING |
-| Private candidate/ZIP validation | VALIDATION_PENDING |
+| Fresh clean checkout | Passed from a separate clean temporary clone at the implementation SHA: npm ci, 506 Node tests, root build, 10 Python tests, all five accepted browser suites and all three Apache variants; Git remained clean |
+| Private candidate/ZIP validation | Two local internal ZIPs from the clean checkout are byte-identical; **80 site files**, **35,645,078 archive bytes**, clean source; CRC/content checks passed |
 | Source/content audit | Original 54 public hashes, original geometry/controls/shaders/contracts and package lock preserved; full notices/font present, default manifest empty, no course/test/GUI/docs/Git/env/credential content in site output |
 | Physical Windows Phase 4 acceptance | **Pending; instructor will perform it** |
 
@@ -126,6 +126,11 @@ unittest modules, `check-dist.py`, `run-browser-regressions.py`, and
 `production-smoke.py` (the known cloud adapter option was explicitly supplied).
 The static smoke invokes Vite with each `--base` and private absolute `--outDir`.
 All output/ZIP evidence remains in private temporary paths and is not uploaded.
+The two private ZIPs have SHA-256 `92512a9517b851b0c49e0c06f3ed5da04d47d932c90cf2cc4ab492b1494f916a`.
+The fresh root/course/UserDir Apache checks each verified 79 non-dot files over
+HTTP (80 total site files including the denied empty marker). Observed runtime
+responses numbered 52/53/57 respectively; counts vary with the existing shuffled
+video pool/preload behavior, while every required file is independently verified.
 
 ## CI status and reproducibility
 
@@ -194,9 +199,11 @@ committed; no dist/ZIP/binary build output is committed):
 - `docs/license-evidence.json`
 - `docs/phase-0.md`
 - `docs/phase-1-results.md`
+- `docs/phase-2-results.md`
 - `docs/phase-3-5-results.md`
 - `docs/phase-3-results.md`
 - `docs/phase-4-results.md`
+- `docs/phase-4-runtime-requests.json`
 - `docs/release-inventory.json`
 - `docs/release-readiness.md`
 - `index.html`
@@ -241,7 +248,6 @@ committed; no dist/ZIP/binary build output is committed):
 - `tests/app-asset.test.js`
 - `tests/test_release_artifacts.py`
 - `vite.config.js`
-- `docs/phase-4-runtime-requests.json`
 
 ## Windows 11 Chrome/Edge acceptance gate
 

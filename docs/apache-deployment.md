@@ -149,7 +149,10 @@ python scripts/production-smoke.py
 ```
 
 `APACHE_HTTPD`, `APACHE_MODULES` and `CHROMIUM_EXECUTABLE` can select local tool
-paths. The static smoke builds `/`, `/course/cyberpunk-lab/` and
+paths. The automated Apache runner targets Linux/CI (Unix process/group APIs); Windows
+maintainers can use WSL or a Linux build runner for it, then perform browser
+acceptance against the approved Apache staging host. The runner is not required
+on the production server. The static smoke builds `/`, `/course/cyberpunk-lab/` and
 `/~username/cyberpunk-lab/` into private temp directories, starts **real Apache**
 on loopback with a newly generated specific trusted test certificate, checks
 files/types/cache/ranges/404 and uses actual compiled application modules. It

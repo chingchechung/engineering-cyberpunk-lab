@@ -1,0 +1,862 @@
+{
+  "scope": "Observed actual built application requests on private local HTTPS Apache; no Vite transform/harness. All URLs below are path-only.",
+  "server": "Server version: Apache/2.4.68 (Debian)",
+  "sourceCommit": "789ce6ad8538b3ddd356a09cb77a725fee6225c4",
+  "node": "22.23.4",
+  "npm": "10.9.9",
+  "python": "3.12",
+  "playwright": "1.62.0",
+  "chromium": "154.0.8037.57",
+  "hardwareVisualAcceptance": false,
+  "variants": {
+    "root": {
+      "base": "/",
+      "integrity": {
+        "base": "/",
+        "files": 80,
+        "originalPublicHashes": 54,
+        "manifestEmpty": true,
+        "matrixFontBytes": 9964
+      },
+      "staticHttp": {
+        "filesVerified": 79,
+        "mimeCacheHashes": true,
+        "missing404": true,
+        "mediaRange206": true
+      },
+      "runtimeResponsesObserved": 52,
+      "baseContainment": true,
+      "assignmentRequests": [
+        "/assignments/manifest.json",
+        "/assignments/manifest.json",
+        "/assignments/S01.json",
+        "/assignments/manifest.json",
+        "/assignments/S02.json",
+        "/assignments/manifest.json",
+        "/assignments/S01.json"
+      ],
+      "assignmentVersions": [
+        1,
+        2
+      ],
+      "questionTotals": [
+        4,
+        5
+      ],
+      "failedReplacementPreserved": true,
+      "fontLoaded": true,
+      "worldInitializationReachedHud": true,
+      "knownSoftwareDeviceLoss": true,
+      "unexpectedErrors": [],
+      "nativeMediaPreloadAborts": [
+        {
+          "path": "/video/imagine-art-feed-item.mp4",
+          "reason": "net::ERR_ABORTED"
+        },
+        {
+          "path": "/light-rain.mp3",
+          "reason": "net::ERR_ABORTED"
+        },
+        {
+          "path": "/thunderstorm.mp3",
+          "reason": "net::ERR_ABORTED"
+        },
+        {
+          "path": "/night-ambience.mp3",
+          "reason": "net::ERR_ABORTED"
+        }
+      ],
+      "requests": [
+        {
+          "path": "/",
+          "status": 200,
+          "mime": "text/html"
+        },
+        {
+          "path": "/assets/index-BeMFTm7o.js",
+          "status": 200,
+          "mime": "text/javascript"
+        },
+        {
+          "path": "/assets/index-CTWetRdM.css",
+          "status": 200,
+          "mime": "text/css"
+        },
+        {
+          "path": "/assets/lab-matrix-text-DeOh1g3G.woff2",
+          "status": 200,
+          "mime": "font/woff2"
+        },
+        {
+          "path": "/assignments/S01.json",
+          "status": 200,
+          "mime": "application/json"
+        },
+        {
+          "path": "/assignments/S02.json",
+          "status": 200,
+          "mime": "application/json"
+        },
+        {
+          "path": "/assignments/manifest.json",
+          "status": 200,
+          "mime": "application/json"
+        },
+        {
+          "path": "/custom_noise.webp",
+          "status": 200,
+          "mime": "image/webp"
+        },
+        {
+          "path": "/custom_perlin.webp",
+          "status": 200,
+          "mime": "image/webp"
+        },
+        {
+          "path": "/engine.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/fonts/orbitron-latin.woff2",
+          "status": 200,
+          "mime": "font/woff2"
+        },
+        {
+          "path": "/fonts/phosphor/Phosphor.woff2",
+          "status": 200,
+          "mime": "font/woff2"
+        },
+        {
+          "path": "/freesound_community-plasma-engine-fx-33559.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/hdri/sunflowers_puresky_1k.hdr",
+          "status": 200,
+          "mime": "image/vnd.radiance"
+        },
+        {
+          "path": "/libs/basis/basis_transcoder.js",
+          "status": 200,
+          "mime": "text/javascript"
+        },
+        {
+          "path": "/libs/basis/basis_transcoder.wasm",
+          "status": 200,
+          "mime": "application/wasm"
+        },
+        {
+          "path": "/libs/draco/draco_decoder.wasm",
+          "status": 200,
+          "mime": "application/wasm"
+        },
+        {
+          "path": "/libs/draco/draco_wasm_wrapper.js",
+          "status": 200,
+          "mime": "text/javascript"
+        },
+        {
+          "path": "/light-rain.mp3",
+          "status": 206,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/models/billboards.glb",
+          "status": 200,
+          "mime": "model/gltf-binary"
+        },
+        {
+          "path": "/models/colider.glb",
+          "status": 200,
+          "mime": "model/gltf-binary"
+        },
+        {
+          "path": "/models/cyberpunk_compressed.glb",
+          "status": 200,
+          "mime": "model/gltf-binary"
+        },
+        {
+          "path": "/models/plane.glb",
+          "status": 200,
+          "mime": "model/gltf-binary"
+        },
+        {
+          "path": "/models/quadra.glb",
+          "status": 200,
+          "mime": "model/gltf-binary"
+        },
+        {
+          "path": "/night-ambience.mp3",
+          "status": 206,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/textures/smoke.png",
+          "status": 200,
+          "mime": "image/png"
+        },
+        {
+          "path": "/textures/water-splash.webp",
+          "status": 200,
+          "mime": "image/webp"
+        },
+        {
+          "path": "/textures/wet-puddles-albedo.jpg",
+          "status": 200,
+          "mime": "image/jpeg"
+        },
+        {
+          "path": "/textures/wet-puddles-normal.jpg",
+          "status": 200,
+          "mime": "image/jpeg"
+        },
+        {
+          "path": "/textures/wet-puddles-roughness.jpg",
+          "status": 200,
+          "mime": "image/jpeg"
+        },
+        {
+          "path": "/thunderstorm.mp3",
+          "status": 206,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/video/imagine-art-feed-item-2.mp4",
+          "status": 206,
+          "mime": "video/mp4"
+        },
+        {
+          "path": "/video/imagine-art-feed-item-3.mp4",
+          "status": 206,
+          "mime": "video/mp4"
+        },
+        {
+          "path": "/video/imagine-art-feed-item-4.mp4",
+          "status": 206,
+          "mime": "video/mp4"
+        },
+        {
+          "path": "/video/imagine-art-feed-item-5.mp4",
+          "status": 206,
+          "mime": "video/mp4"
+        },
+        {
+          "path": "/video/imagine-art-feed-item-6.mp4",
+          "status": 206,
+          "mime": "video/mp4"
+        },
+        {
+          "path": "/video/imagine-art-feed-item.mp4",
+          "status": 206,
+          "mime": "video/mp4"
+        },
+        {
+          "path": "/wet_footstep-step-01.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/wet_footstep-step-02.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/wet_footstep-step-03.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/wet_footstep-step-04.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/wet_footstep-step-05.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/wet_footstep-step-06.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        }
+      ]
+    },
+    "nested": {
+      "base": "/course/cyberpunk-lab/",
+      "integrity": {
+        "base": "/course/cyberpunk-lab/",
+        "files": 80,
+        "originalPublicHashes": 54,
+        "manifestEmpty": true,
+        "matrixFontBytes": 9964
+      },
+      "staticHttp": {
+        "filesVerified": 79,
+        "mimeCacheHashes": true,
+        "missing404": true,
+        "mediaRange206": true
+      },
+      "runtimeResponsesObserved": 53,
+      "baseContainment": true,
+      "assignmentRequests": [
+        "/course/cyberpunk-lab/assignments/manifest.json",
+        "/course/cyberpunk-lab/assignments/manifest.json",
+        "/course/cyberpunk-lab/assignments/S01.json",
+        "/course/cyberpunk-lab/assignments/manifest.json",
+        "/course/cyberpunk-lab/assignments/S02.json",
+        "/course/cyberpunk-lab/assignments/manifest.json",
+        "/course/cyberpunk-lab/assignments/S01.json"
+      ],
+      "assignmentVersions": [
+        1,
+        2
+      ],
+      "questionTotals": [
+        4,
+        5
+      ],
+      "failedReplacementPreserved": true,
+      "fontLoaded": true,
+      "worldInitializationReachedHud": true,
+      "knownSoftwareDeviceLoss": true,
+      "unexpectedErrors": [],
+      "nativeMediaPreloadAborts": [
+        {
+          "path": "/course/cyberpunk-lab/video/imagine-art-feed-item-2.mp4",
+          "reason": "net::ERR_ABORTED"
+        },
+        {
+          "path": "/course/cyberpunk-lab/video/imagine-art-feed-item-4.mp4",
+          "reason": "net::ERR_ABORTED"
+        },
+        {
+          "path": "/course/cyberpunk-lab/light-rain.mp3",
+          "reason": "net::ERR_ABORTED"
+        },
+        {
+          "path": "/course/cyberpunk-lab/night-ambience.mp3",
+          "reason": "net::ERR_ABORTED"
+        },
+        {
+          "path": "/course/cyberpunk-lab/thunderstorm.mp3",
+          "reason": "net::ERR_ABORTED"
+        }
+      ],
+      "requests": [
+        {
+          "path": "/course/cyberpunk-lab/",
+          "status": 200,
+          "mime": "text/html"
+        },
+        {
+          "path": "/course/cyberpunk-lab/assets/index-CHGhfYBO.js",
+          "status": 200,
+          "mime": "text/javascript"
+        },
+        {
+          "path": "/course/cyberpunk-lab/assets/index-DG1kR-Z_.css",
+          "status": 200,
+          "mime": "text/css"
+        },
+        {
+          "path": "/course/cyberpunk-lab/assets/lab-matrix-text-DeOh1g3G.woff2",
+          "status": 200,
+          "mime": "font/woff2"
+        },
+        {
+          "path": "/course/cyberpunk-lab/assignments/S01.json",
+          "status": 200,
+          "mime": "application/json"
+        },
+        {
+          "path": "/course/cyberpunk-lab/assignments/S02.json",
+          "status": 200,
+          "mime": "application/json"
+        },
+        {
+          "path": "/course/cyberpunk-lab/assignments/manifest.json",
+          "status": 200,
+          "mime": "application/json"
+        },
+        {
+          "path": "/course/cyberpunk-lab/custom_noise.webp",
+          "status": 200,
+          "mime": "image/webp"
+        },
+        {
+          "path": "/course/cyberpunk-lab/custom_perlin.webp",
+          "status": 200,
+          "mime": "image/webp"
+        },
+        {
+          "path": "/course/cyberpunk-lab/engine.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/course/cyberpunk-lab/fonts/orbitron-latin.woff2",
+          "status": 200,
+          "mime": "font/woff2"
+        },
+        {
+          "path": "/course/cyberpunk-lab/fonts/phosphor/Phosphor.woff2",
+          "status": 200,
+          "mime": "font/woff2"
+        },
+        {
+          "path": "/course/cyberpunk-lab/freesound_community-plasma-engine-fx-33559.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/course/cyberpunk-lab/hdri/sunflowers_puresky_1k.hdr",
+          "status": 200,
+          "mime": "image/vnd.radiance"
+        },
+        {
+          "path": "/course/cyberpunk-lab/libs/basis/basis_transcoder.js",
+          "status": 200,
+          "mime": "text/javascript"
+        },
+        {
+          "path": "/course/cyberpunk-lab/libs/basis/basis_transcoder.wasm",
+          "status": 200,
+          "mime": "application/wasm"
+        },
+        {
+          "path": "/course/cyberpunk-lab/libs/draco/draco_decoder.wasm",
+          "status": 200,
+          "mime": "application/wasm"
+        },
+        {
+          "path": "/course/cyberpunk-lab/libs/draco/draco_wasm_wrapper.js",
+          "status": 200,
+          "mime": "text/javascript"
+        },
+        {
+          "path": "/course/cyberpunk-lab/light-rain.mp3",
+          "status": 206,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/course/cyberpunk-lab/models/billboards.glb",
+          "status": 200,
+          "mime": "model/gltf-binary"
+        },
+        {
+          "path": "/course/cyberpunk-lab/models/colider.glb",
+          "status": 200,
+          "mime": "model/gltf-binary"
+        },
+        {
+          "path": "/course/cyberpunk-lab/models/cyberpunk_compressed.glb",
+          "status": 200,
+          "mime": "model/gltf-binary"
+        },
+        {
+          "path": "/course/cyberpunk-lab/models/plane.glb",
+          "status": 200,
+          "mime": "model/gltf-binary"
+        },
+        {
+          "path": "/course/cyberpunk-lab/models/quadra.glb",
+          "status": 200,
+          "mime": "model/gltf-binary"
+        },
+        {
+          "path": "/course/cyberpunk-lab/night-ambience.mp3",
+          "status": 206,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/course/cyberpunk-lab/textures/smoke.png",
+          "status": 200,
+          "mime": "image/png"
+        },
+        {
+          "path": "/course/cyberpunk-lab/textures/water-splash.webp",
+          "status": 200,
+          "mime": "image/webp"
+        },
+        {
+          "path": "/course/cyberpunk-lab/textures/wet-puddles-albedo.jpg",
+          "status": 200,
+          "mime": "image/jpeg"
+        },
+        {
+          "path": "/course/cyberpunk-lab/textures/wet-puddles-normal.jpg",
+          "status": 200,
+          "mime": "image/jpeg"
+        },
+        {
+          "path": "/course/cyberpunk-lab/textures/wet-puddles-roughness.jpg",
+          "status": 200,
+          "mime": "image/jpeg"
+        },
+        {
+          "path": "/course/cyberpunk-lab/thunderstorm.mp3",
+          "status": 206,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/course/cyberpunk-lab/video/imagine-art-feed-item-2.mp4",
+          "status": 206,
+          "mime": "video/mp4"
+        },
+        {
+          "path": "/course/cyberpunk-lab/video/imagine-art-feed-item-3.mp4",
+          "status": 206,
+          "mime": "video/mp4"
+        },
+        {
+          "path": "/course/cyberpunk-lab/video/imagine-art-feed-item-4.mp4",
+          "status": 206,
+          "mime": "video/mp4"
+        },
+        {
+          "path": "/course/cyberpunk-lab/video/imagine-art-feed-item-5.mp4",
+          "status": 206,
+          "mime": "video/mp4"
+        },
+        {
+          "path": "/course/cyberpunk-lab/video/imagine-art-feed-item-6.mp4",
+          "status": 206,
+          "mime": "video/mp4"
+        },
+        {
+          "path": "/course/cyberpunk-lab/video/imagine-art-feed-item.mp4",
+          "status": 206,
+          "mime": "video/mp4"
+        },
+        {
+          "path": "/course/cyberpunk-lab/wet_footstep-step-01.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/course/cyberpunk-lab/wet_footstep-step-02.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/course/cyberpunk-lab/wet_footstep-step-03.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/course/cyberpunk-lab/wet_footstep-step-04.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/course/cyberpunk-lab/wet_footstep-step-05.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/course/cyberpunk-lab/wet_footstep-step-06.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        }
+      ]
+    },
+    "userdir": {
+      "base": "/~username/cyberpunk-lab/",
+      "integrity": {
+        "base": "/~username/cyberpunk-lab/",
+        "files": 80,
+        "originalPublicHashes": 54,
+        "manifestEmpty": true,
+        "matrixFontBytes": 9964
+      },
+      "staticHttp": {
+        "filesVerified": 79,
+        "mimeCacheHashes": true,
+        "missing404": true,
+        "mediaRange206": true
+      },
+      "runtimeResponsesObserved": 57,
+      "baseContainment": true,
+      "assignmentRequests": [
+        "/~username/cyberpunk-lab/assignments/manifest.json",
+        "/~username/cyberpunk-lab/assignments/manifest.json",
+        "/~username/cyberpunk-lab/assignments/S01.json",
+        "/~username/cyberpunk-lab/assignments/manifest.json",
+        "/~username/cyberpunk-lab/assignments/S02.json",
+        "/~username/cyberpunk-lab/assignments/manifest.json",
+        "/~username/cyberpunk-lab/assignments/S01.json"
+      ],
+      "assignmentVersions": [
+        1,
+        2
+      ],
+      "questionTotals": [
+        4,
+        5
+      ],
+      "failedReplacementPreserved": true,
+      "fontLoaded": true,
+      "worldInitializationReachedHud": true,
+      "knownSoftwareDeviceLoss": true,
+      "unexpectedErrors": [],
+      "nativeMediaPreloadAborts": [
+        {
+          "path": "/~username/cyberpunk-lab/video/imagine-art-feed-item-2.mp4",
+          "reason": "net::ERR_ABORTED"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/video/imagine-art-feed-item-4.mp4",
+          "reason": "net::ERR_ABORTED"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/video/imagine-art-feed-item-3.mp4",
+          "reason": "net::ERR_ABORTED"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/video/imagine-art-feed-item.mp4",
+          "reason": "net::ERR_ABORTED"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/video/imagine-art-feed-item-6.mp4",
+          "reason": "net::ERR_ABORTED"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/video/imagine-art-feed-item-5.mp4",
+          "reason": "net::ERR_ABORTED"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/light-rain.mp3",
+          "reason": "net::ERR_ABORTED"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/night-ambience.mp3",
+          "reason": "net::ERR_ABORTED"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/thunderstorm.mp3",
+          "reason": "net::ERR_ABORTED"
+        }
+      ],
+      "requests": [
+        {
+          "path": "/~username/cyberpunk-lab/",
+          "status": 200,
+          "mime": "text/html"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/assets/index-CGd_kLK6.js",
+          "status": 200,
+          "mime": "text/javascript"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/assets/index-CTOpTz3U.css",
+          "status": 200,
+          "mime": "text/css"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/assets/lab-matrix-text-DeOh1g3G.woff2",
+          "status": 200,
+          "mime": "font/woff2"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/assignments/S01.json",
+          "status": 200,
+          "mime": "application/json"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/assignments/S02.json",
+          "status": 200,
+          "mime": "application/json"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/assignments/manifest.json",
+          "status": 200,
+          "mime": "application/json"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/custom_noise.webp",
+          "status": 200,
+          "mime": "image/webp"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/custom_perlin.webp",
+          "status": 200,
+          "mime": "image/webp"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/engine.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/fonts/orbitron-latin.woff2",
+          "status": 200,
+          "mime": "font/woff2"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/fonts/phosphor/Phosphor.woff2",
+          "status": 200,
+          "mime": "font/woff2"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/freesound_community-plasma-engine-fx-33559.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/hdri/sunflowers_puresky_1k.hdr",
+          "status": 200,
+          "mime": "image/vnd.radiance"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/libs/basis/basis_transcoder.js",
+          "status": 200,
+          "mime": "text/javascript"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/libs/basis/basis_transcoder.wasm",
+          "status": 200,
+          "mime": "application/wasm"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/libs/draco/draco_decoder.wasm",
+          "status": 200,
+          "mime": "application/wasm"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/libs/draco/draco_wasm_wrapper.js",
+          "status": 200,
+          "mime": "text/javascript"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/light-rain.mp3",
+          "status": 206,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/models/billboards.glb",
+          "status": 200,
+          "mime": "model/gltf-binary"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/models/colider.glb",
+          "status": 200,
+          "mime": "model/gltf-binary"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/models/cyberpunk_compressed.glb",
+          "status": 200,
+          "mime": "model/gltf-binary"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/models/plane.glb",
+          "status": 200,
+          "mime": "model/gltf-binary"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/models/quadra.glb",
+          "status": 200,
+          "mime": "model/gltf-binary"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/night-ambience.mp3",
+          "status": 206,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/textures/smoke.png",
+          "status": 200,
+          "mime": "image/png"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/textures/water-splash.webp",
+          "status": 200,
+          "mime": "image/webp"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/textures/wet-puddles-albedo.jpg",
+          "status": 200,
+          "mime": "image/jpeg"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/textures/wet-puddles-normal.jpg",
+          "status": 200,
+          "mime": "image/jpeg"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/textures/wet-puddles-roughness.jpg",
+          "status": 200,
+          "mime": "image/jpeg"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/thunderstorm.mp3",
+          "status": 206,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/video/imagine-art-feed-item-2.mp4",
+          "status": 206,
+          "mime": "video/mp4"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/video/imagine-art-feed-item-3.mp4",
+          "status": 206,
+          "mime": "video/mp4"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/video/imagine-art-feed-item-4.mp4",
+          "status": 206,
+          "mime": "video/mp4"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/video/imagine-art-feed-item-5.mp4",
+          "status": 206,
+          "mime": "video/mp4"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/video/imagine-art-feed-item-6.mp4",
+          "status": 206,
+          "mime": "video/mp4"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/video/imagine-art-feed-item.mp4",
+          "status": 206,
+          "mime": "video/mp4"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/wet_footstep-step-01.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/wet_footstep-step-02.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/wet_footstep-step-03.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/wet_footstep-step-04.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/wet_footstep-step-05.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        },
+        {
+          "path": "/~username/cyberpunk-lab/wet_footstep-step-06.mp3",
+          "status": 200,
+          "mime": "audio/mpeg"
+        }
+      ]
+    }
+  }
+}
