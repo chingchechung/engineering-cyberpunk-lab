@@ -206,8 +206,44 @@ suite headed under Xvfb with the same pinned Chromium and assertions. This
 evaluates a supported display configuration without depending on it to bypass
 the browser policy. Both modes must pass before the actual built Apache checks.
 Production mouse controls and all src/public/tests/schema/dependency bytes are
-unchanged by this investigation. Successful hosted evidence is recorded after
-the corrected run completes.
+unchanged by this investigation.
+
+### Successful corrected CI evidence
+
+Correction commit **`dade9911b72fcadd92381c958ef39e767d52401b`** completed
+[Validation run 40641701517](https://github.com/chingchechung/engineering-cyberpunk-lab/actions/runs/40641701517)
+(run 3, job `122661096343`) with **success** on 2026-10-28. The hosted job
+completed at approximately **14:10 Asia/Taipei**. Its logs verify:
+
+| Hosted check | Observed result |
+| --- | --- |
+| Frozen install, Node and production build | npm ci passed; **506/506 Node tests**, zero skipped/failed; **208 modules** built |
+| Python contract/parity and release integrity | **10/10 passed**; 364 validation cases/76 answer selections retained; clean dist, original 54 public hashes and empty manifest checked |
+| All five headless browser suites | Phase 1, 2, 3, 3.5 and multilingual text passed with pinned Playwright **1.62.0**, Chromium **151.0.7922.34 / revision 1234** |
+| Headed Phase 3 under Xvfb | The same real trusted mouse/keyboard lock/resume, filtering, focus/Escape/denial and native-resource assertions passed; eight provider fixture navigations intercepted in each mode |
+| Actual built root Apache smoke | `/` passed; 56 observed runtime responses stayed inside base |
+| Actual built nested Apache smoke | `/course/cyberpunk-lab/` passed; 51 base-contained runtime responses |
+| Actual built UserDir-style Apache smoke | `/~username/cyberpunk-lab/` passed; 53 base-contained runtime responses |
+
+Hosted environment: Ubuntu **24.04**, Node **22.23.4**, Python **3.12.15**,
+Apache **2.4.58-1ubuntu8.17**. Each Apache variant independently checked the 79
+non-dot static files/80 total files, hashes/MIME/cache/nosniff, genuine missing
+resource 404s, media ranges, font loading, empty Demo and synthetic v1/v2
+switching/failure preservation. Runtime response counts vary with the accepted
+video preload shuffle. All three still report the explicitly classified known
+software WebGPU device loss; success is for network/DOM/static contracts, not
+rendered graphics, physical browser acceptance or FPS. No production effects
+were disabled. The runner's default Apache service remained disabled/not started;
+the smoke server used its own temporary loopback HTTPS configuration.
+
+Local revalidation also passed npm ci, 506 Node/10 Python tests, all five browser
+suites and all three actual Apache paths on Chromium 154/Apache 2.4.68. After
+adding this evidence, the final documentation head is validated again; the PR
+checks page/final handoff records that head's immutable SHA and completed run.
+No archive is uploaded by either workflow. Identical Git tree IDs for `src`,
+`public` and `tests` against original PR head `3f25860` additionally confirm that
+the accepted features, assets, schemas/fixtures and movement algorithms did not
+change. Dependency declarations/lockfile and deployment policies are unchanged.
 
 ## Packaging, rights and dependency review
 
@@ -235,6 +271,16 @@ graph includes only Three, GSAP and three-mesh-bvh (and Three's vendored librari
 not Vercel. No Node service/node_modules is shipped. No audit fix, large dependency
 upgrade or Three/WebGPU change was made; this is not a vulnerability-free claim.
 No analytics, identity/grade collection or persistent progress is added.
+
+The instructor intends a formal **private v1.0.0** tag/GitHub Release after
+acceptance and separate explicit authorization. The
+[documented private release workflow](release-readiness.md#intended-private-v100-release-workflow)
+distinguishes tag/Release metadata, GitHub-generated source archives (which can
+contain tracked bundled assets), optional compiled ZIP attachments and public
+Apache hosting. Repository privacy grants no redistribution rights. Keep the
+rights blockers visible and review the exact contents/audience, including source
+archives, before release authorization. This task creates no tag or Release,
+uploads no archives, and does not deploy.
 
 ## Changed files
 
@@ -284,6 +330,7 @@ committed; no dist/ZIP/binary build output is committed):
 - `scripts/package-candidate.py`
 - `scripts/probe-webgpu.py`
 - `scripts/production-smoke.py`
+- `scripts/pointer_lock_diagnostics.py`
 - `scripts/run-browser-regressions.py`
 - `src/audio/createCarEngineAudio.js`
 - `src/audio/createPlaneEngineAudio.js`
