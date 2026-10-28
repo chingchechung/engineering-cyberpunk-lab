@@ -41,7 +41,6 @@
             inspectorSession: { revealInspector() {}, applyDevelopmentMode() {} } });
           const education = createEducationSystem({ scene, camera, cameraDirector: director,
             uiState: shell.uiState, isReady: shell.isFinishedIntro, domElement: canvas, colliders: world.colliders });
-          world.colliders.push(...education.terminals.colliders);
           director.preparePreRevealPose();
           shell.revealAppUi();
           education.update();

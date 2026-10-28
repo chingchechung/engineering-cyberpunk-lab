@@ -51,7 +51,7 @@ export function createTerminals({ scene }) {
     group.add(casing, screen, indicator, label);
     colliders.push(casing);
     root.add(group);
-    return { ...terminal, group, label, indicator };
+    return { ...terminal, group, label, indicator, collider: casing };
   });
   scene.add(root);
   root.updateMatrixWorld(true);

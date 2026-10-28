@@ -116,7 +116,7 @@ def modal_checks(browser, origin):
     page.keyboard.press("r")
     page.keyboard.down("w")
     page.keyboard.press("x")
-    quiz = page.locator("dialog.education-quiz")
+    quiz = page.locator("dialog.education-quiz:not(.education-selector)")
     check(quiz.is_visible(), "X did not open nearby Q01")
     check(page.evaluate("document.pointerLockElement === null && app.director.isInputSuspended()"), "Modal did not release lock/suspend input")
     page.keyboard.up("w")
