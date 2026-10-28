@@ -16,6 +16,7 @@
       import { TERMINAL_LAYOUT, findNearbyTerminal } from "../src/education/terminalLayout.js";
       import { FREE_CAMERA_START } from "../src/bootstrap/createCamera.js";
       import terminalSurvey from "./fixtures/terminal-survey.json";
+      import { createMatrixExtension } from "../src/world/matrix/createMatrixExtension.js";
       window.harness = { THREE, loadGeometry, createWalkControls, TERMINAL_LAYOUT, findNearbyTerminal, FREE_CAMERA_START,
         approach(id) { return new THREE.Vector3(...terminalSurvey.nodes[terminalSurvey.approachNodes[id]].position); },
         async setup() {
@@ -30,7 +31,13 @@
           const camera = new THREE.PerspectiveCamera(65, 4 / 3, 0.1, 300);
           camera.position.set(...FREE_CAMERA_START.position);
           camera.lookAt(...FREE_CAMERA_START.target);
-          const world = { ...geometry, ground: { mesh: ground } };
+          const matrix = new URLSearchParams(location.search).has('originalBounds') ? null
+            : await createMatrixExtension({ scene, boundsCollider: geometry.bounds, colliders: geometry.colliders });
+          const walkGround = new THREE.Group();
+          walkGround.add(ground);
+          if (matrix) walkGround.add(matrix.ground);
+          scene.add(walkGround);
+          const world = { ...geometry, ground: { mesh: ground }, walkGround, matrix };
           const canvas = document.querySelector("canvas");
           canvas.style.zIndex = "14";
           const renderer = { domElement: canvas };

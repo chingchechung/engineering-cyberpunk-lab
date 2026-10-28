@@ -1,0 +1,26 @@
+Lab Matrix Text Regular — multilingual digital-rain font subset
+
+Derived from Noto Sans CJK JP Regular, version 2.004.
+Copyright © 2014-2021 Adobe (http://www.adobe.com/).
+Licensed under SIL Open Font License 1.1; the complete license is in OFL.txt.
+The renamed derivative font remains under the same SIL OFL 1.1, not MIT.
+
+Source repository: https://github.com/notofonts/noto-cjk
+Source commit: f8d157532fbfaeda587e826d4cd5b21a49186f7c
+Source file: Sans/OTF/Japanese/NotoSansCJKjp-Regular.otf
+Source SHA-256: 68a3fc98800b2a27b371f2fb79991daf3633bd89309d4ffaa6946fd587f375b5
+Source license: Sans/LICENSE at the same commit.
+
+Modification: subset to the 96 curated Unicode characters in glyphInventory.js;
+remove hinting/layout features unused by single-character rasterization; rename
+family/PostScript names to Lab Matrix Text / LabMatrixText-Regular; encode WOFF2.
+Original copyright/license metadata is retained. No glyph outlines were drawn
+or replaced, and no movie/game texture was used.
+
+Bundled file: src/world/matrix/fonts/lab-matrix-text.woff2
+Subset bytes: 9964
+Subset SHA-256: 57185ac432fb65d0cc674f94fd91bfca4f04f91e8d860b164c23eda5afbce155
+Reproduce with fontTools 4.61.1 and Brotli 1.2.0 using scripts/subset-matrix-font.py
+and the pinned Node runtime. Download/check the exact source separately; the
+script refuses any other source hash and verifies all characters' cmap entries.
+The build emits the WOFF2 as a local hashed asset; no font CDN is contacted.

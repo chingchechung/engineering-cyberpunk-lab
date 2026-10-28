@@ -1,6 +1,7 @@
-export function collectCollisionHideObjects({ rain, smoke, planes, sky, educationLabels = [] } = {}) {
+export function collectCollisionHideObjects({ rain, smoke, planes, sky, matrix, educationLabels = [] } = {}) {
   // Floating text is not a physical roof for the rain height pass.
   const hideObjects = [...educationLabels];
+  if (matrix?.effectsGroup) hideObjects.push(matrix.effectsGroup);
 
   if (rain?.group) {
     hideObjects.push(rain.group);

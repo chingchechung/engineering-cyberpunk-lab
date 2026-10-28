@@ -140,7 +140,7 @@ export function createCameraDirector({
       domElement: renderer.domElement,
       model: world.city,
       colliders: world.colliders,
-      ground: world.ground?.mesh ?? null,
+      ground: world.walkGround ?? world.ground?.mesh ?? null,
       baseFov: getBaseFovForLayout(),
       settings: {
         moveSpeed: 4.5,

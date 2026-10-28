@@ -37,6 +37,8 @@ with sync_playwright() as p:
       adapter:!!(await navigator.gpu?.requestAdapter()), canvas:!!document.querySelector('canvas'),
       educationHud:!!document.querySelector('.education-hud:not([hidden])'),
       terminals:window.__app?.scene.getObjectByName('education-terminals')?.children.length??null,
+      matrix:window.__app?.scene.getObjectByName('MatrixExtension')?.name??null,
+      matrixGrounds:window.__app?.scene.getObjectByName('MatrixGround')?.children.length??null,
       loader:document.querySelector('#app-loader')?.getAttribute('aria-label')??null})""")
     result.update(messages=messages[:12], errors=list(dict.fromkeys(errors))[:6], error_count=len(errors))
     Path(args.output + ".json").write_text(json.dumps(result, indent=2))

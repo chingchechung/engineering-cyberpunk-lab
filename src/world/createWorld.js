@@ -13,6 +13,7 @@ import { createCloudSky } from "../clouds/createCloudSky.js";
 import { FEATURES } from "./features.js";
 import { performanceProfile } from "../platform/performanceProfile.js";
 import * as THREE from "three/webgpu";
+import { createMatrixExtension } from "./matrix/createMatrixExtension.js";
 
 function buildColliders({ city, boundsCollider, carCollider }) {
   const colliders = [];
@@ -119,7 +120,18 @@ export async function createWorld({
     requestShadowMapUpdate?.("quadra-car");
   }
 
+  const colliders = buildColliders({ city, boundsCollider, carCollider: quadraCollider });
   const ground = FEATURES.ground ? createGround(scene) : null;
+  const matrix = ground && boundsCollider
+    ? await createMatrixExtension({ scene, boundsCollider, colliders }) : null;
+  // The existing controller recursively probes this group, including both the
+  // unchanged wet city ground and the lightweight exterior surfaces.
+  const walkGround = new THREE.Group();
+  walkGround.name = "WalkGround";
+  if (ground) walkGround.add(ground.mesh);
+  if (matrix) walkGround.add(matrix.ground);
+  scene.add(walkGround);
+  import.meta.hot?.dispose(() => matrix?.dispose());
 
   let smoke = null;
   if (FEATURES.smoke && quadraCar) {
@@ -157,11 +169,6 @@ export async function createWorld({
     });
   }
 
-  const colliders = buildColliders({
-    city,
-    boundsCollider,
-    carCollider: quadraCollider,
-  });
   const focusTargets = buildFocusTargets({
     city,
     car: quadraCar,
@@ -178,6 +185,8 @@ export async function createWorld({
     carSurfaceRain,
     envTexture,
     ground,
+    walkGround,
+    matrix,
     collisionHeight,
     rain,
     smoke,
