@@ -17,11 +17,11 @@ MIMES={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'ap
 p=argparse.ArgumentParser();p.add_argument('--output',default='/tmp/phase4-static-results.json');p.add_argument('--allow-software-device-loss',action='store_true');a=p.parse_args()
 work=Path(tempfile.mkdtemp(prefix='engineering-lab-static-'));www=work/'www';www.mkdir()
 print('Private static test workspace:',work,flush=True)
-assert subprocess.check_output(['node','--version'],text=True).strip()=='v22.23.4','Use pinned Node'
+assert subprocess.check_output(['node','--version'],text=True, encoding="utf-8").strip()=='v22.23.4','Use pinned Node'
 results={'variants':{},'workDirectory':str(work),'webgpuVisualAcceptance':False}
 for name,base in BASES.items():
     out=work/'builds'/name
-    with open(work/(name+'-build.log'),'w') as log:subprocess.run(['npm','run','build','--','--base='+base,'--outDir='+str(out)],cwd=ROOT,check=True,stdout=log,stderr=log)
+    with open(work/(name+'-build.log'),'w', encoding="utf-8") as log:subprocess.run(['npm','run','build','--','--base='+base,'--outDir='+str(out)],cwd=ROOT,check=True,stdout=log,stderr=log)
     integrity=verify_dist(out,base);results['variants'][name]={'base':base,'integrity':{k:v for k,v in integrity.items() if k!='inventory'}}
     target=www/base.lstrip('/');shutil.copytree(out,target,dirs_exist_ok=True)
 with apache_host(www,work/'apache') as host:
@@ -68,17 +68,17 @@ with apache_host(www,work/'apache') as host:
                 page.get_by_role('button',name='Assignments',exact=True).click()
                 page.wait_for_function("!document.querySelector('.education-selector [data-status]').textContent.includes('Reading')")
             open_selector();assert 'Demo Mode' in selector.locator('[data-status]').inner_text();page.keyboard.press('Escape')
-            units=[json.loads((ROOT/'tests/fixtures/S01.json').read_text()),json.loads((ROOT/'tests/fixtures/v2/S02.json').read_text())]
+            units=[json.loads((ROOT/'tests/fixtures/S01.json').read_text(encoding="utf-8")),json.loads((ROOT/'tests/fixtures/v2/S02.json').read_text(encoding="utf-8"))]
             assert [len(u['questions']) for u in units]==[4,5]
             assignments=www/base.lstrip('/')/'assignments'
-            for unit in units:(assignments/(unit['unitId']+'.json')).write_text(json.dumps(unit))
+            for unit in units:(assignments/(unit['unitId']+'.json')).write_text(json.dumps(unit), encoding="utf-8")
             manifest={'schemaVersion':1,'units':[{'unitId':u['unitId'],'title':u['title'],'file':u['unitId']+'.json'} for u in units]}
-            (assignments/'manifest.json.tmp').write_text(json.dumps(manifest));(assignments/'manifest.json.tmp').replace(assignments/'manifest.json')
+            (assignments/'manifest.json.tmp').write_text(json.dumps(manifest), encoding="utf-8");(assignments/'manifest.json.tmp').replace(assignments/'manifest.json')
             for unit in units:
                 open_selector();selector.locator('select').select_option(unit['unitId']);selector.get_by_role('button',name='Load unit',exact=True).click();selector.get_by_role('button',name='Replace and load').click();selector.wait_for(state='hidden')
                 assert f"0/{len(unit['questions'])}" in hud.inner_text() and unit['unitId'] in hud.inner_text()
             # Unlisted S03 is never requested; failed replacement preserves S02.
-            (assignments/'S01.json').write_text('{')
+            (assignments/'S01.json').write_text('{', encoding="utf-8")
             open_selector();selector.locator('select').select_option('S01');selector.get_by_role('button',name='Load unit',exact=True).click();selector.get_by_role('button',name='Replace and load').click()
             page.wait_for_function("!document.querySelector('.education-selector [data-status]').textContent.includes('Loading')")
             assert selector.is_visible() and 'S02' in hud.inner_text() and '0/5' in hud.inner_text();page.keyboard.press('Escape')
@@ -102,5 +102,5 @@ with apache_host(www,work/'apache') as host:
             print('PASS static Apache',name,base,'network resources',len(network),'known software GPU loss',known,flush=True)
             context.close()
         browser.close()
-Path(a.output).write_text(json.dumps(results,indent=2)+'\n')
+Path(a.output).write_text(json.dumps(results,indent=2)+'\n', encoding="utf-8")
 print('PASS root/nested/UserDir built static hosting; hardware visual acceptance remains separate. Results:',a.output)

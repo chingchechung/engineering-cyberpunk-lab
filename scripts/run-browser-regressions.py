@@ -11,11 +11,11 @@ parser.add_argument('--phase-3-headed',action='store_true',help='Run Phase 3 hea
 args=parser.parse_args()
 work=Path(tempfile.mkdtemp(prefix='engineering-lab-regressions-'))
 env={**os.environ,'BROWSER':'none'}
-log=open(work/'vite.log','w');process=subprocess.Popen(['npm','run','dev','--','--host','127.0.0.1','--port','5177','--strictPort'],cwd=ROOT,env=env,stdout=log,stderr=log,start_new_session=True)
+log=open(work/'vite.log','w', encoding="utf-8");process=subprocess.Popen(['npm','run','dev','--','--host','127.0.0.1','--port','5177','--strictPort'],cwd=ROOT,env=env,stdout=log,stderr=log,start_new_session=True)
 try:
     public=work/'vite-public.crt';pem=ROOT/'node_modules/.vite/basic-ssl/_cert.pem'
     for _ in range(150):
-        if process.poll() is not None:raise RuntimeError((work/'vite.log').read_text())
+        if process.poll() is not None:raise RuntimeError((work/'vite.log').read_text(encoding="utf-8"))
         if pem.exists():
             subprocess.run(['openssl','x509','-in',str(pem),'-out',str(public)],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
             try:

@@ -11,7 +11,9 @@ Phase 3.5 PR #6 merged at `85b07ff506dde3a58b0422340b2787f139ee17c2`, including
 instructor Windows acceptance of both Matrix worlds and real multilingual text.
 Phase 4 is authorized on `feature/phase-4-release-preparation`: static production
 compatibility, Apache guidance/tests, CI, private packaging and release readiness.
-No gameplay redesign. Stop at a Draft PR for Windows production acceptance.
+No gameplay redesign. Windows 11 Production Build acceptance has passed per the
+instructor, after manual LF/UTF-8 corrections. Final compatibility fixes automate
+those corrections; stop at Draft PR #7 after successful CI.
 Keep the repository Private; actual release/deployment remains unauthorized.
 Never modify the upstream repository, merge a PR, publish a release, or deploy
 without explicit approval. Retain the city, walking, BVH collision, rain,
@@ -157,7 +159,7 @@ Draft PR stop is historical. Its Phase 3.5 successor has also been accepted; Pha
 Accepted by the instructor on Windows 11 and merged through PR #6. Its original
 Draft stop is historical; Phase 4 has separate authorization.
 
-## Phase 4 — production compatibility and release preparation (implemented; acceptance pending)
+## Phase 4 — production compatibility and release preparation (Windows accepted; final compatibility checks)
 
 - Build from latest accepted main without changing gameplay, assets or algorithms.
 - Resolve runtime public resources through Vite's configured base; retain native

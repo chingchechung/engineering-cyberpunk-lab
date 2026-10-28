@@ -8,7 +8,7 @@ import subprocess
 ROOT=Path(__file__).resolve().parents[1]
 zones=json.loads(subprocess.check_output(['node','--input-type=module','-e',
     "import {MATRIX_ZONES} from './src/world/matrix/matrixLayout.js'; console.log(JSON.stringify(MATRIX_ZONES))"],cwd=ROOT))
-survey=json.loads((ROOT/'tests/fixtures/terminal-survey.json').read_text())
+survey=json.loads((ROOT/'tests/fixtures/terminal-survey.json').read_text(encoding="utf-8"))
 def point(x,z):return ((x+322)*2.3,280-(z+25)*2.3)
 def poly(points):return ' '.join('%.1f,%.1f'%point(x,z) for x,z in points)
 svg=['<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="390" viewBox="0 0 1240 390" role="img" aria-labelledby="title desc">',
@@ -39,4 +39,4 @@ svg.extend(['<text x="560" y="105">Accepted street · original spawn and termina
  '<text x="22" y="352">Grey: 2 m street survey samples · yellow: fixed Q01–Q05 · green: finite new ground and safe perimeter</text>',
  '<text x="22" y="374">Causeways follow building gaps; city assets stay intact. Looking back at each transition remains open. Diagram is not visual acceptance.</text>',
  '</g></svg>'])
-(ROOT/'docs/phase-3-5-layout.svg').write_text('\n'.join(svg)+'\n')
+(ROOT/'docs/phase-3-5-layout.svg').write_text('\n'.join(svg)+'\n', encoding="utf-8")

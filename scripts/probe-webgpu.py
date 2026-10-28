@@ -42,7 +42,7 @@ with sync_playwright() as p:
       matrixGrounds:window.__app?.scene.getObjectByName('MatrixGround')?.children.length??null,
       loader:document.querySelector('#app-loader')?.getAttribute('aria-label')??null})""")
     result.update(messages=messages[:12], errors=list(dict.fromkeys(errors))[:6], error_count=len(errors))
-    Path(args.output + ".json").write_text(json.dumps(result, indent=2))
+    Path(args.output + ".json").write_text(json.dumps(result, indent=2), encoding="utf-8")
     page.screenshot(path=args.output + ".png")
     print(json.dumps(result, indent=2))
     browser.close()

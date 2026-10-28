@@ -5,7 +5,8 @@
 Started `feature/phase-4-release-preparation` from latest merged main
 **`85b07ff506dde3a58b0422340b2787f139ee17c2`**, verified PR #6 merged and complete
 (including commit `6dbdf42` real multilingual text). The instructor reports
-Windows 11 acceptance of Phase 0–3.5; this does not claim new Codex hardware tests.
+Windows 11 acceptance of Phase 0–3.5 and, subsequently, Phase 4 Production Build
+after manual LF/UTF-8 corrections; this does not claim new Codex hardware tests.
 Ending implementation commit: **789ce6ad8538b3ddd356a09cb77a725fee6225c4**. The final PR head
 also includes the documentation/evidence follow-up; its immutable SHA is recorded
 by GitHub/PR description. The clean-checkout test below uses the implementation SHA.
@@ -17,7 +18,8 @@ algorithm is redesigned. The repository remains Private; no external server,
 visibility, release, deployment or upstream change is authorized/performed.
 
 **Release Blocked — Asset Rights Pending.** Complete engineering work does not
-clear asset licenses or constitute Phase 4 Windows production acceptance.
+clear asset licenses. Physical Phase 4 acceptance is reported by the instructor,
+separately from the automated checks below.
 
 ## Production architecture and asset strategy
 
@@ -119,7 +121,7 @@ standard runner; GitHub execution status is reported separately below.
 | Fresh clean checkout | Passed from a separate clean temporary clone at the implementation SHA: npm ci, 506 Node tests, root build, 10 Python tests, all five accepted browser suites and all three Apache variants; Git remained clean |
 | Private candidate/ZIP validation | Two local internal ZIPs from the clean checkout are byte-identical; **80 site files**, **35,645,078 archive bytes**, clean source; CRC/content checks passed |
 | Source/content audit | Original 54 public hashes, original geometry/controls/shaders/contracts and package lock preserved; full notices/font present, default manifest empty, no course/test/GUI/docs/Git/env/credential content in site output |
-| Physical Windows Phase 4 acceptance | **Pending; instructor will perform it** |
+| Physical Windows Phase 4 acceptance | **Passed per instructor**, after manually restoring LF bytes and running Python in UTF-8 mode; findings and prevention below |
 
 Required local commands are `npm ci`, `npm test`, `npm run build`, the two Python
 unittest modules, `check-dist.py`, `run-browser-regressions.py`, and
@@ -245,6 +247,59 @@ No archive is uploaded by either workflow. Identical Git tree IDs for `src`,
 the accepted features, assets, schemas/fixtures and movement algorithms did not
 change. Dependency declarations/lockfile and deployment policies are unchanged.
 
+## Windows acceptance findings and compatibility corrections
+
+The instructor reports **Windows 11 Production Build acceptance completed and
+passed**. During acceptance, two host-specific failures were manually resolved:
+
+1. Git's Windows checkout converted imported reference text and nine original
+   public text assets to CRLF. The existing raw SHA-256 checks correctly rejected
+   those bytes. After restoring LF, the instructor verified all **15 imported
+   reference artifacts**, all **54 original public assets**, **506/506 Node
+   tests** and the production build. No hash values or validators were changed.
+2. Windows Python **3.14** used the default **CP950** for `Path.read_text()` in
+   artifact integrity checking. Running Python in UTF-8 mode resolved the local
+   failure. This was a text-decoding issue, separate from Git byte conversion.
+
+`.gitattributes` now uses `* text=auto eol=lf`, overriding `core.autocrlf=true`
+for text at checkout, with explicit binary rules for models, images/HDR, audio,
+video, WASM and fonts. All nine nonempty original public text files (SVG/CSS/
+decoder JS/Basis README) and every byte-exact reference stay LF; no source asset,
+schema, approved hash or imported validator is renormalized/edited.
+
+Owned Python validation, packaging, build/browser evidence and diagram utilities
+now specify `encoding="utf-8"` for UTF-8 file reads/writes and textual subprocess
+pipes. The independent imported Python validators already specify UTF-8 and
+remain byte-identical. Binary hash/font/media I/O stays binary. No UTF-8-mode
+environment setting is required by the corrected scripts.
+
+Three portability regressions cover an actual fresh Git checkout of all 69
+approved artifacts with `core.autocrlf=true` / `core.eol=crlf`, artifact/candidate
+CLI output under simulated CP950 defaults, and all 10 existing Python tests
+under the same defaults. The isolated child interpreter has `-X utf8=0`; a shim
+forces CP950 for implicit file/subprocess text I/O, including pathlib's `locale`
+sentinel. Negative read/write controls prove the simulation is active. Explicit
+UTF-8 calls are honored, output JSON/notices are decoded back as UTF-8, and no
+ZIP/upload is created by these tests. This simulation is not a claim that the
+Linux host or the hosted Windows runner's native ACP is CP950.
+
+CI retains the complete Linux Node/Python/browser/Xvfb/Apache suites and adds a
+**Windows 2025 / Python 3.14** job. It sets Git `core.autocrlf=true` before the
+initial checkout, disables Python UTF-8 mode, and runs frozen install, all 506
+Node tests, production build, the 10 existing Python tests, three portability
+regressions and production artifact integrity. The CP950 simulation runs on both
+platforms; the Windows job exercises real Windows Git/pathlib behavior as well.
+No runtime dependency, gameplay, camera, movement, Matrix, education, schema,
+asset or validation algorithm is changed. Hosted results are recorded after
+the corrected workflow completes.
+
+For an existing Windows checkout, first preserve local edits, update the branch,
+then restore only previously converted files that have no intentional edits
+using Git checkout/restore with the new attributes. Verify `npm test` and
+`check-dist.py`; avoid a blanket hard reset or rewriting approved hashes.
+Fresh checkouts receive LF directly. Python UTF-8 mode remains an optional
+environment preference rather than a required workaround.
+
 ## Packaging, rights and dependency review
 
 `artifact_checks.py` restricts output to exact public assets/notices, expected
@@ -287,6 +342,8 @@ uploads no archives, and does not deploy.
 Exact changed/added files in this Phase 4 PR (generated reports/notices are
 committed; no dist/ZIP/binary build output is committed):
 
+
+- `.gitattributes`
 - `.github/workflows/validation.yml`
 - `AGENTS.md`
 - `Plan.md`
@@ -328,10 +385,14 @@ committed; no dist/ZIP/binary build output is committed):
 - `scripts/browser-phase-3.py`
 - `scripts/check-dist.py`
 - `scripts/package-candidate.py`
+- `scripts/plot-matrix-layout.py`
+- `scripts/plot-terminal-layout.py`
+- `scripts/pointer_lock_diagnostics.py`
 - `scripts/probe-webgpu.py`
 - `scripts/production-smoke.py`
-- `scripts/pointer_lock_diagnostics.py`
 - `scripts/run-browser-regressions.py`
+- `scripts/survey-phase-3.py`
+- `scripts/verify-baseline.py`
 - `src/audio/createCarEngineAudio.js`
 - `src/audio/createPlaneEngineAudio.js`
 - `src/audio/createWetFootstepAudio.js`
@@ -349,10 +410,17 @@ committed; no dist/ZIP/binary build output is committed):
 - `src/world/loaders/createGltfLoaders.js`
 - `src/world/weather/createCollisionRain.js`
 - `tests/app-asset.test.js`
+- `tests/helpers/cp950_defaults.py`
+- `tests/test_assignment_contract.py`
 - `tests/test_release_artifacts.py`
+- `tests/test_windows_compatibility.py`
 - `vite.config.js`
 
-## Windows 11 Chrome/Edge acceptance gate
+## Windows 11 Chrome/Edge acceptance checklist (retained reference)
+
+The instructor reports Production Build acceptance passed after the two manual
+corrections above. This retained checklist describes the review scope; it is not
+a new Codex physical test record or a claim of new hardware measurements.
 
 Use the actual selected Apache HTTPS host/base only after explicit deployment
 permission and rights review. Record browser/GPU/driver versions and failures.
@@ -389,5 +457,5 @@ already covers these new production URL/build configurations.
   and media ranges work, no unsupported .htaccess requirement, and rollback of
   matching static/approved-assignment snapshots is understood.
 
-Stop at the Draft PR. Phase 4 is not physically accepted, and actual deployment,
+Stop at Draft PR #7 after final compatibility CI. Actual deployment,
 public release, archive upload, merge or visibility change remains unauthorized.

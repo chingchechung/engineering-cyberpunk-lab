@@ -2,8 +2,10 @@
 
 **Release Blocked — Asset Rights Pending.** Engineering preparation is distinct
 from permission to publish. No release/deployment/upload or visibility change is
-authorized. Windows Phase 0–3.5 acceptance is supplied by the instructor; Phase 4
-production-root/nested acceptance is pending.
+authorized. The instructor reports Windows Phase 0–4 acceptance passed, including
+Phase 4 Production Build after manual LF-byte restoration and Python UTF-8 mode.
+Final checkout/encoding corrections and their regressions are documented in
+[Phase 4 results](phase-4-results.md#windows-acceptance-findings-and-compatibility-corrections).
 
 ## Content and attribution inventory
 
@@ -122,10 +124,11 @@ Draft notes for the future **separately approved private v1.0.0** release:
   Apache MIME/cache/404/range guidance, content integrity and automated regressions.
 - Session-only progress; teacher v1/v2 exports/S01–S12 allowlist unchanged.
 - Requires trusted HTTPS and supported Windows WebGPU/GPU drivers. No backend.
-- **Not publishable yet**: asset/shader/GSAP rights review and Phase 4 physical
-  acceptance remain open; cloud headless startup is not visual/FPS acceptance.
+- **Not publishable yet**: asset/shader/GSAP rights review remains open. The
+  instructor reports Phase 4 Windows acceptance passed; cloud headless startup
+  is not independent visual/FPS acceptance.
 
 Before any public release/deployment: obtain the missing grants/conditions and
-match them to artifact hashes; retain all notices; complete the Windows production
-checklist; choose and approve the real URL/access policy; review the exact candidate
+match them to artifact hashes; retain all notices and the instructor's Windows
+acceptance record; choose and approve the real URL/access policy; review the exact candidate
 and rollback snapshot; obtain explicit instructor deployment/release authorization.

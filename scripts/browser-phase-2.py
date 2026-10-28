@@ -23,7 +23,7 @@ check = phase1["check"]
 
 
 def fixture(version, unit_id):
-    return json.loads((ROOT / "tests/fixtures" / ("v2" if version == 2 else "") / f"{unit_id}.json").read_text())
+    return json.loads((ROOT / "tests/fixtures" / ("v2" if version == 2 else "") / f"{unit_id}.json").read_text(encoding="utf-8"))
 
 
 def assignment_checks(browser, origin):

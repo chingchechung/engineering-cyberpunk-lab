@@ -6,8 +6,8 @@ Based on **Threejs-Punk by Anderson Mancini and Sunag**; original credits and
 technical reference are preserved below. The original demo is an upstream reference,
 not this project's deployment URL.
 
-Phase 0–3.5 are accepted/merged; Phase 4 prepares static hosting and awaits production
-acceptance. **Release Blocked — Asset Rights Pending.** Keep this repository and
+Phase 0–3.5 are accepted/merged; the instructor reports Phase 4 Windows 11 Production
+Build acceptance passed. **Release Blocked — Asset Rights Pending.** Keep this repository and
 internal candidates private; no public deployment/release is approved.
 After acceptance, the instructor intends a private `v1.0.0` tag/GitHub Release;
 see the [release workflow and source-archive review](docs/release-readiness.md#intended-private-v100-release-workflow).
@@ -29,6 +29,12 @@ See [Apache deployment and maintenance](docs/apache-deployment.md),
 and [asset licensing](docs/asset-licenses.md). Validation/CI uses Python 3.12 and
 requirements-validation.txt; it never uploads distribution archives or deploys.
 Do not run the retained upstream `npm run deploy` script.
+
+Git checkouts enforce LF text even with Windows `core.autocrlf=true`; binary
+assets stay binary. Python validation/packaging reads and writes UTF-8 explicitly,
+including on Windows Python 3.14 with a CP950 system encoding. Existing checkouts
+need the corrected attributes applied to any previously converted files; see the
+[Windows acceptance findings](docs/phase-4-results.md#windows-acceptance-findings-and-compatibility-corrections).
 
 ---
 

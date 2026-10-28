@@ -35,7 +35,7 @@ class AssignmentContractTests(unittest.TestCase):
         cases, answers = contract_cases(), answer_cases()
         process = subprocess.run(['node', str(ROOT/'tests/assignment_parity.mjs')],
             cwd=ROOT, input=json.dumps({'cases': cases, 'answers': answers}, ensure_ascii=False),
-            text=True, capture_output=True, check=True)
+            text=True, capture_output=True, check=True, encoding="utf-8")
         output = json.loads(process.stdout)
         self.assertEqual(output['rules'], {key: UNIT_SCHEMA['$defs'][key]['pattern'] for key in ('youtubeUrl','googleFormUrl')})
         for case, result in zip(cases, output['results'], strict=True):
@@ -53,7 +53,7 @@ class AssignmentContractTests(unittest.TestCase):
     def test_json_schemas_agree_with_complete_reference_corpus(self):
         from jsonschema import Draft202012Validator
         schemas = {'unit': UNIT_SCHEMA, 'unit_v2': UNIT_SCHEMA_V2,
-            'manifest': json.loads((SCHEMA_DIR/'manifest-v1.schema.json').read_text())}
+            'manifest': json.loads((SCHEMA_DIR/'manifest-v1.schema.json').read_text(encoding="utf-8"))}
         validators = {}
         for kind, schema in schemas.items():
             Draft202012Validator.check_schema(schema)

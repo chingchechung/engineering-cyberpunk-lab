@@ -33,8 +33,11 @@ The original upstream instructions are retained below.
   Review bundled assets in GitHub-generated source archives separately from
   optional ZIP attachments and public Apache hosting; privacy grants no rights.
   See docs/release-readiness.md. No tag/Release/upload is authorized by CI repair.
-- Complete tests/docs, open a **Draft PR**, then stop for Phase 4 Windows production
-  acceptance. Do not merge, release, deploy externally, publish coursework, change
+- The instructor reports Phase 4 Windows 11 Production Build acceptance passed
+  after restoring LF bytes and enabling Python UTF-8 mode. Final compatibility
+  fixes enforce LF checkouts and explicit Python UTF-8 I/O on this same branch.
+  Preserve all 15 reference/54 public hashes; run full CI, update Draft PR #7 and
+  stop. Do not merge, release, deploy externally, publish coursework, change
   visibility or execute npm run deploy. See docs/phase-4-results.md.
 - Use feature branches and GitHub pull requests against
   `chingchechung/engineering-cyberpunk-lab`. Do not modify or push to

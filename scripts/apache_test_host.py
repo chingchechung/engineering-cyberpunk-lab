@@ -26,17 +26,17 @@ def apache_host(document_root,work):
       f'ErrorLog "{work}/error.log"','LogLevel warn',f'DocumentRoot "{document_root}"','TypesConfig /etc/mime.types',
       'SSLEngine on',f'SSLCertificateFile "{cert}"',f'SSLCertificateKeyFile "{key}"','SSLProtocol -all +TLSv1.2 +TLSv1.3',
       f'<Directory "{document_root}">','AllowOverride None','Require all granted',f'Include "{ROOT}/deployment/apache-common.conf"','</Directory>',
-      'ErrorDocument 404 default','ServerTokens Prod','ServerSignature Off'])+'\n')
-    log=open(work/'process.log','w');process=subprocess.Popen([httpd,'-f',str(config),'-DFOREGROUND'],stdout=log,stderr=log)
+      'ErrorDocument 404 default','ServerTokens Prod','ServerSignature Off'])+'\n', encoding="utf-8")
+    log=open(work/'process.log','w', encoding="utf-8");process=subprocess.Popen([httpd,'-f',str(config),'-DFOREGROUND'],stdout=log,stderr=log)
     origin=f'https://127.0.0.1:{port}';context=ssl.create_default_context(cafile=str(cert))
     try:
         for _ in range(150):
-            if process.poll() is not None:raise RuntimeError((work/'process.log').read_text()+(work/'error.log').read_text() if (work/'error.log').exists() else (work/'process.log').read_text())
+            if process.poll() is not None:raise RuntimeError((work/'process.log').read_text(encoding="utf-8")+(work/'error.log').read_text(encoding="utf-8") if (work/'error.log').exists() else (work/'process.log').read_text(encoding="utf-8"))
             try:
                 with urlopen(origin+'/',context=context,timeout=1):break
             except Exception:time.sleep(.1)
         else:raise RuntimeError('Apache startup timed out')
-        yield {'origin':origin,'context':context,'spki':spki,'cert':str(cert),'version':subprocess.check_output([httpd,'-v'],text=True).splitlines()[0]}
+        yield {'origin':origin,'context':context,'spki':spki,'cert':str(cert),'version':subprocess.check_output([httpd,'-v'],text=True, encoding="utf-8").splitlines()[0]}
     finally:
         process.terminate()
         try:process.wait(timeout=10)

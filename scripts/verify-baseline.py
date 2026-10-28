@@ -30,7 +30,7 @@ def main():
     args = parser.parse_args()
     context = ssl.create_default_context(cafile=str(args.cafile) if args.cafile else None)
     root = Path(__file__).resolve().parents[1]
-    inventory = json.loads((root / "docs/assets-inventory.json").read_text())
+    inventory = json.loads((root / "docs/assets-inventory.json").read_text(encoding="utf-8"))
 
     def fetch(path):
         with urlopen(urljoin(args.origin.rstrip("/") + "/", path), context=context, timeout=30) as response:

@@ -49,6 +49,6 @@ with sync_playwright() as p:
     }""")
     assert failed,'Font failure silently fell back or mutated world'
     result['blockedFontRejectsCleanly']=True
-    Path(args.output+'.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+    Path(args.output+'.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n', encoding="utf-8")
     print('PASS multilingual Unicode rasterization, coverage, cell mapping/padding, single local load, seeded distribution and stable bounded animation:',json.dumps({k:v for k,v in result.items() if k!='cells'}))
     context.close();browser.close()

@@ -10,11 +10,11 @@ assert dist not in target.parents and target not in dist.parents and target!=dis
 result=verify_dist(dist,a.base)
 # Metadata is outside site/, so only site/ is eventually copied to Apache.
 result['publicationStatus']='INTERNAL VALIDATION ONLY — RELEASE BLOCKED — ASSET RIGHTS PENDING'
-result['sourceCommit']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
-result['sourceDirty']=bool(subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip())
+result['sourceCommit']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True, encoding="utf-8").strip()
+result['sourceDirty']=bool(subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True, encoding="utf-8").strip())
 target.mkdir(parents=True);shutil.copytree(dist,target/'site')
-(target/'candidate.json').write_text(json.dumps(result,indent=2,ensure_ascii=False)+'\n')
-(target/'INTERNAL-ONLY.txt').write_text(result['publicationStatus']+'\nNo upload, public distribution, deployment or release is authorized.\n')
+(target/'candidate.json').write_text(json.dumps(result,indent=2,ensure_ascii=False)+'\n', encoding="utf-8")
+(target/'INTERNAL-ONLY.txt').write_text(result['publicationStatus']+'\nNo upload, public distribution, deployment or release is authorized.\n', encoding="utf-8")
 if a.zip:
     archive=target.with_suffix('.internal.zip');assert not archive.exists(),'Archive exists'
     with zipfile.ZipFile(archive,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as z:

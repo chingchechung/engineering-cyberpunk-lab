@@ -1,2 +1,18 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Byte-exact reference/public text must stay LF even with core.autocrlf=true.
+* text=auto eol=lf
+
+# Keep binary resources out of all text/line-ending conversions.
+*.glb binary
+*.hdr binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.mp3 binary
+*.mp4 binary
+*.wasm binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary

@@ -34,7 +34,7 @@ def open_harness(browser, origin, **options):
 
 def geometry_checks(browser, origin):
     context, page, errors = open_harness(browser, origin, has_touch=True)
-    survey = json.loads((Path(__file__).resolve().parents[1] / "tests/fixtures/terminal-survey.json").read_text())
+    survey = json.loads((Path(__file__).resolve().parents[1] / "tests/fixtures/terminal-survey.json").read_text(encoding="utf-8"))
     result = page.evaluate("""async survey => {
       const {verifyTerminalRoutes}=await import('/tests/helpers/verifyTerminalRoutes.js');
       const result=await verifyTerminalRoutes(app,survey,harness.TERMINAL_LAYOUT);
@@ -48,7 +48,7 @@ def geometry_checks(browser, origin):
     check(not errors, f"Geometry test errors: {errors}")
     context.close()
     output = Path("/tmp/phase-3-route-distances.json")
-    output.write_text(json.dumps(result, indent=2))
+    output.write_text(json.dumps(result, indent=2), encoding="utf-8")
     print("PASS actual GLB ground/clearance, five spawn routes and ten pair routes, labels/indicators, wall/height gates, car collision:", json.dumps(result))
 
 

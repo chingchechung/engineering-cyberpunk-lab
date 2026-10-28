@@ -124,8 +124,8 @@ def resume_checks(browser, origin):
 
 def resource_checks(browser, origin):
     context, page, errors = phase1["open_harness"](browser, origin)
-    units = [json.loads((ROOT / "tests/fixtures/S01.json").read_text()),
-             json.loads((ROOT / "tests/fixtures/v2/S02.json").read_text())]
+    units = [json.loads((ROOT / "tests/fixtures/S01.json").read_text(encoding="utf-8")),
+             json.loads((ROOT / "tests/fixtures/v2/S02.json").read_text(encoding="utf-8"))]
     for unit in units:
         unit["googleFormUrl"] += "?unit=" + unit["unitId"]
         for question in unit["questions"]:

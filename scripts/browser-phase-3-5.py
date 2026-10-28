@@ -31,7 +31,7 @@ def main():
           return verifyMatrixRoutes(app,survey);
         }""")
         if errors:raise AssertionError(errors)
-        Path(args.output).write_text(json.dumps(result,indent=2)+'\n')
+        Path(args.output).write_text(json.dumps(result,indent=2)+'\n', encoding="utf-8")
         print('PASS Matrix original-controller round trips, supported seams/plazas, all exterior edges, retained original walls, look-back geometry, budgets/culling/cleanup:',json.dumps(result))
         context.close();browser.close()
 
