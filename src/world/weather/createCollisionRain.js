@@ -1,3 +1,4 @@
+import { appAsset } from "../../platform/appAsset.js";
 import * as THREE from "three/webgpu";
 import { NodeMaterial } from "three/webgpu";
 import {
@@ -24,7 +25,7 @@ import { performanceProfile } from "../../platform/performanceProfile.js";
 
 export const RAIN_LAYER = 2;
 
-const SPLASH_TEXTURE_PATH = "/textures/water-splash.webp";
+const SPLASH_TEXTURE_PATH = appAsset("textures/water-splash.webp");
 const MAX_COUNT = 5000;
 const DEFAULT_COUNT = performanceProfile.collisionRainCount ?? 5000;
 const SPLASH_FRAMES = 5;

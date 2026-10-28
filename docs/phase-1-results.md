@@ -1,5 +1,10 @@
 # Phase 1 — stable controls and educational interaction
 
+**Subsequent status:** Phase 1 was subsequently accepted on Windows 11 and merged through PR #2. Earlier pending/stop statements below
+are historical submission evidence. Current Phase 4 preparation and its separate
+production acceptance gate are in [phase-4-results.md](phase-4-results.md). No
+new physical test measurements are claimed here.
+
 ## Scope and review gate
 
 Phase 0 was merged through [PR #1](https://github.com/chingchechung/engineering-cyberpunk-lab/pull/1).

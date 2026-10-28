@@ -1,3 +1,4 @@
+import { appAsset } from "../../platform/appAsset.js";
 import * as THREE from "three/webgpu";
 import {
   Fn,
@@ -14,9 +15,9 @@ import { createRainRipples } from "../../tsl/rainRipples.js";
 import { performanceProfile } from "../../platform/performanceProfile.js";
 import { RAIN_LAYER } from "../weather/createCollisionRain.js";
 
-const ALBEDO_PATH = "/textures/wet-puddles-albedo.jpg";
-const ROUGHNESS_PATH = "/textures/wet-puddles-roughness.jpg";
-const NORMAL_PATH = "/textures/wet-puddles-normal.jpg";
+const ALBEDO_PATH = appAsset("textures/wet-puddles-albedo.jpg");
+const ROUGHNESS_PATH = appAsset("textures/wet-puddles-roughness.jpg");
+const NORMAL_PATH = appAsset("textures/wet-puddles-normal.jpg");
 
 const _size = new THREE.Vector2();
 const _normal = new THREE.Vector3();

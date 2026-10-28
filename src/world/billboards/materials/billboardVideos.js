@@ -1,10 +1,11 @@
+import { appAsset } from "../../../platform/appAsset.js";
 export const BILLBOARD_VIDEO_PATHS = [
-  "/video/imagine-art-feed-item.mp4",
-  "/video/imagine-art-feed-item-2.mp4",
-  "/video/imagine-art-feed-item-3.mp4",
-  "/video/imagine-art-feed-item-4.mp4",
-  "/video/imagine-art-feed-item-5.mp4",
-  "/video/imagine-art-feed-item-6.mp4",
+  appAsset("video/imagine-art-feed-item.mp4"),
+  appAsset("video/imagine-art-feed-item-2.mp4"),
+  appAsset("video/imagine-art-feed-item-3.mp4"),
+  appAsset("video/imagine-art-feed-item-4.mp4"),
+  appAsset("video/imagine-art-feed-item-5.mp4"),
+  appAsset("video/imagine-art-feed-item-6.mp4"),
 ];
 
 export function createShuffledVideoPool() {

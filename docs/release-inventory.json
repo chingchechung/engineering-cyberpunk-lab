@@ -1,0 +1,832 @@
+{
+  "conclusion": "Release Blocked — Asset Rights Pending",
+  "baselineCommit": "85b07ff506dde3a58b0422340b2787f139ee17c2",
+  "scope": "Every original public artifact, added notice and local Matrix font. Generated code/decoder notices are listed separately below.",
+  "assets": [
+    {
+      "path": "public/Minduka_Keyboard_ABNT2_Pt_Br.svg",
+      "bytes": 68727,
+      "sha256": "fa23096a9dbfd148643bad6f8521c0d93f32f60505f1403d36fea095894ed973",
+      "rights_status": "embedded-public-domain-declaration",
+      "evidence": "Embedded RDF points to http://creativecommons.org/licenses/publicdomain/ and https://openclipart.org/detail/26499/keyboard-abnt2-pt-br-by-minduka.",
+      "release_status": "verified-public-domain-declaration",
+      "license": "embedded public-domain dedication",
+      "notices": [],
+      "release_blocker": false,
+      "phase4_evidence": "Embedded RDF points to http://creativecommons.org/licenses/publicdomain/ and https://openclipart.org/detail/26499/keyboard-abnt2-pt-br-by-minduka."
+    },
+    {
+      "path": "public/custom_noise.webp",
+      "bytes": 16692,
+      "sha256": "4c65d7c41c126a5662fea82318cea3ca6778e9ebcf5e42362e6080de4cf04ad0",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/custom_perlin.webp",
+      "bytes": 89878,
+      "sha256": "a61440777841c434f81dd53baead30674f08cb17600cd02a30599ca1228a9afa",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/engine.mp3",
+      "bytes": 117028,
+      "sha256": "09f20bfe5780b7c2b7ea316d7d39566563875f1ac10fe8aeea1a1ca7b3c86436",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/fonts/fonts.css",
+      "bytes": 1375,
+      "sha256": "4ccf792b7ed9b65cb6faa8849467d6f04d5a0567b9796dddad0d011e0aa269be",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/fonts/gloock-cyrillic-ext.woff2",
+      "bytes": 1148,
+      "sha256": "c115fbb2205ddd3d99817562ecaafffd4dda6c6b1b120de3cc38a4cadbf4836c",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "verified-embedded-font-license",
+      "license": "SIL-OFL-1.1",
+      "notices": [
+        "licenses/ui-fonts/Gloock-OFL.txt"
+      ],
+      "release_blocker": false,
+      "phase4_evidence": "Embedded font copyright and SIL OFL URL agree with official Google Fonts family OFL notice; original font bytes/names unchanged."
+    },
+    {
+      "path": "public/fonts/gloock-latin-ext.woff2",
+      "bytes": 9016,
+      "sha256": "89effc4607918017e5345a03fb8d29af3e1e4b6d28e0f42dfb9a074d370c9edb",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "verified-embedded-font-license",
+      "license": "SIL-OFL-1.1",
+      "notices": [
+        "licenses/ui-fonts/Gloock-OFL.txt"
+      ],
+      "release_blocker": false,
+      "phase4_evidence": "Embedded font copyright and SIL OFL URL agree with official Google Fonts family OFL notice; original font bytes/names unchanged."
+    },
+    {
+      "path": "public/fonts/gloock-latin.woff2",
+      "bytes": 17576,
+      "sha256": "b862aac1a16f7dafbf1d2f0115a78f3d216c8a8a83ecd154eb4afb54ade82245",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "verified-embedded-font-license",
+      "license": "SIL-OFL-1.1",
+      "notices": [
+        "licenses/ui-fonts/Gloock-OFL.txt"
+      ],
+      "release_blocker": false,
+      "phase4_evidence": "Embedded font copyright and SIL OFL URL agree with official Google Fonts family OFL notice; original font bytes/names unchanged."
+    },
+    {
+      "path": "public/fonts/orbitron-latin.woff2",
+      "bytes": 11768,
+      "sha256": "967b3909a7d6a5cc6365e9947775060fca15efdb62bc70099aef2e7d86e10205",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "verified-embedded-font-license",
+      "license": "SIL-OFL-1.1",
+      "notices": [
+        "licenses/ui-fonts/Orbitron-OFL.txt"
+      ],
+      "release_blocker": false,
+      "phase4_evidence": "Embedded font copyright and SIL OFL URL agree with official Google Fonts family OFL notice; original font bytes/names unchanged."
+    },
+    {
+      "path": "public/fonts/phosphor/Phosphor.ttf",
+      "bytes": 488636,
+      "sha256": "06b91e022b7ee899a63efced879392a74f0bacbda54e4467e9f663220d173a10",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "verified-embedded-font-license",
+      "license": "MIT",
+      "notices": [
+        "licenses/ui-fonts/Phosphor-MIT.txt"
+      ],
+      "release_blocker": false,
+      "phase4_evidence": "Font name-table IDs 13/14 explicitly identify MIT and authoritative Phosphor license URL."
+    },
+    {
+      "path": "public/fonts/phosphor/Phosphor.woff",
+      "bytes": 488716,
+      "sha256": "396c5eae7f2dfb4d1f5432edd87109eda2f92a451b2167e43a26165b82770f75",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "verified-embedded-font-license",
+      "license": "MIT",
+      "notices": [
+        "licenses/ui-fonts/Phosphor-MIT.txt"
+      ],
+      "release_blocker": false,
+      "phase4_evidence": "Font name-table IDs 13/14 explicitly identify MIT and authoritative Phosphor license URL."
+    },
+    {
+      "path": "public/fonts/phosphor/Phosphor.woff2",
+      "bytes": 147380,
+      "sha256": "c2ea45ea05ff5c7df1936770c104725f2a68f43fd343f35f3da23a30b27de32a",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "verified-embedded-font-license",
+      "license": "MIT",
+      "notices": [
+        "licenses/ui-fonts/Phosphor-MIT.txt"
+      ],
+      "release_blocker": false,
+      "phase4_evidence": "Font name-table IDs 13/14 explicitly identify MIT and authoritative Phosphor license URL."
+    },
+    {
+      "path": "public/fonts/phosphor/style.css",
+      "bytes": 78123,
+      "sha256": "18c055e53e8d19344f5ef6a6848aed1b97621dfae2f6c02948e5c8b0fb4c3503",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/freesound_community-diesel-idle-2-62716.mp3",
+      "bytes": 353280,
+      "sha256": "21b05af7dccb017c489407188a1cfafc98d9f2902cfb608f75a10757c588ebdb",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/freesound_community-plasma-engine-fx-33559.mp3",
+      "bytes": 821280,
+      "sha256": "1944f49a2ca5e6debce4ab505b41ccba4e2e023441ef0bc8689a924a493ba475",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/hdri/sunflowers_puresky_1k.hdr",
+      "bytes": 1482923,
+      "sha256": "39a18be788fda30e1b1929d4ebd78b5da14433a6e2271eff1928a35e481c5111",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/hdri/white_home_studio_1k.hdr",
+      "bytes": 1520776,
+      "sha256": "62b0ecd8e67a8e02ec040494dc919cb6496f9bb8568b395b159e3a7480beae69",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/libs/basis/README.md",
+      "bytes": 1448,
+      "sha256": "930b11bbbb742b2525491b0964f0462d63d8b21383c0623ec4c98c43d53723c6",
+      "rights_status": "declared-apache-2.0-notice-review-needed",
+      "evidence": "public/libs/basis/README.md declares Apache License 2.0; exact binary provenance and full distribution notices still require review.",
+      "release_status": "verified-library-license",
+      "license": "Apache-2.0",
+      "notices": [
+        "licenses/runtime/Basis-Apache-2.0.txt"
+      ],
+      "release_blocker": false,
+      "phase4_evidence": "Bundled README explicitly declares Apache-2.0; JS/WASM byte-identical to installed Three 0.185.1 Basis distribution."
+    },
+    {
+      "path": "public/libs/basis/basis_transcoder.js",
+      "bytes": 57529,
+      "sha256": "8478b5b6d6b74e7d3082b89f6417321d8d1dc0307f2b30d4484bb11b441696a1",
+      "rights_status": "declared-apache-2.0-notice-review-needed",
+      "evidence": "public/libs/basis/README.md declares Apache License 2.0; exact binary provenance and full distribution notices still require review.",
+      "release_status": "verified-library-license",
+      "license": "Apache-2.0",
+      "notices": [
+        "licenses/runtime/Basis-Apache-2.0.txt"
+      ],
+      "release_blocker": false,
+      "phase4_evidence": "Bundled README explicitly declares Apache-2.0; JS/WASM byte-identical to installed Three 0.185.1 Basis distribution."
+    },
+    {
+      "path": "public/libs/basis/basis_transcoder.wasm",
+      "bytes": 527333,
+      "sha256": "6cf17dc889352c42e9acf8897107978d127005fe3386c36a0e3845e27967630a",
+      "rights_status": "declared-apache-2.0-notice-review-needed",
+      "evidence": "public/libs/basis/README.md declares Apache License 2.0; exact binary provenance and full distribution notices still require review.",
+      "release_status": "verified-library-license",
+      "license": "Apache-2.0",
+      "notices": [
+        "licenses/runtime/Basis-Apache-2.0.txt"
+      ],
+      "release_blocker": false,
+      "phase4_evidence": "Bundled README explicitly declares Apache-2.0; JS/WASM byte-identical to installed Three 0.185.1 Basis distribution."
+    },
+    {
+      "path": "public/libs/draco/draco_decoder.js",
+      "bytes": 512465,
+      "sha256": "8625489da79a805f4f2a7d511c3e52d8b4085608a9d2a4d5f4f9de5db0aea04f",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "verified-library-license",
+      "license": "Apache-2.0",
+      "notices": [
+        "licenses/runtime/Draco-Apache-2.0.txt"
+      ],
+      "release_blocker": false,
+      "phase4_evidence": "Byte-identical to Three 0.185.1 glTF Draco files; its adjacent README identifies Google Draco and Apache-2.0."
+    },
+    {
+      "path": "public/libs/draco/draco_decoder.wasm",
+      "bytes": 192420,
+      "sha256": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "verified-library-license",
+      "license": "Apache-2.0",
+      "notices": [
+        "licenses/runtime/Draco-Apache-2.0.txt"
+      ],
+      "release_blocker": false,
+      "phase4_evidence": "Byte-identical to Three 0.185.1 glTF Draco files; its adjacent README identifies Google Draco and Apache-2.0."
+    },
+    {
+      "path": "public/libs/draco/draco_encoder.js",
+      "bytes": 954360,
+      "sha256": "6d4132d7b68d26d20a43a1ed59ff4b4a694fbaad41b339158db050dbd0e68f56",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "Legacy unused encoder is not byte-matched to current Three distribution; exact version/provenance remains incomplete. No inference from filename alone."
+    },
+    {
+      "path": "public/libs/draco/draco_wasm_wrapper.js",
+      "bytes": 58456,
+      "sha256": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "verified-library-license",
+      "license": "Apache-2.0",
+      "notices": [
+        "licenses/runtime/Draco-Apache-2.0.txt"
+      ],
+      "release_blocker": false,
+      "phase4_evidence": "Byte-identical to Three 0.185.1 glTF Draco files; its adjacent README identifies Google Draco and Apache-2.0."
+    },
+    {
+      "path": "public/light-rain.mp3",
+      "bytes": 3339493,
+      "sha256": "cd93fb3b707033aa844866b67abbc65c774fb4216105480dbc6114a0a5a968f8",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/models/.gitkeep",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rights_status": "not-an-asset",
+      "evidence": "Empty directory marker.",
+      "release_status": "not-copyrightable-marker",
+      "license": null,
+      "notices": [],
+      "release_blocker": false,
+      "phase4_evidence": "Empty directory marker; no runtime content."
+    },
+    {
+      "path": "public/models/billboards.glb",
+      "bytes": 7968,
+      "sha256": "9a8a53eb1445b8935e2918584e83d4e2f6a22b619d7e7ebcfaaade6184a0598c",
+      "rights_status": "unresolved",
+      "evidence": "glTF asset metadata and extras contain no license, copyright, author, or source URL; upstream README excludes public models from MIT.",
+      "gltf_asset": {
+        "generator": "Khronos glTF Blender I/O v5.0.21",
+        "version": "2.0"
+      },
+      "release_status": "permission-required",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "Original GLB metadata has no asset copyright/license/source URL; specific redistribution grant required."
+    },
+    {
+      "path": "public/models/colider.glb",
+      "bytes": 2700,
+      "sha256": "fc928780d0b184871513f9c4dec0dcb195e27f6bb7ba29a13d59e78dda0e5ecc",
+      "rights_status": "unresolved",
+      "evidence": "glTF asset metadata and extras contain no license, copyright, author, or source URL; upstream README excludes public models from MIT.",
+      "gltf_asset": {
+        "generator": "Khronos glTF Blender I/O v5.0.21",
+        "version": "2.0"
+      },
+      "release_status": "permission-required",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "Original GLB metadata has no asset copyright/license/source URL; specific redistribution grant required."
+    },
+    {
+      "path": "public/models/cyberpunk_compressed.glb",
+      "bytes": 4747816,
+      "sha256": "f28aa552177bdc758ad2863e5c0b2642a41226774239c35a6d9617144fb53ba4",
+      "rights_status": "unresolved",
+      "evidence": "glTF asset metadata and extras contain no license, copyright, author, or source URL; upstream README excludes public models from MIT.",
+      "gltf_asset": {
+        "generator": "glTF-Transform v4.2.1",
+        "version": "2.0"
+      },
+      "release_status": "permission-required",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "Original GLB metadata has no asset copyright/license/source URL; specific redistribution grant required."
+    },
+    {
+      "path": "public/models/plane.glb",
+      "bytes": 2478132,
+      "sha256": "26f238dd8e9146078f6120b2074cd7061ab57ad8751c085170fdae8fa7ab4e9f",
+      "rights_status": "unresolved",
+      "evidence": "glTF asset metadata and extras contain no license, copyright, author, or source URL; upstream README excludes public models from MIT.",
+      "gltf_asset": {
+        "generator": "Khronos glTF Blender I/O v5.0.21",
+        "version": "2.0"
+      },
+      "release_status": "permission-required",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "Original GLB metadata has no asset copyright/license/source URL; specific redistribution grant required."
+    },
+    {
+      "path": "public/models/quadra.glb",
+      "bytes": 2675848,
+      "sha256": "cc856c042226cec255d9f686cc9966149a7ba191cbe81a9c0addea9e1cea59d0",
+      "rights_status": "unresolved",
+      "evidence": "glTF asset metadata and extras contain no license, copyright, author, or source URL; upstream README excludes public models from MIT.",
+      "gltf_asset": {
+        "generator": "Khronos glTF Blender I/O v5.0.21",
+        "version": "2.0"
+      },
+      "release_status": "permission-required",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "Original GLB metadata has no asset copyright/license/source URL; specific redistribution grant required."
+    },
+    {
+      "path": "public/mouse-svgrepo-com.svg",
+      "bytes": 759,
+      "sha256": "3032303dfc14bcc08f0786e37c0e4f3f040baa952d99c6826a1d31d95157661f",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/night-ambience.mp3",
+      "bytes": 7361280,
+      "sha256": "758d0a12ea04c2d64021ae7277adae18a8d70c97b2e5bdb5eade8d974bdd5c0a",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/preview.jpg",
+      "bytes": 871369,
+      "sha256": "0e829bc3d92d4c0a376e27a7792e21d05875e186fc7bf401aea01a9f074327ce",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/textures/rainDrop.png",
+      "bytes": 4852,
+      "sha256": "d50a7fbd63f35d8e3426c566b12e451217ed4994f262c175fe37a0dccc64b261",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/textures/smoke.png",
+      "bytes": 182047,
+      "sha256": "45bd83b65d18ede6f9a2ec7ea45fedfd77c86e60c2041ac535d5f44b5d99c6be",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/textures/water-splash.webp",
+      "bytes": 3442,
+      "sha256": "7090659cf8a470b9fdd9cc0b765e8881c8a8e0ad50507e9d9d08d6ee1a297dc5",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/textures/wet-puddles-albedo.jpg",
+      "bytes": 995495,
+      "sha256": "02b5d56bbf392b8eb17128a24c824bac427df1fb223da8d4992519444db6bff0",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/textures/wet-puddles-normal.jpg",
+      "bytes": 1124507,
+      "sha256": "37ba6e3cb14567e3b892be65e36477d8626b2c8b02207c936d2535e792504591",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/textures/wet-puddles-roughness.jpg",
+      "bytes": 1303850,
+      "sha256": "736eb52bf60596ee1b42ae5830e0b761ae82295dda5c8138880e2b42ad8cd5bd",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/thunderstorm.mp3",
+      "bytes": 2425920,
+      "sha256": "54b495216446e60fe3aa7e61da0116ebe9723d926faa3bf5ae12c708d28f56bd",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/video/imagine-art-feed-item-2.mp4",
+      "bytes": 619318,
+      "sha256": "552f1f96e93e8692be1208342919edc0c7f2a190379f41c6f6c1e60dd1cbbaba",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/video/imagine-art-feed-item-3.mp4",
+      "bytes": 649017,
+      "sha256": "b0f729f506e3e7f69774726f7aba7ef3b7742997a6af6d4be21a9de9467e1256",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/video/imagine-art-feed-item-4.mp4",
+      "bytes": 666077,
+      "sha256": "c20c6e6f0709fde6678cea89ee76bcd3824d11a24772d7789fd16e9b7cb4aa3d",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/video/imagine-art-feed-item-5.mp4",
+      "bytes": 680921,
+      "sha256": "da7fceb955eed1de2eff1416afb0bf17bf3d8883ead47566e11d71497ec7f206",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/video/imagine-art-feed-item-6.mp4",
+      "bytes": 580687,
+      "sha256": "8115833c7f74b7db8a1438f9156ab0d645e2ab38182293b22a14137cefeafd45",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/video/imagine-art-feed-item.mp4",
+      "bytes": 619083,
+      "sha256": "66b324dfe94515d16a18ea370d88f4722685b02cca32de78b99b4e89dabfc9be",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/wet_footstep-step-01.mp3",
+      "bytes": 10283,
+      "sha256": "883a880ca0c6971d9ce19f24b6999782662836af2c024bc3144ada5f71df2dd4",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/wet_footstep-step-02.mp3",
+      "bytes": 11954,
+      "sha256": "1552f95a95000ecce88be16d2b8bb852ab57fdf3a731359a7a6f8c61349d3cab",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/wet_footstep-step-03.mp3",
+      "bytes": 10701,
+      "sha256": "256e1fd9bb52fc795da79e2a0bd17337c5029585b95f829ca6fefecc55601bb6",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/wet_footstep-step-04.mp3",
+      "bytes": 11118,
+      "sha256": "e8f51e0b019c0250b831cec6d8625b661deca2008b90be1eab34c579e4bf0f36",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/wet_footstep-step-05.mp3",
+      "bytes": 13626,
+      "sha256": "baa8cb51b38a703d8c942af1b7595c9c10d83ffc7cd49620367062ffdef8f4ed",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/wet_footstep-step-06.mp3",
+      "bytes": 13208,
+      "sha256": "c235403982463d54f54e3ba2d08c82825a8db2aa5a7bf13c69c4a5eb5739a18b",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/wet_footstep.mp3",
+      "bytes": 105325,
+      "sha256": "bcc9b7693cec54d0b29c700c9fa15f96273ae4968a51fdeaa9f978d21aa3de92",
+      "rights_status": "unresolved",
+      "evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md.",
+      "release_status": "incomplete-evidence",
+      "license": null,
+      "notices": [],
+      "release_blocker": true,
+      "phase4_evidence": "No artifact-specific license evidence found in the pinned snapshot; see docs/asset-licenses.md."
+    },
+    {
+      "path": "public/licenses/PROJECT-NOTICE.txt",
+      "bytes": 1267,
+      "sha256": "128e4bea0273197324523b3a363a7ad979ae35dc896450ff4b238da3b1a75339",
+      "release_status": "included-notice-document",
+      "release_blocker": false
+    },
+    {
+      "path": "public/licenses/matrix-text/NOTICE.txt",
+      "bytes": 1476,
+      "sha256": "781fae06ca82562f38ac89a0d4d3ae370acd12342c015f60e88e34ae1e8b748c",
+      "release_status": "included-notice-document",
+      "release_blocker": false
+    },
+    {
+      "path": "public/licenses/matrix-text/OFL.txt",
+      "bytes": 4301,
+      "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+      "release_status": "included-notice-document",
+      "release_blocker": false
+    },
+    {
+      "path": "public/licenses/runtime/Basis-Apache-2.0.txt",
+      "bytes": 11347,
+      "sha256": "065fcf48d6af21c0b75e23be5ed5753aee75c892e1c2cf178fa6736305614a5c",
+      "release_status": "included-notice-document",
+      "release_blocker": false
+    },
+    {
+      "path": "public/licenses/runtime/Draco-Apache-2.0.txt",
+      "bytes": 13898,
+      "sha256": "d3709b0fb4b8a94bbb1d02b8a2e484f258b0d9c5c5a01f940391f3fe662cd1a4",
+      "release_status": "included-notice-document",
+      "release_blocker": false
+    },
+    {
+      "path": "public/licenses/runtime/Zstandard-BSD.txt",
+      "bytes": 1549,
+      "sha256": "7055266497633c9025b777c78eb7235af13922117480ed5c674677adc381c9d8",
+      "release_status": "included-notice-document",
+      "release_blocker": false
+    },
+    {
+      "path": "public/licenses/runtime/ktx-parse-MIT.txt",
+      "bytes": 1078,
+      "sha256": "79847431f9ecef9cf399085cb863452e71a6dab99738f4f0c1ea06c6484b5692",
+      "release_status": "included-notice-document",
+      "release_blocker": false
+    },
+    {
+      "path": "public/licenses/runtime/zstddec-MIT.txt",
+      "bytes": 2617,
+      "sha256": "8d078b49fc02bd63c1beaf4ddc629a8b48e4ba6a435415408c8209e2a5c3aacf",
+      "release_status": "included-notice-document",
+      "release_blocker": false
+    },
+    {
+      "path": "public/licenses/ui-fonts/Gloock-OFL.txt",
+      "bytes": 4380,
+      "sha256": "9c1806e8ad28b7f467d8d59eb4b4abf3e2759abd83091c096f4d650407b9e19d",
+      "release_status": "included-notice-document",
+      "release_blocker": false
+    },
+    {
+      "path": "public/licenses/ui-fonts/Orbitron-OFL.txt",
+      "bytes": 4425,
+      "sha256": "dd6fdb6716fd179d1fe891759efb3f9200753fdf6abf513b55b712c4ae16e512",
+      "release_status": "included-notice-document",
+      "release_blocker": false
+    },
+    {
+      "path": "public/licenses/ui-fonts/Phosphor-MIT.txt",
+      "bytes": 1071,
+      "sha256": "6918b72504641180600cbbd4a86b0dfa9dfccf788775694325b71b9a029f6eb4",
+      "release_status": "included-notice-document",
+      "release_blocker": false
+    },
+    {
+      "path": "src/world/matrix/fonts/lab-matrix-text.woff2",
+      "bytes": 9964,
+      "sha256": "57185ac432fb65d0cc674f94fd91bfca4f04f91e8d860b164c23eda5afbce155",
+      "release_status": "verified-font-subset-license",
+      "license": "SIL-OFL-1.1",
+      "notices": [
+        "licenses/matrix-text/OFL.txt",
+        "licenses/matrix-text/NOTICE.txt"
+      ],
+      "release_blocker": false,
+      "phase4_evidence": "Pinned original font/source SHA, renamed derivative, complete OFL/attribution and 96-character cmap/browser evidence."
+    }
+  ],
+  "generatedNotices": {
+    "licenses/Threejs-Punk-MIT.txt": "LICENSE",
+    "licenses/runtime/Three-MIT.txt": "node_modules/three/LICENSE",
+    "licenses/runtime/three-mesh-bvh-MIT.txt": "node_modules/three-mesh-bvh/LICENSE"
+  },
+  "runtimeCode": [
+    {
+      "package": "three",
+      "version": "0.185.1",
+      "license": "MIT",
+      "notice": "licenses/runtime/Three-MIT.txt"
+    },
+    {
+      "package": "three-mesh-bvh",
+      "version": "0.9.13",
+      "license": "MIT",
+      "notice": "licenses/runtime/three-mesh-bvh-MIT.txt"
+    },
+    {
+      "package": "gsap",
+      "version": "3.15.0",
+      "license": "GreenSock standard no-charge license",
+      "notice": "licenses/PROJECT-NOTICE.txt",
+      "release_status": "conditions-review-required"
+    },
+    {
+      "component": "Three vendored ktx-parse / zstddec / inline Zstandard WASM",
+      "license": "MIT / BSD-3-Clause",
+      "notices": [
+        "licenses/runtime/ktx-parse-MIT.txt",
+        "licenses/runtime/zstddec-MIT.txt",
+        "licenses/runtime/Zstandard-BSD.txt"
+      ]
+    },
+    {
+      "component": "Adapted rain graphs in src/tsl/rainGlass.js and surfaceRain.js",
+      "attribution": "rocksdanister / BigWings",
+      "release_status": "permission-chain-review-required",
+      "notice": "licenses/PROJECT-NOTICE.txt"
+    }
+  ]
+}

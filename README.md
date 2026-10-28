@@ -1,3 +1,45 @@
+# Engineering Cyberpunk Lab
+
+An interactive WebGPU cyberpunk learning environment featuring educational
+question terminals, multimedia learning activities, and multilingual digital worlds.
+Based on **Threejs-Punk by Anderson Mancini and Sunag**; original credits and
+technical reference are preserved below. The original demo is an upstream reference,
+not this project's deployment URL.
+
+Phase 0–3.5 are accepted/merged; the instructor reports Phase 4 Windows 11 Production
+Build acceptance passed. **Release Blocked — Asset Rights Pending.** Keep this repository and
+internal candidates private; no public deployment/release is approved.
+After acceptance, the instructor intends a private `v1.0.0` tag/GitHub Release;
+see the [release workflow and source-archive review](docs/release-readiness.md#intended-private-v100-release-workflow).
+No Release or archive upload is authorized by the current CI investigation.
+
+Build locally with Node **22.23.4** / npm **10.9.9**:
+
+```bash
+npm ci
+npm test
+npm run build -- --base=/course/cyberpunk-lab/
+python scripts/check-dist.py --dist dist --base /course/cyberpunk-lab/
+```
+
+Only the contents of `dist/` are needed by Apache; production needs no Node/Python
+application service. Choose the final root/subdirectory base before building.
+See [Apache deployment and maintenance](docs/apache-deployment.md),
+[Phase 4 results](docs/phase-4-results.md), [release readiness](docs/release-readiness.md)
+and [asset licensing](docs/asset-licenses.md). Validation/CI uses Python 3.12 and
+requirements-validation.txt; it never uploads distribution archives or deploys.
+Do not run the retained upstream `npm run deploy` script.
+
+Git checkouts enforce LF text even with Windows `core.autocrlf=true`; binary
+assets stay binary. Python validation/packaging reads and writes UTF-8 explicitly,
+including on Windows Python 3.14 with a CP950 system encoding. Existing checkouts
+need the corrected attributes applied to any previously converted files; see the
+[Windows acceptance findings](docs/phase-4-results.md#windows-acceptance-findings-and-compatibility-corrections).
+
+---
+
+## Original Threejs-Punk technical reference
+
 # Threejs-Punk
 
 ![Threejs-Punk — rainy cyberpunk alley with neon lights and cinematic atmosphere](./public/preview.jpg)
@@ -6,7 +48,7 @@
 
 | | |
 |---|---|
-| **Live demo** | [https://threejspunk.vercel.app/](https://threejspunk.vercel.app/) |
+| **Original upstream demo** | [https://threejspunk.vercel.app/](https://threejspunk.vercel.app/) |
 | **Authors** | [Anderson Mancini](https://andersonmancini.dev/) · **Sunag** (TSL creator) |
 | **Context** | Revised for [TSL Workshop 2026](https://threejs.paris/) |
 | **Stack** | Three.js `^0.185` (WebGPU + TSL), Vite 6, `three-mesh-bvh`, GSAP |
@@ -32,7 +74,6 @@ npm install
 npm run dev      # Vite dev server (HTTPS via @vitejs/plugin-basic-ssl — WebGPU needs a secure context)
 npm run build
 npm run preview
-npm run deploy   # Vercel production
 ```
 
 After the loader finishes, click **ENTER** on the intro overlay (or skip if `FEATURES.intro` is false), then **click to look around** in walk mode. Settings expose look presets, audio, and (in Development Mode) the Three.js inspector.

@@ -73,7 +73,7 @@ def main():
         if errors:
             raise AssertionError(errors)
         result = finalize_survey(result)
-        Path(args.output).write_text(json.dumps(result, separators=(",", ":")) + "\n")
+        Path(args.output).write_text(json.dumps(result, separators=(",", ":")) + "\n", encoding="utf-8")
         print(json.dumps({"nodes": len(result["nodes"]), "candidates": len(result["candidates"]),
                           "selected": [result["nodes"][i]["position"] for i in result["selected"]]}), flush=True)
         context.close()

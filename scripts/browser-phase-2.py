@@ -5,6 +5,7 @@ No fixture is published. No video/Form navigation or GPU rendering is exercised.
 Uses the same original-geometry harness and certificate trust as Phase 1.
 """
 import argparse
+import os
 import base64
 from copy import deepcopy
 import hashlib
@@ -22,7 +23,7 @@ check = phase1["check"]
 
 
 def fixture(version, unit_id):
-    return json.loads((ROOT / "tests/fixtures" / ("v2" if version == 2 else "") / f"{unit_id}.json").read_text())
+    return json.loads((ROOT / "tests/fixtures" / ("v2" if version == 2 else "") / f"{unit_id}.json").read_text(encoding="utf-8"))
 
 
 def assignment_checks(browser, origin):
@@ -214,7 +215,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--origin", default="https://127.0.0.1:5173")
     parser.add_argument("--cafile", type=Path, required=True)
-    parser.add_argument("--chromium", default="/usr/bin/chromium")
+    parser.add_argument("--chromium", default=os.environ.get("CHROMIUM_EXECUTABLE", "/usr/bin/chromium"))
     args = parser.parse_args()
     pub = subprocess.check_output(["openssl", "x509", "-in", str(args.cafile), "-pubkey", "-noout"])
     der = subprocess.run(["openssl", "pkey", "-pubin", "-outform", "der"], input=pub, check=True, capture_output=True).stdout

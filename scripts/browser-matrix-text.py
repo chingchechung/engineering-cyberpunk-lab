@@ -4,6 +4,7 @@
 No hardware WebGPU/Windows visual acceptance is implied by this test.
 """
 import argparse
+import os
 import base64
 import hashlib
 import json
@@ -21,7 +22,7 @@ pub=subprocess.check_output(['openssl','x509','-in',args.cafile,'-pubkey','-noou
 der=subprocess.run(['openssl','pkey','-pubin','-outform','der'],input=pub,capture_output=True,check=True).stdout
 spki=base64.b64encode(hashlib.sha256(der).digest()).decode()
 with sync_playwright() as p:
-    browser=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox','--ignore-certificate-errors-spki-list='+spki])
+    browser=p.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE', '/usr/bin/chromium'),args=['--no-sandbox','--ignore-certificate-errors-spki-list='+spki])
     context=browser.new_context(viewport={'width':1280,'height':900},has_touch=True)
     page=context.new_page();errors=[];fonts=[]
     page.on('pageerror',lambda e:errors.append(str(e)))
@@ -48,6 +49,6 @@ with sync_playwright() as p:
     }""")
     assert failed,'Font failure silently fell back or mutated world'
     result['blockedFontRejectsCleanly']=True
-    Path(args.output+'.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+    Path(args.output+'.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n', encoding="utf-8")
     print('PASS multilingual Unicode rasterization, coverage, cell mapping/padding, single local load, seeded distribution and stable bounded animation:',json.dumps({k:v for k,v in result.items() if k!='cells'}))
     context.close();browser.close()

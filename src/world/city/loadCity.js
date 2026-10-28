@@ -1,8 +1,9 @@
+import { appAsset } from "../../platform/appAsset.js";
 import { buildModelBvh } from "../bvh.js";
 import { getGltfLoader } from "../loaders/createGltfLoaders.js";
 
-const CITY_PATH = "/models/cyberpunk_compressed.glb";
-const BOUNDS_COLLIDER_PATH = "/models/colider.glb";
+const CITY_PATH = appAsset("models/cyberpunk_compressed.glb");
+const BOUNDS_COLLIDER_PATH = appAsset("models/colider.glb");
 
 /** Vertical offset applied to the loaded root. */
 export const CITY_OFFSET_Y = -20;

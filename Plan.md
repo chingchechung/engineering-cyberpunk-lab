@@ -6,13 +6,15 @@ Target: `chingchechung/engineering-cyberpunk-lab`.
 Upstream: `ektogamat/threejs-conference` (Threejs-Punk), pinned to
 `8cc20593b2270e2ce832e7b7b44356705daddec4`.
 
-Phase 0–3 and the walking-speed adjustment are accepted and merged.
-Phase 3 PR #5 merged at `39ee045893c8c3b456894fc0e1097ac942dcd912` after
-instructor Windows 11 acceptance. Phase 3.5 is authorized on
-`feature/phase-3-5-matrix-extension` from latest main: add two seamless, bounded
-Matrix-style extensions through surveyed street-end gaps. Complete automated
-validation/docs and open a Draft PR; stop for Windows 11 Chrome/Edge acceptance.
-Phase 4 is not authorized. Keep the repository Private; no release/deployment.
+Phase 0–3.5 and the walking-speed adjustment are accepted and merged.
+Phase 3.5 PR #6 merged at `85b07ff506dde3a58b0422340b2787f139ee17c2`, including
+instructor Windows acceptance of both Matrix worlds and real multilingual text.
+Phase 4 is authorized on `feature/phase-4-release-preparation`: static production
+compatibility, Apache guidance/tests, CI, private packaging and release readiness.
+No gameplay redesign. Windows 11 Production Build acceptance has passed per the
+instructor, after manual LF/UTF-8 corrections. Final compatibility fixes automate
+those corrections; stop at Draft PR #7 after successful CI.
+Keep the repository Private; actual release/deployment remains unauthorized.
 Never modify the upstream repository, merge a PR, publish a release, or deploy
 without explicit approval. Retain the city, walking, BVH collision, rain,
 lighting, shaders, post-processing, and original visual quality.
@@ -129,9 +131,9 @@ accepted this phase and merged PR #4; its earlier stop is historical.
 See [docs/phase-3-results.md](docs/phase-3-results.md) for final coordinates,
 distance table/diagram, methods, source preservation, tests and Windows checklist.
 The instructor accepted Phase 3 on Windows 11 and merged PR #5. Its original
-Draft PR stop is historical. Phase 3.5 is the only newly authorized work.
+Draft PR stop is historical. Its Phase 3.5 successor has also been accepted; Phase 4 is now authorized.
 
-## Phase 3.5 — Matrix digital world extension (implemented; acceptance pending)
+## Phase 3.5 — Matrix digital world extension (accepted and merged)
 
 - Inspect original GLBs, the accepted survey, bounds and reflective ground first.
   The X-longitudinal street exits bend NW/SE between buildings; preserve both
@@ -154,17 +156,29 @@ Draft PR stop is historical. Phase 3.5 is the only newly authorized work.
 - Report coordinates, dimensions, tradeoffs, diagram, exact evidence, changed
   files and Windows checklist in [docs/phase-3-5-results.md](docs/phase-3-5-results.md).
 
-Exit: Draft PR, no merge/release/deployment, stop before Phase 4.
+Accepted by the instructor on Windows 11 and merged through PR #6. Its original
+Draft stop is historical; Phase 4 has separate authorization.
 
-## Phase 4 — regression and release preparation (not started)
+## Phase 4 — production compatibility and release preparation (Windows accepted; final compatibility checks)
 
-- Run behavioral tests for mouse controls, collision, movement, terminals,
-  modal isolation, assignment loading, grading, session-only progress, videos, and Forms.
-- Verify real WebGPU gameplay and visual parity on supported desktop/mobile
-  hardware. Software rendering smoke checks do not establish GPU performance.
-- Build static `dist/`, test a production-like static host, and verify asset
-  paths for the selected deployment base. Upstream currently assumes `/`.
-- Resolve every asset redistribution issue and required third-party notices.
-  Audit pinned dependency warnings separately from baseline import.
-- Prepare packaging, project metadata, and release notes on a PR. Deployment,
-  release publication, and merging require separate explicit approval.
+- Build from latest accepted main without changing gameplay, assets or algorithms.
+- Resolve runtime public resources through Vite's configured base; retain native
+  module/CSS/HTML rewriting and the document-relative allowlisted assignment loader.
+- Verify actual root, course-subdirectory and Apache UserDir-style static builds
+  with real local HTTPS Apache, correct types/caching/ranges and genuine 404s.
+  Exercise compiled app startup and synthetic v1/v2 switching without Vite/harness
+  dependence, outside all production artifacts. Intercept provider fixtures.
+- Run pinned Node/Python, all five accepted browser suites, integrity regressions,
+  a fresh clean checkout build and private reproducible candidate/ZIP validation.
+- Add read-only PR/main/manual CI, pinned Playwright/browser setup and all checks;
+  no secrets, deployment or automatic distribution artifact uploads.
+- Update site identity without an invented public/canonical/social URL, preserve
+  upstream attribution and supply runtime/font/decoder notices in static output.
+- Audit every asset, outstanding rights, dependency warnings and output content.
+  Do not infer MIT for media, force dependency upgrades or replace major visuals.
+- Document Apache copy/update/manifest-last/removal/rollback procedures, candidate
+  verification, release-note draft and Windows 11 Chrome/Edge acceptance.
+
+Exit: complete engineering evidence and Draft PR, then stop. **Release Blocked —
+Asset Rights Pending**; actual deployment/release/merge needs separate authorization.
+See docs/phase-4-results.md, docs/apache-deployment.md and docs/release-readiness.md.

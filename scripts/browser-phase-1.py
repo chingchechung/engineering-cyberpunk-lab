@@ -5,6 +5,7 @@ Requires Python Playwright and system Chromium. Start the normal HTTPS Vite dev
 server first. Only the supplied local certificate's public key is trusted.
 """
 import argparse
+import os
 import base64
 import hashlib
 import json
@@ -33,7 +34,7 @@ def open_harness(browser, origin, **options):
 
 def geometry_checks(browser, origin):
     context, page, errors = open_harness(browser, origin, has_touch=True)
-    survey = json.loads((Path(__file__).resolve().parents[1] / "tests/fixtures/terminal-survey.json").read_text())
+    survey = json.loads((Path(__file__).resolve().parents[1] / "tests/fixtures/terminal-survey.json").read_text(encoding="utf-8"))
     result = page.evaluate("""async survey => {
       const {verifyTerminalRoutes}=await import('/tests/helpers/verifyTerminalRoutes.js');
       const result=await verifyTerminalRoutes(app,survey,harness.TERMINAL_LAYOUT);
@@ -47,7 +48,7 @@ def geometry_checks(browser, origin):
     check(not errors, f"Geometry test errors: {errors}")
     context.close()
     output = Path("/tmp/phase-3-route-distances.json")
-    output.write_text(json.dumps(result, indent=2))
+    output.write_text(json.dumps(result, indent=2), encoding="utf-8")
     print("PASS actual GLB ground/clearance, five spawn routes and ten pair routes, labels/indicators, wall/height gates, car collision:", json.dumps(result))
 
 
@@ -203,7 +204,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--origin", default="https://127.0.0.1:5173")
     parser.add_argument("--cafile", type=Path, required=True)
-    parser.add_argument("--chromium", default="/usr/bin/chromium")
+    parser.add_argument("--chromium", default=os.environ.get("CHROMIUM_EXECUTABLE", "/usr/bin/chromium"))
     args = parser.parse_args()
     public_key = subprocess.check_output(["openssl", "x509", "-in", str(args.cafile), "-pubkey", "-noout"])
     der = subprocess.run(["openssl", "pkey", "-pubin", "-outform", "der"], input=public_key, check=True, capture_output=True).stdout

@@ -1,3 +1,4 @@
+import { appAsset } from "../../platform/appAsset.js";
 import "./audioButton.css";
 import {
   getAudioVolume,
@@ -7,9 +8,9 @@ import {
 } from "../../audio/audioState.js";
 
 const DEFAULT_URLS = [
-  "/light-rain.mp3",
-  "/night-ambience.mp3",
-  "/thunderstorm.mp3",
+  appAsset("light-rain.mp3"),
+  appAsset("night-ambience.mp3"),
+  appAsset("thunderstorm.mp3"),
 ];
 
 const WAVE_SVG = `

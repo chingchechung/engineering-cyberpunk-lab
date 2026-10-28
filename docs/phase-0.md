@@ -1,5 +1,10 @@
 # Phase 0 — baseline, architecture, and environment evidence
 
+**Subsequent status:** Phase 0 was subsequently accepted and merged through PR #1. Earlier pending/stop statements below
+are historical submission evidence. Current Phase 4 preparation and its separate
+production acceptance gate are in [phase-4-results.md](phase-4-results.md). No
+new physical test measurements are claimed here.
+
 ## Scope and provenance
 
 Project: Engineering Cyberpunk Lab. Target:

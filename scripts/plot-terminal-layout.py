@@ -14,8 +14,8 @@ import matplotlib.pyplot as plt
 matplotlib.rcParams["svg.hashsalt"] = "engineering-cyberpunk-lab-phase-3"
 
 ROOT = Path(__file__).resolve().parents[1]
-survey = json.loads((ROOT / "tests/fixtures/terminal-survey.json").read_text())
-metrics = json.loads((ROOT / "tests/fixtures/terminal-route-metrics.json").read_text())
+survey = json.loads((ROOT / "tests/fixtures/terminal-survey.json").read_text(encoding="utf-8"))
+metrics = json.loads((ROOT / "tests/fixtures/terminal-route-metrics.json").read_text(encoding="utf-8"))
 nodes = survey["nodes"]
 positions = {key: nodes[index]["position"] for key, index in survey["terminalNodes"].items()}
 fig, axis = plt.subplots(figsize=(13.5, 5), layout="constrained")
@@ -43,7 +43,7 @@ diagram = ROOT / "docs/phase-3-terminal-layout.svg"
 fig.savefig(diagram, metadata={"Date": None})
 # Matplotlib emits trailing blanks inside multiline path attributes. Newlines
 # already separate SVG tokens; trim them for clean, stable repository diffs.
-diagram.write_text("\n".join(line.rstrip() for line in diagram.read_text().splitlines()) + "\n")
+diagram.write_text("\n".join(line.rstrip() for line in diagram.read_text(encoding="utf-8").splitlines()) + "\n", encoding="utf-8")
 plt.close(fig)
 ids = list(positions)
 print("| Pair | Straight-line centers (m) | Measured walking route between approaches (m) |")
