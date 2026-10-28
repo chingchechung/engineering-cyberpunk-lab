@@ -5,6 +5,7 @@ These use real browser input and the original decoded geometry harness, not a
 WebGPU renderer. No requests reach YouTube or Google Forms fixture destinations.
 """
 import argparse
+import os
 import base64
 from copy import deepcopy
 import hashlib
@@ -289,7 +290,7 @@ def main():
     der = subprocess.run(["openssl", "pkey", "-pubin", "-outform", "der"], input=pub, capture_output=True, check=True).stdout
     spki = base64.b64encode(hashlib.sha256(der).digest()).decode()
     with sync_playwright() as p:
-        browser = p.chromium.launch(executable_path="/usr/bin/chromium", args=["--no-sandbox", "--ignore-certificate-errors-spki-list=" + spki])
+        browser = p.chromium.launch(executable_path=os.environ.get("CHROMIUM_EXECUTABLE", "/usr/bin/chromium"), args=["--no-sandbox", "--ignore-certificate-errors-spki-list=" + spki])
         resume_checks(browser, args.origin)
         resource_checks(browser, args.origin)
         browser.close()

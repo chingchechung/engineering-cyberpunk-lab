@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Optional full-app startup diagnostic; a canvas is not a visual-parity pass."""
 import argparse
+import os
 import base64
 import hashlib
 import json
@@ -21,7 +22,7 @@ launch = ["--no-sandbox", "--ignore-certificate-errors-spki-list=" + spki]
 if args.software_webgpu:
     launch.extend(["--enable-unsafe-webgpu", "--use-angle=swiftshader"])
 with sync_playwright() as p:
-    browser = p.chromium.launch(executable_path="/usr/bin/chromium", args=launch)
+    browser = p.chromium.launch(executable_path=os.environ.get("CHROMIUM_EXECUTABLE", "/usr/bin/chromium"), args=launch)
     page = browser.new_page(viewport={"width": 960, "height": 640})
     messages, errors = [], []
     page.on("console", lambda message: messages.append({"type": message.type, "text": message.text})

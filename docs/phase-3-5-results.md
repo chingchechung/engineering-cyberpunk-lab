@@ -1,5 +1,10 @@
 # Phase 3.5 — Matrix digital world extension
 
+**Subsequent status:** The instructor accepted Phase 3.5 (including both worlds and real Unicode text) on Windows 11 and merged PR #6 at `85b07ff506dde3a58b0422340b2787f139ee17c2`. Earlier pending/stop statements below
+are historical submission evidence. Current Phase 4 preparation and its separate
+production acceptance gate are in [phase-4-results.md](phase-4-results.md). No
+new physical test measurements are claimed here.
+
 ## Scope and acceptance gate
 
 Started `feature/phase-3-5-matrix-extension` from latest merged `main`,

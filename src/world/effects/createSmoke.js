@@ -1,3 +1,4 @@
+import { appAsset } from "../../platform/appAsset.js";
 import * as THREE from "three/webgpu";
 import {
   color,
@@ -11,7 +12,7 @@ import {
 } from "three/tsl";
 import { performanceProfile } from "../../platform/performanceProfile.js";
 
-const SMOKE_TEXTURE_PATH = "/textures/smoke.png";
+const SMOKE_TEXTURE_PATH = appAsset("textures/smoke.png");
 
 /** Dedicated render layer so GTAO / beauty depth ignore transparent sprites. */
 export const SMOKE_LAYER = 3;

@@ -92,3 +92,19 @@ is used. The 96-character cmap and real browser rasterization are tested.
 This addition provides font-specific redistribution evidence only. All original
 54 public asset bytes and their inventory remain unchanged; the unresolved
 original GLB/other-asset rights above remain release/deployment blockers.
+
+## Phase 4 evidence and distribution notices
+
+[release-inventory.json](release-inventory.json) and
+[license-evidence.json](license-evidence.json) record the current per-artifact
+status and authoritative notice sources. Original 54 public hashes remain
+unchanged. Embedded Gloock/Orbitron OFL and Phosphor MIT declarations were verified;
+full family notices now ship. Basis/Draco decoder hashes match the installed
+Three 0.185.1 library distribution with adjacent Apache license declarations.
+Full decoder licenses, runtime MIT notices, vendored ktx-parse/zstddec MIT and
+Zstandard BSD notice now ship. The unmatched legacy encoder remains unresolved.
+GSAP conditions and adapted shader permission chains still require review.
+
+These findings supplement the original historical audit above. They do not clear
+the five GLBs or 34 other incomplete-evidence artifacts. **Release Blocked — Asset
+Rights Pending** remains the conclusion; see [release-readiness.md](release-readiness.md).

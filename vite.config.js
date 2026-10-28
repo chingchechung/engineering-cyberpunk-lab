@@ -44,6 +44,19 @@ function serveInspectorExtensions() {
   };
 }
 
+function includeRuntimeNotices() {
+  return {
+    name: "runtime-license-notices",
+    apply: "build",
+    generateBundle() {
+      const notices = JSON.parse(readFileSync(resolve(rootDir, "config/runtime-notices.json"), "utf8"));
+      for (const [fileName, source] of Object.entries(notices)) {
+        this.emitFile({ type: "asset", fileName, source: readFileSync(resolve(rootDir, source)) });
+      }
+    },
+  };
+}
+
 export default defineConfig({
   server: {
     host: true,
@@ -51,6 +64,7 @@ export default defineConfig({
   },
   plugins: [
     basicSsl(),
+    includeRuntimeNotices(),
     {
       name: "three-inspector-extensions",
       configureServer(server) {

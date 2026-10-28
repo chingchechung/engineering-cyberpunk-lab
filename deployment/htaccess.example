@@ -1,0 +1,4 @@
+# Optional alternative only when the administrator permits AllowOverride FileInfo
+# Options Indexes AuthConfig and enables mod_headers/mod_mime/mod_authz_core.
+# Copy the contents of apache-common.conf to .htaccess only after that confirmation.
+# No .htaccess file is included in dist/; AllowOverride None is fully supported.

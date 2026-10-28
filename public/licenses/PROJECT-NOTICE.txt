@@ -1,0 +1,22 @@
+Engineering Cyberpunk Lab — internal release candidate
+Based on Threejs-Punk by Anderson Mancini and Sunag.
+Source: https://github.com/ektogamat/threejs-conference
+Imported baseline: 8cc20593b2270e2ce832e7b7b44356705daddec4
+
+Code and bundled third-party assets have separate license terms. Preserve the
+included MIT/OFL/Apache notices. Lab Matrix Text is SIL OFL 1.1, not MIT.
+GSAP 3.15.0: Copyright (c) 2008-2026 GreenSock. All rights reserved.
+Standard "no charge" license: https://gsap.com/standard-license
+The GSAP standard license must be reviewed for the intended distribution.
+
+RELEASE BLOCKED — ASSET RIGHTS PENDING
+Original GLB models and other media have incomplete redistribution evidence.
+This notice is not a grant of rights. No public release or deployment is approved.
+See the repository's docs/asset-licenses.md and docs/release-readiness.md.
+
+Additional attribution retained for the adapted rain graphs:
+rocksdanister / BigWings (https://github.com/rocksdanister/rain).
+The adaptation's complete permission chain still requires review; this notice
+is attribution, not a license grant.
+Vendored ktx-parse/zstddec wrappers: Don McCurdy (MIT); inline Zstandard: Meta
+(BSD-3-Clause). Decoder and UI-font notices are included in adjacent directories.

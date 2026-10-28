@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Actual GLB/controller extension tests; independent of rendered GPU acceptance."""
 import argparse
+import os
 import base64
 import hashlib
 import json
@@ -22,7 +23,7 @@ def main():
     spki=base64.b64encode(hashlib.sha256(der).digest()).decode()
     helper=runpy.run_path(str(ROOT/'scripts/browser-phase-1.py'))
     with sync_playwright() as p:
-        browser=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox','--ignore-certificate-errors-spki-list='+spki])
+        browser=p.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE', '/usr/bin/chromium'),args=['--no-sandbox','--ignore-certificate-errors-spki-list='+spki])
         context,page,errors=helper['open_harness'](browser,args.origin,has_touch=True)
         result=page.evaluate("""async () => {
           const {verifyMatrixRoutes}=await import('/tests/helpers/verifyMatrixRoutes.js');

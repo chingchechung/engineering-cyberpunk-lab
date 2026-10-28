@@ -1,3 +1,4 @@
+import { appAsset } from "../../platform/appAsset.js";
 import {
   Box3,
   BoxGeometry,
@@ -11,7 +12,7 @@ import { buildModelBvh, installBvhRaycast } from "../bvh.js";
 import { getGltfLoader } from "../loaders/createGltfLoaders.js";
 import { applyCarSurfaceRain } from "./applyCarSurfaceRain.js";
 
-const QUADRA_PATH = "/models/quadra.glb";
+const QUADRA_PATH = appAsset("models/quadra.glb");
 
 /** Alley placement near the free-camera start. */
 export const QUADRA_START = {

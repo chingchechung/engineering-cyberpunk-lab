@@ -1,0 +1,5 @@
+{
+  "licenses/Threejs-Punk-MIT.txt": "LICENSE",
+  "licenses/runtime/Three-MIT.txt": "node_modules/three/LICENSE",
+  "licenses/runtime/three-mesh-bvh-MIT.txt": "node_modules/three-mesh-bvh/LICENSE"
+}

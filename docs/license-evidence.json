@@ -1,0 +1,52 @@
+{
+  "reviewDate": "2026-10-28",
+  "sources": [
+    {
+      "file": "public/licenses/ui-fonts/Gloock-OFL.txt",
+      "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/gloock/OFL.txt",
+      "sha256": "9c1806e8ad28b7f467d8d59eb4b4abf3e2759abd83091c096f4d650407b9e19d",
+      "source_sha256": "321e28d45a430e017d9d1d6a47ef1fd261aad354723b014cf1933a765036c311",
+      "formatting": "Trailing line whitespace trimmed only; complete license wording/copyright preserved."
+    },
+    {
+      "file": "public/licenses/ui-fonts/Orbitron-OFL.txt",
+      "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/orbitron/OFL.txt",
+      "sha256": "dd6fdb6716fd179d1fe891759efb3f9200753fdf6abf513b55b712c4ae16e512",
+      "source_sha256": "ab609b0e110d622435ff337cdf233288556e011bbf9bd0550be98846c0630819",
+      "formatting": "Trailing line whitespace trimmed only; complete license wording/copyright preserved."
+    },
+    {
+      "file": "public/licenses/ui-fonts/Phosphor-MIT.txt",
+      "source": "https://raw.githubusercontent.com/phosphor-icons/homepage/master/LICENSE",
+      "sha256": "6918b72504641180600cbbd4a86b0dfa9dfccf788775694325b71b9a029f6eb4"
+    },
+    {
+      "file": "public/licenses/runtime/Draco-Apache-2.0.txt",
+      "source": "https://raw.githubusercontent.com/google/draco/1.5.7/LICENSE",
+      "sha256": "d3709b0fb4b8a94bbb1d02b8a2e484f258b0d9c5c5a01f940391f3fe662cd1a4"
+    },
+    {
+      "file": "public/licenses/runtime/Basis-Apache-2.0.txt",
+      "source": "https://raw.githubusercontent.com/BinomialLLC/basis_universal/master/LICENSE",
+      "sha256": "065fcf48d6af21c0b75e23be5ed5753aee75c892e1c2cf178fa6736305614a5c"
+    },
+    {
+      "file": "public/licenses/runtime/ktx-parse-MIT.txt",
+      "source": "https://raw.githubusercontent.com/donmccurdy/ktx-parse/main/LICENSE",
+      "sha256": "79847431f9ecef9cf399085cb863452e71a6dab99738f4f0c1ea06c6484b5692"
+    },
+    {
+      "file": "public/licenses/runtime/zstddec-MIT.txt",
+      "source": "https://raw.githubusercontent.com/donmccurdy/zstddec/main/LICENSE",
+      "sha256": "8d078b49fc02bd63c1beaf4ddc629a8b48e4ba6a435415408c8209e2a5c3aacf"
+    },
+    {
+      "file": "public/licenses/runtime/Zstandard-BSD.txt",
+      "source": "https://raw.githubusercontent.com/facebook/zstd/v1.5.7/LICENSE",
+      "sha256": "7055266497633c9025b777c78eb7235af13922117480ed5c674677adc381c9d8"
+    }
+  ],
+  "zstddecNote": "Official README explicitly distinguishes MIT JS wrapper from Facebook BSD-3-Clause WASM decoder.",
+  "publicFontEvidence": "Original embedded name-table copyright/IDs13/14 inspected with fontTools 4.61.1.",
+  "decoderEvidence": "Hash equality against installed Three 0.185.1 libs/basis and libs/draco/gltf verified."
+}

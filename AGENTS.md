@@ -6,27 +6,32 @@ The original upstream instructions are retained below.
 
 ## Authorized phase and Git workflow
 
-- Phase 0–3 and the walking-speed adjustment are accepted and merged.
-  Phase 3 PR #5 merged at `39ee045893c8c3b456894fc0e1097ac942dcd912` after
-  instructor Windows 11 acceptance.
-- Phase 3.5 is authorized on `feature/phase-3-5-matrix-extension` from latest
-  main: two seamless digital zones beyond surveyed street-end gaps, original
-  multilingual Unicode text, lightweight ground, localized boundary openings and safe
-  exterior limits. Do not move terminals, original city assets or spawn.
-- Retain actual city/building/vehicle collisions and all bounds outside the two
-  documented opening boxes. Clip triangles locally; never remove all city or
-  bounds collisions. Preserve material sidedness in geometry tests. Keep the
-  original movement, mouse filters/pitch/settling/R/P and educational system.
-- PR #6 revision uses actual Latin/digits/symbols, Hiragana/Katakana and Hangul,
-  with seeded 25/20/30/25% column slots and one locally bundled SIL OFL font
-  subset. Do not restore pseudo-glyphs or depend on incidental system fonts.
-- Matrix effects use bounded instancing/TSL, local fades and the existing loop.
-  Never change global fog/lighting/weather or degrade original effects for this
-  feature. Hide glyphs/backdrops from the rain height pass, retain ground support,
-  and dispose generated resources. See [docs/phase-3-5-results.md](docs/phase-3-5-results.md).
-- Complete before/after automated suites, document Windows acceptance, open a
-  **Draft PR**, then stop. Phase 4, merging, releases, deployment, coursework
-  publication and visibility changes remain unauthorized.
+- Phase 0–3.5 and the walking-speed adjustment are accepted and merged.
+  Phase 3.5 PR #6 (including real multilingual text) merged at
+  `85b07ff506dde3a58b0422340b2787f139ee17c2` after instructor Windows 11 acceptance.
+- Phase 4 is authorized on `feature/phase-4-release-preparation` from latest main:
+  static root/course/UserDir builds, Apache validation, CI, private packaging,
+  metadata/attribution and release-readiness documentation. No new gameplay or
+  visual redesign. Keep all accepted movement, Matrix and education behavior.
+- Application public resources use `src/platform/appAsset.js` / Vite BASE_URL;
+  module assets use new URL(import.meta.url), CSS/HTML use Vite rewriting.
+  Preserve the document-relative assignment loader and all contracts/schemas.
+- Retain city/building/vehicle collisions, the two existing localized openings,
+  exact zone/terminal positions, original spawn, wet ground and all effects.
+  Mouse filters/pitch/settling/R/P/Pointer Lock, 4.5/9 m/s, input isolation and
+  resource disposal remain accepted constraints. No algorithm simplification for CI.
+- Matrix text keeps 96 actual Latin/digit/symbol/Hiragana/Katakana/Hangul entries,
+  seeded 25/20/30/25% slots, one local SIL OFL subset, bounded instancing/TSL,
+  fades/culling and one loop. No pseudo-glyphs or incidental system-font fallback.
+- Validate actual built static files on root, nested and UserDir paths with HTTPS,
+  MIME/cache/range/404 behavior. Existing browser harnesses remain separate from
+  production smoke. Read-only CI has no secrets, deployment or artifact upload.
+- Candidates/ZIPs are PRIVATE INTERNAL validation only. Complete content/hash/
+  notice checks; never include course/private/test data. Original asset rights
+  remain unresolved: **Release Blocked — Asset Rights Pending**.
+- Complete tests/docs, open a **Draft PR**, then stop for Phase 4 Windows production
+  acceptance. Do not merge, release, deploy externally, publish coursework, change
+  visibility or execute npm run deploy. See docs/phase-4-results.md.
 - Use feature branches and GitHub pull requests against
   `chingchechung/engineering-cyberpunk-lab`. Do not modify or push to
   `ektogamat/threejs-conference`.

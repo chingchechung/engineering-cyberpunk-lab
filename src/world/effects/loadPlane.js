@@ -1,6 +1,7 @@
+import { appAsset } from "../../platform/appAsset.js";
 import { getGltfLoader } from "../loaders/createGltfLoaders.js";
 
-export const PLANE_PATH = "/models/plane.glb";
+export const PLANE_PATH = appAsset("models/plane.glb");
 
 export async function loadPlaneModel(renderer) {
   const gltfLoader = getGltfLoader(renderer);

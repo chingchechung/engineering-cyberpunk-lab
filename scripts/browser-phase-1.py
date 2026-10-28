@@ -5,6 +5,7 @@ Requires Python Playwright and system Chromium. Start the normal HTTPS Vite dev
 server first. Only the supplied local certificate's public key is trusted.
 """
 import argparse
+import os
 import base64
 import hashlib
 import json
@@ -203,7 +204,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--origin", default="https://127.0.0.1:5173")
     parser.add_argument("--cafile", type=Path, required=True)
-    parser.add_argument("--chromium", default="/usr/bin/chromium")
+    parser.add_argument("--chromium", default=os.environ.get("CHROMIUM_EXECUTABLE", "/usr/bin/chromium"))
     args = parser.parse_args()
     public_key = subprocess.check_output(["openssl", "x509", "-in", str(args.cafile), "-pubkey", "-noout"])
     der = subprocess.run(["openssl", "pkey", "-pubin", "-outform", "der"], input=public_key, check=True, capture_output=True).stdout

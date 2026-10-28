@@ -4,7 +4,8 @@
 merged [PR #5](https://github.com/chingchechung/engineering-cyberpunk-lab/pull/5)
 at `39ee045893c8c3b456894fc0e1097ac942dcd912`. Pending/stop statements below
 record the original submission; they do not claim a new cloud physical test.
-Phase 3.5 is separately authorized; see [its report](phase-3-5-results.md).
+Phase 3.5 was subsequently accepted and merged through PR #6; see
+[its report](phase-3-5-results.md) and current [Phase 4](phase-4-results.md).
 
 ## Scope and acceptance boundary
 
