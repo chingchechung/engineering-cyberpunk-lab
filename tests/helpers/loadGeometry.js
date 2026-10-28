@@ -1,4 +1,4 @@
-import { MeshBasicMaterial, Box3, BoxGeometry, Mesh, Vector3 } from "three/webgpu";
+import { MeshBasicMaterial, Box3, BoxGeometry, Mesh, Vector3, DoubleSide, FrontSide } from "three/webgpu";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 import { buildModelBvh } from "../../src/world/bvh.js";
@@ -11,7 +11,11 @@ export async function loadGeometry() {
   const draco = new DRACOLoader().setDecoderPath("/libs/draco/");
   const loader = new GLTFLoader().setDRACOLoader(draco);
   loader.register((parser) => {
-    parser.loadMaterial = async () => new MeshBasicMaterial();
+    // Raycast sidedness affects collision even without rendering. Preserve the
+    // GLB material flag while omitting only textures/shader work in this fixture.
+    parser.loadMaterial = async (index) => new MeshBasicMaterial({
+      side: parser.json.materials?.[index]?.doubleSided ? DoubleSide : FrontSide,
+    });
     return { name: "test-geometry-only" };
   });
   const [city, bounds, car] = await Promise.all([

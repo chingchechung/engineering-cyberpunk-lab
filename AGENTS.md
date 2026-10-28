@@ -6,14 +6,18 @@ The original upstream instructions are retained below.
 
 ## Authorized phase and Git workflow
 
-- Phase 0, Phase 1, and the walking-speed adjustment are complete and merged
-  through PRs #1–#3. The instructor accepted Phase 1 on Windows 11.
-- Phase 2 (assignment JSON integration and unit management) is explicitly
-  authorized. Work from merged `main` on `feature/phase-2-assignment-integration`.
-  See [docs/phase-2-results.md](docs/phase-2-results.md).
-- Complete automated checks, open a **Draft PR** against `main`, then stop for
-  instructor acceptance. Do not begin Phase 3, merge, tag, release, deploy,
-  or change repository visibility.
+- Phase 0–2 and the walking-speed adjustment are complete, accepted and merged.
+  Phase 2 PR #4 merged at `3142bd30534519669f545e835a078c8f4739ed1f`.
+- Phase 3 is explicitly authorized on `feature/phase-3-learning-workflow` from
+  latest main: complete the educational links, redistribute exactly five fixed
+  terminals within the original reachable city, and add trusted Close & Resume.
+- Survey actual GLBs/BVHs and preserve material sidedness in geometry tests.
+  Keep the city/model/bounds, original spawn, movement/collision algorithms,
+  mouse filters/pitch/settling/R/P, WebGPU/TSL and visual effects unchanged.
+- Complete automated checks, document evidence and Windows acceptance, open a
+  **Draft PR**, then stop for instructor review. Do not begin Phase 4, merge,
+  tag, release, deploy, publish coursework/fixtures or change private visibility.
+  See [docs/phase-3-results.md](docs/phase-3-results.md).
 - Use feature branches and GitHub pull requests against
   `chingchechung/engineering-cyberpunk-lab`. Do not modify or push to
   `ektogamat/threejs-conference`.
@@ -39,6 +43,8 @@ The original upstream instructions are retained below.
 - Upstream has no test, lint, or typecheck script. Phase 1 adds `npm test`
   (Node regression tests) and `scripts/browser-phase-1.py` (Playwright with the
   real DOM/Pointer Lock and decoded GLB geometry, independent of GPU rendering).
+  Phase 3 adds `scripts/browser-phase-3.py` and collision-verified survey/route
+  evidence. Provider fixture URLs must be intercepted before navigation.
   Build, HTTP, and geometry/input checks do not prove rendered visual parity.
 
 ## Requirements for later phases
@@ -49,7 +55,8 @@ The original upstream instructions are retained below.
 - Preserve Phase 1's tested mouse filtering, pitch limits, Pointer Lock/focus
   lifecycle, R/P recovery, WASD/sprint/crouch and modal input/focus barrier.
   Effective walking speed is 4.5 m/s and maximum sprint is 9 m/s.
-- Q01–Q05 terminals require visible labels as well as yellow indicators; X opens
+- Q01–Q05 terminals keep readable labels and yellow indicators (green after a
+  pass). Their Phase 3 surveyed locations remain fixed across S01–S12; X opens
   the nearby terminal. An open quiz must block background clicks, global input,
   movement, mouse look, and underlying controls, with appropriate focus handling.
 - Reuse the approved Engineering City Lab `v1.0.0` assignment contract, pinned
@@ -66,7 +73,15 @@ The original upstream instructions are retained below.
   original fixed sites. Wrong answers permit retry without revoking passes.
 - Progress exists only in memory during the current page visit. No assignment
   progress in localStorage/sessionStorage/backend; no student identity, answer
-  collection, analytics, video/Form actions or automatic publication in Phase 2.
+  collection, analytics or automatic publication. Phase 3 adds only explicit
+  native new-tab question videos, optional post-pass English explanations and
+  the active unit Form at 4/4 or 5/5. Use exact validated URLs with `_blank`
+  and `noopener noreferrer`; no autoplay, embeds or viewing-time checks.
+- Only an originally game-Pointer-Locked quiz may request lock synchronously
+  from a trusted Close & Resume click/keyboard activation. Escape, programmatic
+  close, an unlocked opening and external-tab focus return never force lock.
+  Use the existing gated API once; browser denial/throttling leaves a clear
+  click-to-resume fallback. No automatic retries or weakened settling guards.
 - Retain the MIT notice, original author credits, and adapted shader attribution.
   Public assets have separate rights. All five GLB models currently lack
   sufficient license evidence; resolve redistribution rights before release or

@@ -59,4 +59,10 @@ The Python CLI reads local exports; it does not publish or upload anything.
 Validation algorithms, URL patterns, schemas, option order, supplied language,
 strict fields, normalization and error objects are not redesigned or weakened.
 No v1/v2 conversion is performed. Teacher-side exports remain compatible without
-any authoring changes. Maze gameplay/reset rules and Phase 3 link UI are excluded.
+any authoring changes. Maze gameplay/reset rules remain excluded. The Phase 2 import excluded link UI;
+Phase 3 now adapts the small `questionResources` and `completionFormUrl`
+projections from Engineering City Lab v1.0.0 `js/education-ui.js` into
+`src/education/learningResources.js`, plus native-link rendering. These derive
+availability only from the existing validated in-memory session; validation,
+answer logic and the 15 unchanged artifacts remain untouched. The instructor's
+Phase 3 request explicitly authorizes this approved workflow reuse.

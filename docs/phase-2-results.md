@@ -3,13 +3,17 @@
 ## Scope and review gate
 
 Implemented on `feature/phase-2-assignment-integration`, starting from latest
-merged `main` **`d6b6702`** (PR #3 merged). Phase 1 was previously accepted by
-the instructor on Windows 11; this phase's physical acceptance is pending.
-The existing checkout was used without creating a worktree.
+merged `main` **`d6b6702`** (PR #3 merged). Subsequently **accepted by the
+instructor and merged through PR #4** at
+**`3142bd30534519669f545e835a078c8f4739ed1f`**. No new browser/GPU/version
+measurements were supplied with that acceptance. The existing checkout was used
+without creating a worktree. The tests/checklist below preserve Phase 2's
+historical evidence; current Phase 3 work and its pending acceptance are in
+[phase-3-results.md](phase-3-results.md).
 
-Complete the available checks, open a **Draft PR against main**, and stop for
-instructor acceptance. Do not merge or start Phase 3. No release, deployment,
-public coursework publication, visibility change or upstream change is authorized.
+The former stop before Phase 3 is superseded by the instructor's explicit Phase 3
+authorization. No merge/release/deployment/visibility action is authorized for
+that new work beyond its Draft PR.
 
 ## Implemented functionality
 
@@ -119,7 +123,7 @@ Used checksum-pinned **Node 22.23.4 / npm 10.9.9**, Python 3.12, Playwright
 | HTTPS dev and fresh production preview | Passed: each document, 2 entry resources, all 54 original public asset hashes; production empty assignment manifest also fetched/verified |
 | Production output inspection | Passed: only empty `assignments/manifest.json`, no unit exports, fixtures, tests, tools, schemas or parity corpus in `dist/` |
 | Preservation diff and `git diff --check` | Passed |
-| New physical Windows/GPU acceptance | **Not performed; pending instructor acceptance** |
+| Physical Windows/GPU acceptance | Subsequently accepted by instructor for Phase 2; the original automated run did not perform physical tests |
 
 The browser tests run actual production input/education modules against native
 DOM and decoded GLB geometry, with synthetic JSON requests intercepted. They
@@ -197,7 +201,8 @@ directory. Record browser/GPU and failure steps; these boxes remain unchecked.
 
 ## Known limitations and stop
 
-Full Phase 2 visual/gameplay acceptance on physical Windows is pending. Real
+Phase 2 was subsequently accepted by the instructor and merged through PR #4.
+The historical automated checks did not themselves establish physical GPU acceptance. Real
 coursework and provider navigation were not tested; only unpublished synthetic
 fixtures were used. Assignment paths follow the document subdirectory, but
 upstream absolute city/model/media paths still require separate release work
@@ -205,5 +210,5 @@ for an entire Apache subdirectory site. Session-only progress is intentional.
 
 All original [asset licensing warnings](asset-licenses.md) remain unresolved,
 including the five GLBs' insufficient redistribution evidence. This phase
-does not clear assets for public release or deployment. Stop after the Draft PR
-and wait for instructor acceptance before Phase 3.
+does not clear assets for public release or deployment. The Phase 2 Draft PR
+stop was completed by acceptance/merge; Phase 3 now has separate authorization.

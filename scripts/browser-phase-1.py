@@ -33,56 +33,29 @@ def open_harness(browser, origin, **options):
 
 def geometry_checks(browser, origin):
     context, page, errors = open_harness(browser, origin, has_touch=True)
-    result = page.evaluate("""() => {
-      const {THREE, TERMINAL_LAYOUT, findNearbyTerminal} = harness;
-      const {camera, director, world, geometry, education} = app;
-      const walk = director.walkControls;
-      const ray = new THREE.Raycaster();
-      for (const terminal of TERMINAL_LAYOUT) {
-        const [x,y,z] = terminal.position;
-        for (const height of [0.3, 1, 1.8, 2.3]) {
-          for (let a=0; a<Math.PI*2; a+=Math.PI/8) {
-            ray.set(new THREE.Vector3(x,y+height,z), new THREE.Vector3(Math.cos(a),0,Math.sin(a)));
-            ray.far = 1.05;
-            if (ray.intersectObjects(geometry.colliders.slice(0,3),true).length) throw Error(terminal.id+' has blocked clearance');
-          }
-        }
-        ray.set(new THREE.Vector3(x,y+0.05,z), new THREE.Vector3(0,1,0)); ray.far=2.4;
-        if(ray.intersectObjects(geometry.colliders.slice(0,3),true).length) throw Error(terminal.id+' intersects overhead geometry');
-      }
-      const route = [[-137,32],[-136,30.8],[-133,28],[-130,28.8],[-123,28.8],[-116,31.8],[-111,35.8]];
-      const visited = new Set();
-      for (const [x,z] of route) {
-        let frames=0;
-        while(Math.hypot(camera.position.x-x,camera.position.z-z)>0.12 && frames++<1200) {
-          camera.lookAt(x,camera.position.y,z);walk.syncEulerFromCamera();
-          walk.setMoveAxes(0,-Math.min(1,Math.hypot(camera.position.x-x,camera.position.z-z)));
-          director.update(1/60);
-          const nearby=findNearbyTerminal(camera.position);if(nearby)visited.add(nearby.id);
-        }
-        walk.clearInput();
-        if(frames>=1200)throw Error('Route blocked at '+[x,z]+' from '+camera.position.toArray());
-        education.update();
-      }
-      if(visited.size!==5)throw Error('Unreachable terminals: '+[...visited]);
-      const entries=education.terminals.entries;
-      if(entries.some(t=>t.label.name!==t.id+'-label'||t.indicator.material.color.getHex()!==0xffdf24))throw Error('Missing labels/indicators');
-      // Drive at the actual car's conservative blocker with the unchanged wall rays.
+    survey = json.loads((Path(__file__).resolve().parents[1] / "tests/fixtures/terminal-survey.json").read_text())
+    result = page.evaluate("""async survey => {
+      const {verifyTerminalRoutes}=await import('/tests/helpers/verifyTerminalRoutes.js');
+      const result=await verifyTerminalRoutes(app,survey,harness.TERMINAL_LAYOUT);
+      // Preserve the original actual-car collision regression.
+      const {camera,director,geometry}=app;const walk=director.walkControls;
       camera.position.set(-133,-3.85,33);camera.lookAt(-120,-3.85,33);walk.syncEulerFromCamera();
       for(let i=0;i<180;i++){walk.setMoveAxes(0,-1);director.update(1/60);}
-      if(camera.position.x > geometry.carBox.min.x - 0.5)throw Error('Car collision failed');
-      return {visited:[...visited],clearance:'1.05 m radial / 2.4 m high',carStopX:camera.position.x};
-    }""")
+      if(camera.position.x>geometry.carBox.min.x-0.5)throw Error('Car collision failed');
+      return {...result,carStopX:camera.position.x};
+    }""", survey)
     check(not errors, f"Geometry test errors: {errors}")
     context.close()
-    print("PASS actual GLB clearance, five-terminal walking route, labels/indicators, car collision:", json.dumps(result))
+    output = Path("/tmp/phase-3-route-distances.json")
+    output.write_text(json.dumps(result, indent=2))
+    print("PASS actual GLB ground/clearance, five spawn routes and ten pair routes, labels/indicators, wall/height gates, car collision:", json.dumps(result))
 
 
 def modal_checks(browser, origin):
     context, page, errors = open_harness(browser, origin)
     page.wait_for_function("document.querySelector('.app-header').getBoundingClientRect().top >= -0.1")
     page.evaluate("""() => {
-      app.camera.position.set(-136,-3.85,30.8);app.director.walkControls.syncEulerFromCamera();app.education.update();
+      app.camera.position.copy(harness.approach('Q01'));app.director.walkControls.syncEulerFromCamera();app.education.update();
       window.backgroundClicks=0;window.backgroundKeys=0;window.backgroundOpens=0;
       window.open=()=>backgroundOpens++;
       window.backgroundRects=[...document.querySelectorAll('.app-header button, .audio-btn, .walk-controls__chip')].map(e=>{
@@ -159,9 +132,10 @@ def modal_checks(browser, origin):
     quiz.locator('input[value="0"]').check()
     quiz.get_by_role("button", name="Check answer").click()
     check(page.evaluate("app.education.progress.getCompleted()") == 1, "Correct answer did not advance progress")
-    quiz.get_by_role("button", name="Close question").click()
+    quiz.locator("[data-close]").click()
     check(not quiz.is_visible(), "Close button failed")
-    check(page.evaluate("!app.director.isInputSuspended() && document.pointerLockElement === null"), "Close auto-locked or stayed suspended")
+    page.wait_for_function("!app.director.isInputSuspended() && document.pointerLockElement === app.canvas")
+    page.evaluate("app.director.walkControls.exitPointerLock()")
     check(page.evaluate("[app.canvas,document.querySelector('.education-prompt'),document.querySelector('.walk-prompt')].includes(document.activeElement)"), "Focus did not return")
     page.evaluate("""() => {
       const before=app.camera.position.clone();for(let i=0;i<60;i++)app.director.update(1/60);
@@ -173,7 +147,7 @@ def modal_checks(browser, origin):
         check(quiz.is_visible(), f"Repeated open {index} failed")
         check("passed" in quiz.locator("[data-feedback]").inner_text(), "Passed state lost")
         if index % 2:
-            quiz.get_by_role("button", name="Close question").click()
+            quiz.locator("[data-close]").click()
         else:
             page.keyboard.press("Escape")
         check(not quiz.is_visible(), f"Repeated close {index} failed")
@@ -192,15 +166,14 @@ def modal_checks(browser, origin):
     for index in range(1, 5):
         answer = page.evaluate("""index => {
           const q=app.education.progress.questions[index];
-          const [x,y,z]=harness.TERMINAL_LAYOUT[index].position;
-          app.camera.position.set(x,y+1.55,z+1.8);app.education.update();
+          app.camera.position.copy(harness.approach(q.id));app.education.update();
           return q.answer;
         }""", index)
         page.keyboard.press("x")
         check(quiz.locator("h2").inner_text() == f"Q0{index+1}", "Wrong terminal question")
         quiz.locator(f'input[value="{answer}"]').check()
         quiz.get_by_role("button", name="Check answer").click()
-        quiz.get_by_role("button", name="Close question").click()
+        quiz.locator("[data-close]").click()
     check(page.locator("[data-progress]").inner_text() == "5/5 questions passed", "Five-question progress did not render")
     page.evaluate("app.camera.position.set(0,50,0);app.education.update()")
     page.keyboard.press("x")

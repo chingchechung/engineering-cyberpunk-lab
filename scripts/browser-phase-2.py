@@ -71,7 +71,7 @@ def assignment_checks(browser, origin):
     def answer_near(question_id, index):
         page.evaluate("""id => {
           const t=harness.TERMINAL_LAYOUT.find(t=>t.id===id);
-          app.camera.position.set(t.position[0],t.position[1]+1.55,t.position[2]+1.8);
+          app.camera.position.copy(harness.approach(id));
           app.education.update();
         }""", question_id)
         page.keyboard.press("x")
@@ -94,7 +94,7 @@ def assignment_checks(browser, origin):
     page.keyboard.press("Escape")
     check(not selector.is_visible(), "Escape did not close selector")
     answer_near("Q01", 0)
-    quiz.get_by_role("button", name="Close question").click()
+    quiz.locator("[data-close]").click()
     check(page.evaluate("app.education.progress.count") == 1, "Demo no longer works")
 
     units = [fixture(2, "S01"), fixture(1, "S02"), fixture(2, "S02"), fixture(1, "S01")]
@@ -117,7 +117,7 @@ def assignment_checks(browser, origin):
     page.wait_for_function("app.education.progress.unitId==='S01' && !app.education.selector.isOpen()")
     check(page.evaluate("app.education.progress.count===0 && JSON.stringify(app.camera.position.toArray())===JSON.stringify(savedPosition)"), "Valid switch did not reset only progress")
     check(page.evaluate("!app.education.terminals.entries[4].group.visible && !app.world.colliders.includes(app.education.terminals.entries[4].collider)"), "Q05 is not hidden/deactivated")
-    page.evaluate("app.camera.position.set(-111,-3.85,35.8);app.education.update()")
+    page.evaluate("app.camera.position.copy(harness.approach('Q05'));app.education.update()")
     page.keyboard.press("x")
     check(not quiz.is_visible(), "Hidden Q05 still opens")
     answer_near("Q01", 1)
@@ -125,14 +125,14 @@ def assignment_checks(browser, origin):
     check(quiz.locator("input").count() == 3, "Fake D option added")
     check("literal 測試" in quiz.locator("h2").inner_text() and quiz.locator("img").count() == 0, "Question text treated as markup")
     check(quiz.locator("legend").inner_text() == units[0]["questions"][0]["prompt"], "Published prompt changed")
-    check(quiz.locator("a,iframe,video").count() == 0, "Phase 3 media/link UI was added")
+    check(quiz.locator("iframe,video").count() == 0, "Embedded media was added")
     quiz.get_by_role("button", name="Try again").click()
     quiz.locator('input[value="0"]').check()
     quiz.get_by_role("button", name="Check answer").click()
-    quiz.get_by_role("button", name="Close question").click()
+    quiz.locator("[data-close]").click()
     answer_near("Q02", 2)  # v2 accepts C as well as B, with a single radio selection.
     check("Correct" in quiz.locator("[data-feedback]").inner_text(), "v2 membership failed")
-    quiz.get_by_role("button", name="Close question").click()
+    quiz.locator("[data-close]").click()
     check(page.evaluate("app.education.progress.count") == 2, "Progress did not advance independently")
     for bad in ["HTTP503", "BAD_JSON", {**deepcopy(units[1]), "unknown": True}]:
         files["S02.json"] = bad
@@ -171,7 +171,7 @@ def assignment_checks(browser, origin):
     check(page.evaluate("app.education.progress.unitId==='S03' && app.education.progress.count===0"), "Stale response replaced newer unit")
     check(page.evaluate("app.education.terminals.entries[4].group.visible && app.world.colliders.includes(app.education.terminals.entries[4].collider)"), "Five-question unit did not reactivate Q05")
     answer_near("Q05", "ABCD".index(units[2]["questions"][4]["correctOptions"][0]))
-    quiz.get_by_role("button", name="Close question").click()
+    quiz.locator("[data-close]").click()
     page.evaluate("window.savedPosition=app.camera.position.toArray()")
     for manifest in ["HTTP503", {"schemaVersion": 1, "units": []}]:
         files["manifest.json"] = manifest
@@ -190,7 +190,7 @@ def assignment_checks(browser, origin):
         check(page.evaluate("JSON.stringify(app.camera.position.toArray())===JSON.stringify(savedPosition)"), "Unit switching moved player")
     for question in units[3]["questions"]:
         answer_near(question["id"], "ABCD".index(question["correctOption"]))
-        quiz.get_by_role("button", name="Close question").click()
+        quiz.locator("[data-close]").click()
     check(page.locator("[data-progress]").inner_text() == "4/4 questions passed", "Four-question completion requires Q05")
     check(page.evaluate("app.education.progress.complete && !window.injected"), "Completion or text isolation failed")
     check(page.evaluate("JSON.stringify(Object.keys(localStorage))===JSON.stringify(savedLocalKeys) && JSON.stringify(Object.keys(sessionStorage))===JSON.stringify(savedSessionKeys)"), "Assignment progress wrote to storage")

@@ -15,7 +15,9 @@
       import { createEducationSystem } from "../src/education/createEducationSystem.js";
       import { TERMINAL_LAYOUT, findNearbyTerminal } from "../src/education/terminalLayout.js";
       import { FREE_CAMERA_START } from "../src/bootstrap/createCamera.js";
+      import terminalSurvey from "./fixtures/terminal-survey.json";
       window.harness = { THREE, loadGeometry, createWalkControls, TERMINAL_LAYOUT, findNearbyTerminal, FREE_CAMERA_START,
+        approach(id) { return new THREE.Vector3(...terminalSurvey.nodes[terminalSurvey.approachNodes[id]].position); },
         async setup() {
           const geometry = await loadGeometry();
           const scene = new THREE.Scene();
