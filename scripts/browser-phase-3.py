@@ -16,6 +16,7 @@ import subprocess
 from urllib.parse import urlsplit
 
 from playwright.sync_api import sync_playwright, Error
+from pointer_lock_diagnostics import observe_pointer_lock, wait_for_pointer_lock
 
 ROOT = Path(__file__).resolve().parents[1]
 phase1 = runpy.run_path(str(ROOT / "scripts/browser-phase-1.py"))
@@ -28,11 +29,12 @@ def near(page, question_id):
 
 def resume_checks(browser, origin):
     context, page, errors = phase1["open_harness"](browser, origin)
+    observe_pointer_lock(page)
     quiz = page.locator(".education-quiz:not(.education-selector)")
     close = quiz.locator("[data-close]")
     near(page, "Q01")
     page.locator(".walk-prompt").click()
-    page.wait_for_function("document.pointerLockElement===app.canvas")
+    wait_for_pointer_lock(page, "initial prompt")
     page.evaluate("""() => {
       window.lockAttempts=0;window.realLock=app.canvas.requestPointerLock.bind(app.canvas);
       window.lockFailures=[];
@@ -49,7 +51,7 @@ def resume_checks(browser, origin):
             page.keyboard.press("Enter")
         else:
             close.click()
-        page.wait_for_function("document.pointerLockElement===app.canvas")
+        wait_for_pointer_lock(page, f"Close & Resume cycle {index + 1} ({'keyboard' if index % 2 else 'mouse'})")
         check(page.evaluate("lockAttempts") == before["attempts"] + 1, "Close did not make exactly one lock request")
         page.evaluate("""before => {
           if(app.camera.quaternion.angleTo(new harness.THREE.Quaternion(...before.rotation))>1e-7)throw Error('Resume orientation jump');
@@ -73,7 +75,7 @@ def resume_checks(browser, origin):
         check(page.evaluate("document.pointerLockElement===null && lockAttempts===%d" % attempts), f"{method} forced lock")
         check(page.locator(".walk-prompt").is_visible(), "No explicit resume fallback")
         page.locator(".walk-prompt").click()
-        page.wait_for_function("document.pointerLockElement===app.canvas")
+        wait_for_pointer_lock(page, f"explicit prompt after {method} close")
     # A browser refusal is handled once by the existing request API.
     page.keyboard.press("x")
     page.evaluate("() => {app.canvas.requestPointerLock=()=>{lockAttempts++;return Promise.reject(new DOMException('Test policy block','NotAllowedError'))}}")
@@ -93,10 +95,7 @@ def resume_checks(browser, origin):
     # produces actual browser focus/blur events without pretending this is a
     # physical OS/browser-tab acceptance test.
     page.locator(".walk-prompt").click()
-    try:
-        page.wait_for_function("document.pointerLockElement===app.canvas", timeout=5000)
-    except Error:
-        raise AssertionError(page.evaluate("({attempts:lockAttempts,failures:lockFailures,focused:document.hasFocus(),suspended:app.director.isInputSuspended(),open:app.education.modal.isOpen(),active:app.director.walkControls.isActive()})"))
+    wait_for_pointer_lock(page, "explicit prompt after mocked denial", timeout=5000)
     page.keyboard.press("x")
     attempts = page.evaluate("lockAttempts")
     other = context.new_page()
@@ -285,12 +284,14 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--origin", default="https://127.0.0.1:5173")
     parser.add_argument("--cafile", required=True)
+    parser.add_argument("--headed", action="store_true", help="Use a real display (Linux CI: xvfb-run)")
     args = parser.parse_args()
     pub = subprocess.check_output(["openssl", "x509", "-in", args.cafile, "-pubkey", "-noout"])
     der = subprocess.run(["openssl", "pkey", "-pubin", "-outform", "der"], input=pub, capture_output=True, check=True).stdout
     spki = base64.b64encode(hashlib.sha256(der).digest()).decode()
     with sync_playwright() as p:
-        browser = p.chromium.launch(executable_path=os.environ.get("CHROMIUM_EXECUTABLE", "/usr/bin/chromium"), args=["--no-sandbox", "--ignore-certificate-errors-spki-list=" + spki])
+        browser = p.chromium.launch(executable_path=os.environ.get("CHROMIUM_EXECUTABLE", "/usr/bin/chromium"), headless=not args.headed, args=["--no-sandbox", "--ignore-certificate-errors-spki-list=" + spki])
+        print(f"Phase 3 browser: Chromium {browser.version}, headed={args.headed}", flush=True)
         resume_checks(browser, args.origin)
         resource_checks(browser, args.origin)
         browser.close()
