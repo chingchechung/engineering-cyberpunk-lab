@@ -1,5 +1,5 @@
 import * as THREE from "three/webgpu";
-import { isCoarsePointerDevice } from "../platform/deviceLayout.js";
+import { hasFinePointer, isCoarsePointerDevice } from "../platform/deviceLayout.js";
 import { createMouseLook } from "./createMouseLook.js";
 
 const DEFAULTS = {
@@ -123,6 +123,7 @@ export function createWalkControls({
   let pointerLocked = false;
   let moving = false;
   let hasTouchLooked = false;
+  let inputMethod = isCoarsePointerDevice() ? "touch" : "mouse";
   let currentBaseFov = baseFov;
   let currentSpeed = settings.moveSpeed;
 
@@ -140,14 +141,9 @@ export function createWalkControls({
       return false;
     }
 
-    if (isCoarsePointerDevice()) {
-      const joystickActive =
-        externalMoveAxes.lengthSq() >
-        MOVE_AXIS_DEADZONE * MOVE_AXIS_DEADZONE;
-      return hasTouchLooked || joystickActive || moving;
-    }
-
-    return pointerLocked;
+    const joystickActive = externalMoveAxes.lengthSq() > MOVE_AXIS_DEADZONE * MOVE_AXIS_DEADZONE;
+    return pointerLocked || joystickActive ||
+      (inputMethod === "touch" && (hasTouchLooked || moving));
   }
 
   function notifyChange() {
@@ -157,6 +153,8 @@ export function createWalkControls({
         pointerLocked,
         moving,
         hasTouchLooked,
+        inputMethod,
+        inputAvailable: canUseInput(),
         inputSuspended,
         horizontalOnly: look.isHorizontalOnly(),
       });
@@ -457,10 +455,15 @@ export function createWalkControls({
   }
 
   function onKeyDown(event) {
-    if (!canUseInput() || (!pointerLocked && !isCoarsePointerDevice()) ||
+    if (!canUseInput() ||
       event.ctrlKey || event.altKey || event.metaKey || isEditableTarget(event.target)) {
       return;
     }
+
+    const controlKey = KEY_MAP[event.code] || isSprintKey(event) ||
+      ["KeyC", "KeyR", "KeyP"].includes(event.code);
+    if (controlKey && hasFinePointer()) setInputMethod("mouse");
+    if (!pointerLocked && inputMethod !== "touch") return;
 
     syncSprintFromEvent(event);
 
@@ -511,9 +514,8 @@ export function createWalkControls({
   }
 
   function onMouseMove(event) {
-    if (!canUseInput() || !pointerLocked || isCoarsePointerDevice()) {
-      return;
-    }
+    if (!canUseInput() || event.sourceCapabilities?.firesTouchEvents) return;
+    if (!pointerLocked) return;
 
     // Keep sprint in sync while pointer-locked (modifier keyup can be missed).
     syncSprintFromEvent(event);
@@ -522,6 +524,14 @@ export function createWalkControls({
       applyEulerToCamera();
       onLookChange?.();
     }
+  }
+
+  function onPointerActivity(event) {
+    // Use actual mouse PointerEvents, not touch-generated compatibility mousemove.
+    if (canUseInput() && !pointerLocked && touchLookPointers.size === 0 &&
+      externalMoveAxes.lengthSq() <= MOVE_AXIS_DEADZONE * MOVE_AXIS_DEADZONE &&
+      event.isTrusted && event.pointerType === "mouse" &&
+      (event.movementX || event.movementY)) setInputMethod("mouse");
   }
 
   function shouldIgnoreTouchLookTarget(event) {
@@ -534,28 +544,45 @@ export function createWalkControls({
   }
 
   function onCanvasPointerDown(event) {
-    if (!canUseInput() || !isCoarsePointerDevice() || event.pointerType === "mouse") {
-      return;
-    }
+    if (!canUseInput()) return;
 
     if (event.target !== domElement || shouldIgnoreTouchLookTarget(event)) {
       return;
     }
 
+    if (event.pointerType === "mouse") {
+      setInputMethod("mouse");
+      return;
+    }
+    if (event.pointerType !== "touch" && event.pointerType !== "pen") return;
+    event.preventDefault(); // Suppress compatibility mouse events from this touch.
+    const wasLocked = pointerLocked || document.pointerLockElement === domElement;
+    setInputMethod("touch");
+
     touchLookPointers.set(event.pointerId, {
       x: event.clientX,
       y: event.clientY,
+      // While locked, Chromium can report the mouse's fixed client position for
+      // touch-down. Anchor the first unlocked sample instead of applying that jump.
+      anchorPending: wasLocked,
     });
     domElement.setPointerCapture?.(event.pointerId);
   }
 
   function onCanvasPointerMove(event) {
-    if (!canUseInput() || !isCoarsePointerDevice()) {
+    if (!canUseInput() || inputMethod !== "touch") {
       return;
     }
 
     const previous = touchLookPointers.get(event.pointerId);
     if (!previous) {
+      return;
+    }
+
+    if (previous.anchorPending) {
+      previous.x = event.clientX;
+      previous.y = event.clientY;
+      previous.anchorPending = false;
       return;
     }
 
@@ -623,8 +650,10 @@ export function createWalkControls({
 
   function onPointerLockChange() {
     const locked = document.pointerLockElement === domElement;
-    clearInput();
-    pointerLocked = locked && canUseInput();
+    // Touch handoff already cleared the old lock/input synchronously. Its queued
+    // unlock notification must not discard the new, still-held touch gesture.
+    if (locked || pointerLocked || inputMethod !== "touch" || !canUseInput()) clearInput();
+    pointerLocked = locked && canUseInput() && inputMethod === "mouse";
     look.setLocked(pointerLocked);
     if (pointerLocked) syncEulerFromCamera();
     else if (locked) document.exitPointerLock?.();
@@ -653,7 +682,8 @@ export function createWalkControls({
   }
 
   function requestPointerLock() {
-    if (!canUseInput() || pointerLocked || isCoarsePointerDevice()) return;
+    if (!canUseInput() || pointerLocked) return;
+    setInputMethod("mouse");
     // Lock may be denied (e.g. immediately after browser Escape). Retry only
     // on another explicit click, without an unhandled promise rejection.
     try { domElement.requestPointerLock?.()?.catch?.(() => {}); } catch { /* denied */ }
@@ -675,7 +705,8 @@ export function createWalkControls({
   }
 
   function onCanvasClick(event) {
-    if (!canUseInput() || pointerLocked || event.button !== 0 || isCoarsePointerDevice()) {
+    if (!canUseInput() || pointerLocked || event.button !== 0 || !event.isTrusted ||
+      event.pointerType === "touch" || event.pointerType === "pen" || event.sourceCapabilities?.firesTouchEvents) {
       return;
     }
 
@@ -686,10 +717,19 @@ export function createWalkControls({
     requestPointerLock();
   }
 
+  function setInputMethod(next) {
+    if (!canUseInput() || !["mouse", "touch"].includes(next) || next === inputMethod) return;
+    inputMethod = next;
+    exitPointerLock();
+    syncEulerFromCamera();
+    notifyChange();
+  }
+
   function bind() {
     window.addEventListener("keydown", onKeyDown);
     window.addEventListener("keyup", onKeyUp);
     window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("pointermove", onPointerActivity);
     document.addEventListener("pointerlockchange", onPointerLockChange);
     window.addEventListener("blur", onFocusChange);
     window.addEventListener("focus", onFocusChange);
@@ -699,12 +739,14 @@ export function createWalkControls({
     domElement.addEventListener("pointermove", onCanvasPointerMove);
     domElement.addEventListener("pointerup", onCanvasPointerUp);
     domElement.addEventListener("pointercancel", onCanvasPointerUp);
+    domElement.addEventListener("lostpointercapture", onCanvasPointerUp);
   }
 
   function unbind() {
     window.removeEventListener("keydown", onKeyDown);
     window.removeEventListener("keyup", onKeyUp);
     window.removeEventListener("mousemove", onMouseMove);
+    window.removeEventListener("pointermove", onPointerActivity);
     document.removeEventListener("pointerlockchange", onPointerLockChange);
     window.removeEventListener("blur", onFocusChange);
     window.removeEventListener("focus", onFocusChange);
@@ -714,6 +756,7 @@ export function createWalkControls({
     domElement.removeEventListener("pointermove", onCanvasPointerMove);
     domElement.removeEventListener("pointerup", onCanvasPointerUp);
     domElement.removeEventListener("pointercancel", onCanvasPointerUp);
+    domElement.removeEventListener("lostpointercapture", onCanvasPointerUp);
   }
 
   bind();
@@ -851,6 +894,8 @@ export function createWalkControls({
     isActive: () => active,
     isPointerLocked: () => pointerLocked,
     hasTouchLooked: () => hasTouchLooked,
+    getInputMethod: () => inputMethod,
+    setInputMethod,
     isMoving: () => moving,
     getHorizontalSpeed: () => currentVelocity.length(),
     setMoveAxes,
@@ -860,7 +905,7 @@ export function createWalkControls({
     snapCameraToGround: () => snapCameraToGround({ allowLongDrop: true }),
     subscribe: (listener) => {
       listeners.add(listener);
-      listener({ active, pointerLocked, moving, hasTouchLooked,
+      listener({ active, pointerLocked, moving, hasTouchLooked, inputMethod, inputAvailable: canUseInput(),
         inputSuspended, horizontalOnly: look.isHorizontalOnly() });
       return () => listeners.delete(listener);
     },

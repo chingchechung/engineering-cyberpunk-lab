@@ -2,6 +2,14 @@
 
 ## Scope and review boundary
 
+Current work: the authorized v1.0.1 hybrid touchscreen input correction from
+accepted v1.0.0/main `75f7e2af095c174e8d729698a30f0beeb774f638`. This is a
+focused bug fix, not another phase. See [root cause, validation and physical
+acceptance](docs/v1-0-1-hybrid-input.md). Stop at a Draft PR after complete CI;
+the instructor must test both Windows machines without overriding touch points.
+The existing v1.0.0 tag/Release stays unchanged. No merge, deployment, archive
+upload or new Release is authorized.
+
 Target: `chingchechung/engineering-cyberpunk-lab`.
 Upstream: `ektogamat/threejs-conference` (Threejs-Punk), pinned to
 `8cc20593b2270e2ce832e7b7b44356705daddec4`.

@@ -100,7 +100,8 @@ export function createMoveHint({ walkControls, state } = {}) {
   }
 
   function shouldUseDesktopHint() {
-    return !isCoarsePointerDevice();
+    return walkControls?.getInputMethod
+      ? walkControls.getInputMethod() === "mouse" : !isCoarsePointerDevice();
   }
 
   function scheduleHint() {
@@ -158,6 +159,7 @@ export function createMoveHint({ walkControls, state } = {}) {
   }
 
   function onWalkChange({ moving } = {}) {
+    if (!shouldUseDesktopHint()) hide();
     if (moving) {
       markMoved();
     }

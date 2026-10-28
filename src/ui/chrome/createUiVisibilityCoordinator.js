@@ -3,12 +3,12 @@ import { isCoarsePointerDevice } from "../../platform/deviceLayout.js";
 const DESKTOP_IDLE_MS = 5000;
 const TOUCH_IDLE_MS = 12000;
 
-function resolveIdleMs(idleMs) {
+function resolveIdleMs(idleMs, touchInput) {
   if (typeof idleMs === "number") {
     return idleMs;
   }
 
-  return isCoarsePointerDevice() ? TOUCH_IDLE_MS : DESKTOP_IDLE_MS;
+  return touchInput ? TOUCH_IDLE_MS : DESKTOP_IDLE_MS;
 }
 
 export function createUiIdleManager({
@@ -19,7 +19,7 @@ export function createUiIdleManager({
   onIdle,
 } = {}) {
   let idleTimerId = null;
-  const resolvedIdleMs = resolveIdleMs(idleMs);
+  let touchInput = isCoarsePointerDevice();
 
   function clearIdleTimer() {
     if (!idleTimerId) {
@@ -42,10 +42,13 @@ export function createUiIdleManager({
 
       state.hideAllUi();
       onIdle?.();
-    }, resolvedIdleMs);
+    }, resolveIdleMs(idleMs, touchInput));
   }
 
-  function handleActivity() {
+  function handleActivity(event) {
+    if (event?.pointerType === "touch" || event?.pointerType === "pen" || event?.type?.startsWith("touch")) touchInput = true;
+    else if (!event?.sourceCapabilities?.firesTouchEvents &&
+      (event?.pointerType === "mouse" || event?.type === "mousemove" || event?.type === "keydown")) touchInput = false;
     if (!state.uiVisible) {
       state.showAllUi();
       onWake?.();

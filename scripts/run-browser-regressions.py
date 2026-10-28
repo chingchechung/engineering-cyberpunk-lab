@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Run the five accepted DOM/geometry/text suites against local HTTPS Vite."""
+"""Run accepted DOM/geometry/text suites and hybrid-input checks on local HTTPS Vite."""
 import argparse,os,ssl,subprocess,tempfile,time,signal
 from pathlib import Path
 from urllib.request import urlopen
 ROOT=Path(__file__).resolve().parents[1]
-SUITES=['phase-1','phase-2','phase-3','phase-3-5','matrix-text']
+SUITES=['phase-1','phase-2','phase-3','phase-3-5','matrix-text','hybrid-input']
 parser=argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--suite',choices=SUITES,help='Run one suite; default runs all five')
+parser.add_argument('--suite',choices=SUITES,help='Run one suite; default runs all accepted suites plus hybrid input')
 parser.add_argument('--phase-3-headed',action='store_true',help='Run Phase 3 headed (requires a display, e.g. xvfb-run)')
 args=parser.parse_args()
 work=Path(tempfile.mkdtemp(prefix='engineering-lab-regressions-'))

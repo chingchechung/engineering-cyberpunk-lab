@@ -1,5 +1,5 @@
 import "./walkControlsHint.css";
-import { isDesktopPointerLayout } from "../../platform/deviceLayout.js";
+import { isDesktopPointerLayout, isMobileLayout } from "../../platform/deviceLayout.js";
 
 const CLOSE_ICON = `
   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -94,7 +94,7 @@ function renderExpandedDiagram() {
   `;
 }
 
-export function createWalkControlsHint({ state, domElement } = {}) {
+export function createWalkControlsHint({ state, domElement, walkControls } = {}) {
   const root = document.createElement("div");
   root.className = "walk-controls walk-controls--hidden";
   root.setAttribute("data-ui-block-look", "true");
@@ -140,7 +140,8 @@ export function createWalkControlsHint({ state, domElement } = {}) {
     const showChip =
       walkModeVisible &&
       !forceHidden &&
-      isDesktopPointerLayout() &&
+      (walkControls?.getInputMethod
+        ? !isMobileLayout() && walkControls.getInputMethod() === "mouse" : isDesktopPointerLayout()) &&
       !overlayOpen;
 
     root.classList.toggle("walk-controls--hidden", !showChip);
@@ -185,6 +186,7 @@ export function createWalkControlsHint({ state, domElement } = {}) {
   }
 
   const unsubscribeState = state?.subscribe?.(onStateChange);
+  const unsubscribeWalk = walkControls?.subscribe?.(applyVisibility);
 
   function onOverlayKeyDown(event) {
     if (event.code === "Escape" && overlayOpen) {
@@ -214,6 +216,7 @@ export function createWalkControlsHint({ state, domElement } = {}) {
   function destroy() {
     closeOverlay();
     unsubscribeState?.();
+    unsubscribeWalk?.();
     window.removeEventListener("keydown", onOverlayKeyDown);
     root.remove();
   }

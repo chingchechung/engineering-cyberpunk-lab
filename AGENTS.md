@@ -6,6 +6,14 @@ The original upstream instructions are retained below.
 
 ## Authorized phase and Git workflow
 
+- v1.0.0 is accepted at `75f7e2af095c174e8d729698a30f0beeb774f638` (PR #7
+  merged). Current work is the authorized v1.0.1 hybrid-input bug fix on
+  `fix/hybrid-touchscreen-input` from latest main. Touch capability must not
+  disable fine-pointer/keyboard controls. Keep real touch, native Pointer Lock,
+  mouse filtering, overlay isolation, physics/speeds and graphics budgets intact.
+  Run complete Linux/Windows validation and open a Draft PR; stop for instructor
+  testing on both Windows computers. Do not merge, deploy, tag/release v1.0.1,
+  upload archives or change existing v1.0.0. See docs/v1-0-1-hybrid-input.md.
 - Phase 0–3.5 and the walking-speed adjustment are accepted and merged.
   Phase 3.5 PR #6 (including real multilingual text) merged at
   `85b07ff506dde3a58b0422340b2787f139ee17c2` after instructor Windows 11 acceptance.

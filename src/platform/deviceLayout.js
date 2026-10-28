@@ -1,13 +1,22 @@
 export const MOBILE_LAYOUT_QUERY = "(max-width: 768px)";
 
+export function hasTouchCapability() {
+  return typeof navigator !== "undefined" && navigator.maxTouchPoints > 0;
+}
+
+export function hasFinePointer() {
+  return typeof window.matchMedia === "function" &&
+    (window.matchMedia("(any-pointer: fine)").matches || window.matchMedia("(pointer: fine)").matches);
+}
+
 export function isCoarsePointerDevice() {
   if (typeof window.matchMedia === "function") {
-    if (window.matchMedia("(pointer: coarse)").matches) {
-      return true;
-    }
+    // Prefer keyboard/mouse when any fine pointer is available. Touch points
+    // describe capability, not the absence of a mouse on a hybrid laptop.
+    return !hasFinePointer() && window.matchMedia("(pointer: coarse)").matches;
   }
 
-  return typeof navigator !== "undefined" && navigator.maxTouchPoints > 0;
+  return hasTouchCapability();
 }
 
 export function isDesktopPointerLayout() {
@@ -56,7 +65,10 @@ export function isSafari() {
 }
 
 export function isMobileDevice() {
-  return isMobileLayout() || isCoarsePointerDevice() || isAppleMobile();
+  // Keep the accepted conservative rendering budgets separate from input UI.
+  // A touch-capable laptop must retain its graphics settings while using a mouse.
+  return isMobileLayout() || hasTouchCapability() || isAppleMobile() ||
+    (typeof window.matchMedia === "function" && window.matchMedia("(pointer: coarse)").matches);
 }
 
 export function syncLayoutClass() {
