@@ -123,7 +123,7 @@ export async function createWorld({
   const colliders = buildColliders({ city, boundsCollider, carCollider: quadraCollider });
   const ground = FEATURES.ground ? createGround(scene) : null;
   const matrix = ground && boundsCollider
-    ? createMatrixExtension({ scene, boundsCollider, colliders }) : null;
+    ? await createMatrixExtension({ scene, boundsCollider, colliders }) : null;
   // The existing controller recursively probes this group, including both the
   // unchanged wet city ground and the lightweight exterior surfaces.
   const walkGround = new THREE.Group();

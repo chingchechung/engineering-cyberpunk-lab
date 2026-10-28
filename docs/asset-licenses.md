@@ -72,3 +72,23 @@ modification conditions. Match the evidence to the inventoried artifact and
 embedded content. Record grants and supply required notices, or replace assets
 through a separately reviewed change that preserves the intended visual quality.
 Until resolved, this Phase 0 audit must not be described as license clearance.
+
+## Phase 3.5 multilingual text font (separate from original public assets)
+
+`src/world/matrix/fonts/lab-matrix-text.woff2` is a 9,964-byte renamed subset of
+**Noto Sans CJK JP Regular 2.004**, copyright © 2014–2021 Adobe, licensed under
+**SIL Open Font License 1.1**. The original outlines are subset to 96 curated
+Latin/digit/symbol/Japanese/Hangul characters. Derivative font family/PostScript
+names are **Lab Matrix Text / LabMatrixText-Regular**; copyright/license metadata
+is retained. This font remains OFL, not MIT.
+
+[Full license](../public/licenses/matrix-text/OFL.txt) and
+[attribution/provenance](../public/licenses/matrix-text/NOTICE.txt) ship in the
+production output. They record the pinned upstream commit/source SHA-256,
+subset hash/modifications and the reproducible `scripts/subset-matrix-font.py`
+workflow. No font CDN, system-font assumption, movie texture or glyph extraction
+is used. The 96-character cmap and real browser rasterization are tested.
+
+This addition provides font-specific redistribution evidence only. All original
+54 public asset bytes and their inventory remain unchanged; the unresolved
+original GLB/other-asset rights above remain release/deployment blockers.

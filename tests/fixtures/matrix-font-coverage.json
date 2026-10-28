@@ -1,0 +1,486 @@
+{
+  "sha256": "57185ac432fb65d0cc674f94fd91bfca4f04f91e8d860b164c23eda5afbce155",
+  "source": "fontTools 4.61.1 independent WOFF2 cmap inspection",
+  "characters": [
+    {
+      "character": "A",
+      "codepoint": 65,
+      "glyph": "cid00034"
+    },
+    {
+      "character": "B",
+      "codepoint": 66,
+      "glyph": "cid00035"
+    },
+    {
+      "character": "C",
+      "codepoint": 67,
+      "glyph": "cid00036"
+    },
+    {
+      "character": "D",
+      "codepoint": 68,
+      "glyph": "cid00037"
+    },
+    {
+      "character": "E",
+      "codepoint": 69,
+      "glyph": "cid00038"
+    },
+    {
+      "character": "F",
+      "codepoint": 70,
+      "glyph": "cid00039"
+    },
+    {
+      "character": "G",
+      "codepoint": 71,
+      "glyph": "cid00040"
+    },
+    {
+      "character": "H",
+      "codepoint": 72,
+      "glyph": "cid00041"
+    },
+    {
+      "character": "I",
+      "codepoint": 73,
+      "glyph": "cid00042"
+    },
+    {
+      "character": "J",
+      "codepoint": 74,
+      "glyph": "cid00043"
+    },
+    {
+      "character": "K",
+      "codepoint": 75,
+      "glyph": "cid00044"
+    },
+    {
+      "character": "L",
+      "codepoint": 76,
+      "glyph": "cid00045"
+    },
+    {
+      "character": "M",
+      "codepoint": 77,
+      "glyph": "cid00046"
+    },
+    {
+      "character": "N",
+      "codepoint": 78,
+      "glyph": "cid00047"
+    },
+    {
+      "character": "O",
+      "codepoint": 79,
+      "glyph": "cid00048"
+    },
+    {
+      "character": "P",
+      "codepoint": 80,
+      "glyph": "cid00049"
+    },
+    {
+      "character": "Q",
+      "codepoint": 81,
+      "glyph": "cid00050"
+    },
+    {
+      "character": "R",
+      "codepoint": 82,
+      "glyph": "cid00051"
+    },
+    {
+      "character": "S",
+      "codepoint": 83,
+      "glyph": "cid00052"
+    },
+    {
+      "character": "T",
+      "codepoint": 84,
+      "glyph": "cid00053"
+    },
+    {
+      "character": "U",
+      "codepoint": 85,
+      "glyph": "cid00054"
+    },
+    {
+      "character": "V",
+      "codepoint": 86,
+      "glyph": "cid00055"
+    },
+    {
+      "character": "W",
+      "codepoint": 87,
+      "glyph": "cid00056"
+    },
+    {
+      "character": "X",
+      "codepoint": 88,
+      "glyph": "cid00057"
+    },
+    {
+      "character": "Y",
+      "codepoint": 89,
+      "glyph": "cid00058"
+    },
+    {
+      "character": "Z",
+      "codepoint": 90,
+      "glyph": "cid00059"
+    },
+    {
+      "character": "0",
+      "codepoint": 48,
+      "glyph": "cid00017"
+    },
+    {
+      "character": "1",
+      "codepoint": 49,
+      "glyph": "cid00018"
+    },
+    {
+      "character": "2",
+      "codepoint": 50,
+      "glyph": "cid00019"
+    },
+    {
+      "character": "3",
+      "codepoint": 51,
+      "glyph": "cid00020"
+    },
+    {
+      "character": "4",
+      "codepoint": 52,
+      "glyph": "cid00021"
+    },
+    {
+      "character": "5",
+      "codepoint": 53,
+      "glyph": "cid00022"
+    },
+    {
+      "character": "6",
+      "codepoint": 54,
+      "glyph": "cid00023"
+    },
+    {
+      "character": "7",
+      "codepoint": 55,
+      "glyph": "cid00024"
+    },
+    {
+      "character": "8",
+      "codepoint": 56,
+      "glyph": "cid00025"
+    },
+    {
+      "character": "9",
+      "codepoint": 57,
+      "glyph": "cid00026"
+    },
+    {
+      "character": "+",
+      "codepoint": 43,
+      "glyph": "cid00012"
+    },
+    {
+      "character": "-",
+      "codepoint": 45,
+      "glyph": "cid00014"
+    },
+    {
+      "character": "=",
+      "codepoint": 61,
+      "glyph": "cid00030"
+    },
+    {
+      "character": "<",
+      "codepoint": 60,
+      "glyph": "cid00029"
+    },
+    {
+      "character": ">",
+      "codepoint": 62,
+      "glyph": "cid00031"
+    },
+    {
+      "character": "*",
+      "codepoint": 42,
+      "glyph": "cid00011"
+    },
+    {
+      "character": "ア",
+      "codepoint": 12450,
+      "glyph": "cid01555"
+    },
+    {
+      "character": "イ",
+      "codepoint": 12452,
+      "glyph": "cid01557"
+    },
+    {
+      "character": "ウ",
+      "codepoint": 12454,
+      "glyph": "cid01559"
+    },
+    {
+      "character": "エ",
+      "codepoint": 12456,
+      "glyph": "cid01561"
+    },
+    {
+      "character": "オ",
+      "codepoint": 12458,
+      "glyph": "cid01563"
+    },
+    {
+      "character": "カ",
+      "codepoint": 12459,
+      "glyph": "cid01564"
+    },
+    {
+      "character": "キ",
+      "codepoint": 12461,
+      "glyph": "cid01566"
+    },
+    {
+      "character": "ク",
+      "codepoint": 12463,
+      "glyph": "cid01568"
+    },
+    {
+      "character": "ケ",
+      "codepoint": 12465,
+      "glyph": "cid01570"
+    },
+    {
+      "character": "コ",
+      "codepoint": 12467,
+      "glyph": "cid01572"
+    },
+    {
+      "character": "サ",
+      "codepoint": 12469,
+      "glyph": "cid01574"
+    },
+    {
+      "character": "シ",
+      "codepoint": 12471,
+      "glyph": "cid01576"
+    },
+    {
+      "character": "ス",
+      "codepoint": 12473,
+      "glyph": "cid01578"
+    },
+    {
+      "character": "セ",
+      "codepoint": 12475,
+      "glyph": "cid01580"
+    },
+    {
+      "character": "ソ",
+      "codepoint": 12477,
+      "glyph": "cid01582"
+    },
+    {
+      "character": "タ",
+      "codepoint": 12479,
+      "glyph": "cid01584"
+    },
+    {
+      "character": "チ",
+      "codepoint": 12481,
+      "glyph": "cid01586"
+    },
+    {
+      "character": "ツ",
+      "codepoint": 12484,
+      "glyph": "cid01589"
+    },
+    {
+      "character": "テ",
+      "codepoint": 12486,
+      "glyph": "cid01591"
+    },
+    {
+      "character": "ト",
+      "codepoint": 12488,
+      "glyph": "cid01593"
+    },
+    {
+      "character": "ナ",
+      "codepoint": 12490,
+      "glyph": "cid01595"
+    },
+    {
+      "character": "ニ",
+      "codepoint": 12491,
+      "glyph": "cid01596"
+    },
+    {
+      "character": "ヌ",
+      "codepoint": 12492,
+      "glyph": "cid01597"
+    },
+    {
+      "character": "ネ",
+      "codepoint": 12493,
+      "glyph": "cid01598"
+    },
+    {
+      "character": "ノ",
+      "codepoint": 12494,
+      "glyph": "cid01599"
+    },
+    {
+      "character": "あ",
+      "codepoint": 12354,
+      "glyph": "cid01461"
+    },
+    {
+      "character": "い",
+      "codepoint": 12356,
+      "glyph": "cid01463"
+    },
+    {
+      "character": "う",
+      "codepoint": 12358,
+      "glyph": "cid01465"
+    },
+    {
+      "character": "え",
+      "codepoint": 12360,
+      "glyph": "cid01467"
+    },
+    {
+      "character": "お",
+      "codepoint": 12362,
+      "glyph": "cid01469"
+    },
+    {
+      "character": "か",
+      "codepoint": 12363,
+      "glyph": "cid01470"
+    },
+    {
+      "character": "き",
+      "codepoint": 12365,
+      "glyph": "cid01472"
+    },
+    {
+      "character": "く",
+      "codepoint": 12367,
+      "glyph": "cid01474"
+    },
+    {
+      "character": "け",
+      "codepoint": 12369,
+      "glyph": "cid01476"
+    },
+    {
+      "character": "こ",
+      "codepoint": 12371,
+      "glyph": "cid01478"
+    },
+    {
+      "character": "さ",
+      "codepoint": 12373,
+      "glyph": "cid01480"
+    },
+    {
+      "character": "し",
+      "codepoint": 12375,
+      "glyph": "cid01482"
+    },
+    {
+      "character": "す",
+      "codepoint": 12377,
+      "glyph": "cid01484"
+    },
+    {
+      "character": "せ",
+      "codepoint": 12379,
+      "glyph": "cid01486"
+    },
+    {
+      "character": "そ",
+      "codepoint": 12381,
+      "glyph": "cid01488"
+    },
+    {
+      "character": "가",
+      "codepoint": 44032,
+      "glyph": "cid47611"
+    },
+    {
+      "character": "나",
+      "codepoint": 45208,
+      "glyph": "cid48787"
+    },
+    {
+      "character": "다",
+      "codepoint": 45796,
+      "glyph": "cid49375"
+    },
+    {
+      "character": "라",
+      "codepoint": 46972,
+      "glyph": "cid50551"
+    },
+    {
+      "character": "마",
+      "codepoint": 47560,
+      "glyph": "cid51139"
+    },
+    {
+      "character": "바",
+      "codepoint": 48148,
+      "glyph": "cid51727"
+    },
+    {
+      "character": "사",
+      "codepoint": 49324,
+      "glyph": "cid52903"
+    },
+    {
+      "character": "아",
+      "codepoint": 50500,
+      "glyph": "cid54079"
+    },
+    {
+      "character": "자",
+      "codepoint": 51088,
+      "glyph": "cid54667"
+    },
+    {
+      "character": "차",
+      "codepoint": 52264,
+      "glyph": "cid55843"
+    },
+    {
+      "character": "카",
+      "codepoint": 52852,
+      "glyph": "cid56431"
+    },
+    {
+      "character": "타",
+      "codepoint": 53440,
+      "glyph": "cid57019"
+    },
+    {
+      "character": "파",
+      "codepoint": 54028,
+      "glyph": "cid57607"
+    },
+    {
+      "character": "하",
+      "codepoint": 54616,
+      "glyph": "cid58195"
+    }
+  ]
+}

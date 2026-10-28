@@ -1,3 +1,5 @@
+import { GLYPH_COUNT } from './glyphInventory.js';
+
 // World metres. Surveyed gaps bend NW/SE at the ends of the X-longitudinal street.
 // Causeways pass between existing buildings; plazas sit beyond the city AABB.
 export const MATRIX_GROUND_Y = -5.398; // 2 mm above wet ground, avoiding coplanar fighting.
@@ -21,7 +23,7 @@ export const MATRIX_ZONES = [
   },
 ];
 
-export const MATRIX_BUDGET = Object.freeze({ columnsPerZone: 256, glyphsPerColumn: 20, atlasCells: 64, fadeFar: 64 });
+export const MATRIX_BUDGET = Object.freeze({ columnsPerZone: 256, glyphsPerColumn: 20, atlasCells: GLYPH_COUNT, fadeFar: 64 });
 
 export function distanceToZone(x, z, zone) {
   let distance = Infinity;

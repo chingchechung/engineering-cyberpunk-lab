@@ -11,12 +11,15 @@ The original upstream instructions are retained below.
   instructor Windows 11 acceptance.
 - Phase 3.5 is authorized on `feature/phase-3-5-matrix-extension` from latest
   main: two seamless digital zones beyond surveyed street-end gaps, original
-  procedural glyphs, lightweight ground, localized boundary openings and safe
+  multilingual Unicode text, lightweight ground, localized boundary openings and safe
   exterior limits. Do not move terminals, original city assets or spawn.
 - Retain actual city/building/vehicle collisions and all bounds outside the two
   documented opening boxes. Clip triangles locally; never remove all city or
   bounds collisions. Preserve material sidedness in geometry tests. Keep the
   original movement, mouse filters/pitch/settling/R/P and educational system.
+- PR #6 revision uses actual Latin/digits/symbols, Hiragana/Katakana and Hangul,
+  with seeded 25/20/30/25% column slots and one locally bundled SIL OFL font
+  subset. Do not restore pseudo-glyphs or depend on incidental system fonts.
 - Matrix effects use bounded instancing/TSL, local fades and the existing loop.
   Never change global fog/lighting/weather or degrade original effects for this
   feature. Hide glyphs/backdrops from the rain height pass, retain ground support,

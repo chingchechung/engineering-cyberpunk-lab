@@ -1,6 +1,7 @@
 import * as THREE from 'three/webgpu';
-import { attribute, billboarding, cameraPosition, color, float, fract, mix, positionGeometry, texture, uniform, uv, vec2, vec3 } from 'three/tsl';
+import { attribute, billboarding, cameraPosition, color, float, fract, mix, positionGeometry, texture, uv, vec2, vec3 } from 'three/tsl';
 import { MATRIX_BUDGET, MATRIX_GROUND_Y } from './matrixLayout.js';
+import { GLYPH_ATLAS, selectColumnGlyphs } from './glyphInventory.js';
 
 function randomGenerator(seed) {
   return () => { seed = Math.imul(seed, 1664525) + 1013904223 >>> 0; return seed / 4294967296; };
@@ -36,9 +37,10 @@ export function createColumnData(zone, seed) {
 export function createDigitalRain(zone, atlas, clock, seed) {
   const columns = createColumnData(zone, seed), parameters = [], glyphs = [];
   columns.forEach(([x, z, phase, speed, length], column) => {
+    const sequence = selectColumnGlyphs(seed, column);
     for (let glyph = 0; glyph < MATRIX_BUDGET.glyphsPerColumn; glyph++) {
       parameters.push(x, z, phase, speed);
-      glyphs.push(glyph, length, (column * 31 + glyph * 17 + seed) % 64);
+      glyphs.push(glyph, length, sequence[glyph]);
     }
   });
   const base = new THREE.PlaneGeometry(.3, .46);
@@ -50,8 +52,8 @@ export function createDigitalRain(zone, atlas, clock, seed) {
   const column = attribute('matrixColumn', 'vec4'), glyph = attribute('matrixGlyph', 'vec3');
   const head = fract(column.z.sub(clock.mul(column.w).div(36)).add(glyph.x.mul(.58 / 36))).mul(36);
   const center = vec3(column.x, head.add(MATRIX_GROUND_Y), column.y);
-  const cell = vec2(glyph.z.mod(8), glyph.z.div(8).floor());
-  const mask = texture(atlas, uv().add(cell).div(8)).a;
+  const cell = vec2(glyph.z.mod(GLYPH_ATLAS.columns), glyph.z.div(GLYPH_ATLAS.columns).floor());
+  const mask = texture(atlas, vec2(uv().x, uv().y.oneMinus()).add(cell).div(vec2(GLYPH_ATLAS.columns, GLYPH_ATLAS.rows))).a;
   const trail = float(1).sub(glyph.x.div(glyph.y)).max(0).pow(1.6);
   const distanceFade = center.distance(cameraPosition).smoothstep(24, MATRIX_BUDGET.fadeFar).oneMinus();
   const gateDepth = column.x.sub(zone.entrance[0]).mul(zone.outward[0])

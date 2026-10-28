@@ -30,7 +30,8 @@ function groundMaterial(zone, clock) {
   return material;
 }
 
-export function createMatrixExtension({ scene, boundsCollider, colliders = null, zones = MATRIX_ZONES } = {}) {
+export async function createMatrixExtension({ scene, boundsCollider, colliders = null, zones = MATRIX_ZONES } = {}) {
+  const atlas = await createGlyphAtlas();
   const group = new THREE.Group(); group.name = 'MatrixExtension';
   const ground = new THREE.Group(); ground.name = 'MatrixGround';
   const effectsGroup = new THREE.Group(); effectsGroup.name = 'MatrixAtmosphere';
@@ -38,7 +39,7 @@ export function createMatrixExtension({ scene, boundsCollider, colliders = null,
   colliders?.push(collider);
   group.add(ground, effectsGroup, collider); scene.add(group);
   const openings = openCityBounds(boundsCollider, zones);
-  const atlas = createGlyphAtlas(), clock = uniform(0), resources = [];
+  const clock = uniform(0), resources = [];
   const wallGeometry = new THREE.BoxGeometry(1, 8, .2);
   const wallMaterial = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, visible: false });
   const entries = zones.map((zone, index) => {

@@ -140,9 +140,11 @@ Draft PR stop is historical. Phase 3.5 is the only newly authorized work.
   routed between existing buildings. Preserve original spawn/Q01–Q05. Use the
   original movement controller recursively probing both ground types; protect
   every exterior perimeter edge, leaving only the city entrances open.
-- Generate original glyph bitmap data and bounded GPU-instanced falling trails
-  with varied speeds/lengths/brightness, local transition/distance fades, dark
-  negative space and local plaza backdrops. No new dependencies or asset loads.
+- Rasterize 96 curated Latin/digit/symbol/Japanese/Hangul characters once using
+  a locally bundled SIL OFL font subset. Seeded mixed-language column slots use
+  25/20/30/25% weights. Keep bounded GPU-instanced falling trails, varied speeds/
+  lengths/brightness, local fades, negative space and plaza backdrops. No runtime
+  dependency or font CDN; preserve source font attribution/license.
 - Keep one animation loop, original city visuals/global state, wet reflections,
   rain/height map/shaders/post, education/assignments and controls. Add explicit
   resource disposal and exclude nonphysical atmosphere from rain-height rendering.

@@ -10,6 +10,64 @@ remains **Private**. No upstream repository, public asset, teacher tool or cours
 publication was changed. Deliver a Draft PR and stop before Phase 4, merging,
 release or deployment.
 
+## Multilingual text revision of Draft PR #6
+
+The instructor requested actual readable Unicode text in place of the initial
+5 × 7 pseudo-symbol bitmap. This revision updates the **same Draft PR #6** on
+`feature/phase-3-5-matrix-extension`; no additional PR, merge or phase is started.
+Zone positions/dimensions, openings, surfaces/boundaries, education, terminals,
+controls and original post/render architecture remain unchanged from `9fb86e1`.
+
+The curated inventory has **96 actual characters**: 26 A–Z letters, 10 digits
+plus six symbols (`+-=<>*`), 25 Katakana plus 15 Hiragana, and 14 precomposed
+Hangul syllables. Inventory, category membership, cells and selection are pure
+JavaScript in `glyphInventory.js`, independent of browser APIs. There are no
+randomly constructed strokes, pseudo-writing or question-mark substitutions.
+
+Each 20-slot column contains exactly **5 English, 4 number/symbol, 6 Japanese,
+5 Korean** entries (25/20/30/25%). A seeded shuffle puts one of each category in
+the first four positions, so even the shortest eight-slot trail mixes all four.
+Character choices within each category are sampled without replacement for each
+column. Both zones use this mixture, with distinct stable sequences per column;
+no identity changes during animation. Across visible trail lengths, the measured
+mixture is **25.01% / 20.29% / 29.40% / 25.29%** respectively.
+
+### Font choice and portable coverage
+
+The local **9,964-byte** WOFF2 subset is renamed **Lab Matrix Text Regular**,
+derived from **Noto Sans CJK JP Regular 2.004**, copyright © 2014–2021 Adobe,
+under **SIL OFL 1.1**. Its cmap contains a distinct real glyph for every inventory
+character, including Japanese and Korean; coverage is inspected from the bundled
+binary with fontTools, rather than inferred from a font name. No system-font
+coverage or external CDN is required. The font remains under OFL, separate from
+the application's MIT code. Original glyph outlines are preserved.
+
+Source commit `f8d157532fbfaeda587e826d4cd5b21a49186f7c` from `notofonts/noto-cjk`,
+`Sans/OTF/Japanese/NotoSansCJKjp-Regular.otf`, is pinned by SHA-256. The full OFL,
+source/derivative hashes, attribution, modifications and reproduction steps are
+in `public/licenses/matrix-text/{OFL.txt,NOTICE.txt}`. The build carries those
+notices and emits the subset as a local hashed font asset. The full 16 MB source
+font is **not bundled**. `scripts/subset-matrix-font.py` reproduces the subset
+using optional build-time fontTools 4.61.1 / Brotli 1.2.0 and pinned Node; no npm
+runtime dependency or lockfile change is introduced. The independent cmap
+inventory is test-only in `tests/fixtures/matrix-font-coverage.json`.
+
+Initialization awaits one cached `FontFace.load()` before atlas rasterization;
+load failure rejects before changing scene/colliders, rather than drawing a
+system fallback. The asynchronous factory requires only an `await` in the world
+and test-harness callers. No loading UI, gameplay mode or extra loop is added.
+
+The shared transparent Canvas atlas is **768 × 768 RGBA**, a **12 × 8** grid of
+**64 × 96** cells. Text uses actual font ink bounds at up to 56 px, scales down
+when necessary, and centers that ink consistently with at least six pixels of
+padding. This cell aspect preserves the existing 0.3 × 0.46 m billboard geometry
+and recognizable font proportions. Linear filtering, transparent padding, no
+mipmaps, explicit cell indexing and a within-cell Y flip prevent bleeding,
+clipping or upside-down mappings. The atlas is rasterized once per world
+initialization and never redrawn/reuploaded by the frame update. Both zone draws
+sample it; falling positions, speed/length data, green head/tail colors,
+brightness, fade formulas, culling and 10,240-slot cap are unchanged.
+
 ## Original boundary analysis and chosen passages
 
 Inspected the actual decoded `cyberpunk_compressed.glb`, `colider.glb`, original
@@ -99,9 +157,9 @@ sprint ramping, collision/ground algorithms and camera fixes are unchanged.
   local atmosphere, clock, culling and disposal. `createWorld` registers the new
   collider and the combined ground-probe group. The existing render loop calls
   `matrix.update(delta,camera)` once; there is no second animation loop.
-- A **64 × 96 RGBA procedural atlas** contains 64 distinct original 5 × 7 bit
-  symbols, with transparent margins. It uses deterministic simple strokes/bits,
-  no fonts, movie images, extracted resources, external textures or downloads.
+- The **768 × 768 shared Canvas atlas** contains the 96 curated Unicode entries
+  described above, rendered from a licensed local font subset. No movie texture
+  or random stroke generator is used.
 - **256 columns × 20 glyph slots per zone**, capped at **10,240 instances total**.
   Each zone is one instanced billboard draw. Columns vary in phase, speed
   (1.8–5.2 m/s), trail length (8–20) and depth. Brighter pale-green heads fade
@@ -121,8 +179,11 @@ sprint ramping, collision/ground algorithms and camera fixes are unchanged.
   exterior ground stays in that pass. Digital characters never become false
   roofs for the original rain. No original effect is disabled or reduced.
 - The atlas and perimeter geometry/material are shared. Instance attributes use
-  about **280 KiB total**, plus the **24 KiB** atlas; the effect does not add any
-  public asset bytes. Maximum added scene draw budget is two grounds, two rain
+  about **280 KiB total**. The atlas is now **2.25 MiB RGBA** instead of the initial
+  24 KiB bitmap, with a retained 2.25 MiB Canvas backing store plus driver
+  overhead. This is one shared upload, with no mipmaps/per-frame rasterization.
+  The only new downloaded font payload is **9,964 bytes**, served locally; the
+  font notices also ship with the build. Original public asset bytes are unchanged. Maximum added scene draw budget is two grounds, two rain
   meshes and six backdrop panels (10 before culling). The separated gates allow
   atmosphere culling to keep the distant zone inactive. These are resource
   limits, **not measured FPS**; transparency/fill cost still needs hardware review.
@@ -142,22 +203,27 @@ and trusted Close & Resume. No new terminals or course materials are added.
 
 Pinned **Node 22.23.4 / npm 10.9.9**. Before implementation, clean `npm ci`,
 **498/498** Node tests, build (201 modules), **5/5** Python tests and all three
-Phase 1–3 browser suites passed. After implementation and another clean install:
+Phase 1–3 browser suites passed. The initial Phase 3.5 submission also ran a
+clean install and 502 tests. This Unicode revision leaves package declarations/
+lockfile unchanged and reruns Node/build/Python and all browser suites; the table
+below records current results (the install row is the original unchanged-dependency
+validation).
 
 | Check | Result |
 | --- | --- |
-| `npm ci` | Passed, 331 packages; dependency declarations/lockfile unchanged |
-| `npm test` | **502/502 passed**, including all 498 existing tests and four focused Matrix subtraction/atlas/budget tests |
-| `npm run build` | Passed, **206 modules**, static production output |
+| `npm ci` | Initial Phase 3.5 clean install passed, 331 packages; no package/lockfile change in this revision |
+| `npm test` | **505/505 passed**, including all 498 pre-Matrix tests, retained collision/budget tests, and Unicode inventory/distribution/UV/font-coverage tests |
+| `npm run build` | Passed, **207 modules**, static production output |
 | `python -m unittest tests.test_assignment_contract -v` | **5/5 passed**; 364 validation cases and 76 answer selections retain JS/Python/schema parity |
 | Phase 1 browser suite | Passed with extension enabled: five continuous spawn walks and ten pair walks, all terminal clearance/interaction checks, actual car blocking, Pointer Lock/filter/R/P, 13 quiz cycles, focus/modal/orbit regressions |
 | Phase 2 browser suite | Passed: v1/v2, four/five questions/Q05, safe text, allowlist/switch/cancel/stale/error behavior, position preservation, Demo/reload/session-only state |
 | Phase 3 browser suite | Passed: trusted mouse/keyboard resume and refusal/focus safety; 8 intercepted native provider actions; explanation, 4/4–5/5 Forms, stale-link cleanup, retained progress and green indicators |
 | Phase 3.5 browser/controller suite | Passed: continuous outward/exploration/return routes, **20,214** supported movement samples, **18** exterior edges at walk/sprint plus 8 plaza corners, **8,458** retained original boundary surface samples, nearby building blocking, look-back geometry, culling/height-pass isolation, **20** generated resources disposed and bounds restored |
+| Multilingual browser rasterization | Passed: 96 unique nonempty real glyph rasters; exact independent cell comparisons, safe padding/centering and replacement-glyph rejection; one local font request; correct GPU indices; stable atlas/attributes over 600 updates; blocked-font initialization rejects cleanly |
 | Verified HTTPS dev 5173 / preview 4176 | Passed: document, two entry resources and all **54 original public asset hashes** on each |
 | Protected-source/output/whitespace audit | Passed: original public files, controls, education, city loader/GLBs, wet ground, original shaders/post/platform, schemas/tools, packages/license/credits unchanged; empty production manifest only, no fixture/coursework/survey/docs/tools/schema output |
 | Full-app software WebGPU diagnostic | **Known failure reproduced**: WebGPU device loss and dark canvas. Secure context, adapter, ENTER, HUD, five terminals and extension creation are startup evidence only |
-| New physical Windows 11 acceptance | **Pending; not performed in Codex** |
+| New physical Windows 11 acceptance | **Pending; not performed in Codex**, including multilingual glyph/readability checks in Chrome and Edge |
 
 Measured continuous routes from the **original spawn**, including accepted city
 walking segments: west out **159.97 m**, plaza exploration **159.52 m**, return
@@ -188,7 +254,14 @@ the production app. Existing large-bundle and transitive `tar@7.5.7` warnings re
 
 All fixture provider requests are intercepted before navigation. No real course
 content, identity/answer collection, tracking or new persistent storage is used.
-Metrics are test-only in `tests/fixtures/matrix-route-metrics.json`.
+Metrics are test-only in `tests/fixtures/matrix-route-metrics.json`. The revised
+Unicode browser suite writes `/tmp/matrix-text.json` and `/tmp/matrix-text-atlas.png`.
+Linux Chromium Canvas output has no observed tofu/substitution, and bundled cmap
+coverage avoids relying on OS fonts. **Supported Windows browsers have not been
+physically checked here**; their final WebGPU raster/sampling/readability and
+no-tofu acceptance remain on the checklist. An isolated software WebGL TSL
+render checks the revised atlas orientation/style separately from full-app
+WebGPU acceptance. The original cloud device-loss limitation remains.
 
 ## Reproduce
 
@@ -211,6 +284,7 @@ python scripts/browser-phase-1.py --cafile <public-certificate>
 python scripts/browser-phase-2.py --cafile <public-certificate>
 python scripts/browser-phase-3.py --cafile <public-certificate>
 python scripts/browser-phase-3-5.py --cafile <public-certificate>
+python scripts/browser-matrix-text.py --cafile <public-certificate>
 python scripts/verify-baseline.py --origin https://127.0.0.1:5173 --cafile <public-certificate>
 python scripts/plot-matrix-layout.py
 ```
@@ -233,7 +307,8 @@ python scripts/probe-webgpu.py --cafile <public-certificate> --software-webgpu -
 | --- | --- |
 | `src/world/matrix/matrixLayout.js` | Documented entrances, footprints, openings, resource limits and route-distance culling |
 | `src/world/matrix/openCityBounds.js` | Local world-space triangle subtraction, replacement BVH and original restoration |
-| `src/world/matrix/glyphAtlas.js` | Original deterministic glyph pixels/shared texture |
+| `src/world/matrix/glyphInventory.js`, `glyphAtlas.js` | Curated Unicode/cells/seeded mixing, cached local FontFace and padded Canvas atlas |
+| `src/world/matrix/fonts/lab-matrix-text.woff2`, `public/licenses/matrix-text/` | Small renamed font subset, complete OFL and attribution/provenance |
 | `src/world/matrix/createDigitalRain.js` | Fixed instance data, TSL falling trails, safe fades and resource disposal |
 | `src/world/matrix/createMatrixExtension.js` | Ground, bounds, local backdrops, update/culling/disposal composition |
 | `src/world/createWorld.js` | Register extension, shared ground-probe group/collider and HMR disposal |
@@ -243,7 +318,8 @@ python scripts/probe-webgpu.py --cafile <public-certificate> --software-webgpu -
 | `tests/harness.html` | Exercise actual extension by default, original-bounds inspection option |
 | `tests/matrix.test.js`, `tests/helpers/verifyMatrixRoutes.js`, `tests/fixtures/matrix-route-metrics.json` | Focused clipping/glyph limits, real-controller support/return/bounds/cleanup evidence |
 | `scripts/browser-phase-3-5.py`, `scripts/plot-matrix-layout.py`, `scripts/probe-webgpu.py` | New geometry runner/diagram generation; existing startup diagnostic also records extension presence |
-| `AGENTS.md`, `Plan.md`, `docs/phase-3-results.md` | Current authorization, previous acceptance and stop gate |
+| `scripts/browser-matrix-text.py`, `tests/helpers/verifyMatrixText.js`, `tests/fixtures/matrix-font-coverage.json`, `scripts/subset-matrix-font.py` | Real browser raster/mapping/fallback/animation checks and reproducible licensed subset |
+| `AGENTS.md`, `Plan.md`, `docs/phase-3-results.md`, `docs/asset-licenses.md` | Current authorization, previous acceptance/stop gate and separate font license |
 | This report, `docs/phase-3-5-layout.svg` | Architecture, analysis, coordinate diagram, exact evidence and acceptance limits |
 
 ## Windows 11 Chrome/Edge acceptance checklist
@@ -260,6 +336,12 @@ Use instructor-controlled local exports; do not publish fixture course units.
 - [ ] Gradual green glyph/ground buildup works at both gates and reverses
   naturally on return. Original neon buildings are visible when looking back
   from both transition areas; no backdrop covers the entrance or city view.
+- [ ] Local Lab Matrix Text WOFF2 loads successfully, without any font CDN.
+  At close and medium distances, both zones and each column show recognizable
+  English/digits/symbols, Hiragana/Katakana and Hangul, with readable strokes.
+  No tofu, question-mark replacement, clipping, upside-down text or cell bleed.
+  Repeat in Windows 11 Chrome and Edge; inspect all 96 entries if needed using
+  the test atlas. Confirm stable varied identities during falling animation.
 - [ ] Dark plazas, green grid, falling characters, bright heads/darker varied
   tails, negative space and distance fades read well under the actual post stack.
   Check aliasing/flicker, transparency, side/backdrop seams and hidden outer edge.

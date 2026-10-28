@@ -32,7 +32,7 @@
           camera.position.set(...FREE_CAMERA_START.position);
           camera.lookAt(...FREE_CAMERA_START.target);
           const matrix = new URLSearchParams(location.search).has('originalBounds') ? null
-            : createMatrixExtension({ scene, boundsCollider: geometry.bounds, colliders: geometry.colliders });
+            : await createMatrixExtension({ scene, boundsCollider: geometry.bounds, colliders: geometry.colliders });
           const walkGround = new THREE.Group();
           walkGround.add(ground);
           if (matrix) walkGround.add(matrix.ground);
