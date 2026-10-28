@@ -290,8 +290,35 @@ Node tests, production build, the 10 existing Python tests, three portability
 regressions and production artifact integrity. The CP950 simulation runs on both
 platforms; the Windows job exercises real Windows Git/pathlib behavior as well.
 No runtime dependency, gameplay, camera, movement, Matrix, education, schema,
-asset or validation algorithm is changed. Hosted results are recorded after
-the corrected workflow completes.
+asset or validation algorithm is changed.
+
+Local revalidation passed frozen install, **506/506 Node tests**, build (**208
+modules**), the **10 existing + 3 portability Python tests**, all five browser
+suites and actual root/nested/UserDir HTTPS Apache smoke. Each static variant
+again verified 79 non-dot files/80 total files, all original hashes, font loading,
+MIME/cache/range/404 behavior and synthetic v1/v2 switching. Software WebGPU loss
+remains classified separately; the instructor's physical acceptance is not a
+new cloud visual/FPS measurement. AST comparisons of all **17 changed existing
+Python files** confirm that removing the added encoding keywords reproduces
+their previous semantics. Approved reference/public inventories, src/, schemas/,
+tools/, runtime configuration and dependency lockfile are byte-identical to
+pre-compatibility head `b01a294c20c461161f0d2d6def2ae8a46b7ff766`.
+
+Hosted [Validation run 40649208477](https://github.com/chingchechung/engineering-cyberpunk-lab/actions/runs/40649208477)
+completed **successfully** for implementation commit
+**`aabbeac521174ab42ae0b3cf7a2c69363ecf2cf9`**, with both jobs successful:
+
+| Hosted compatibility check | Evidence |
+| --- | --- |
+| Windows 2025, Python **3.14.9** (job `122685073273`) | Initial Git checkout uses `core.autocrlf=true`; frozen install, **506 Node tests**, production build, **13 Python tests** and production integrity passed. Fresh-checkout **15 reference + 54 public hashes** and CP950-default read/write/CLI/parity checks passed with UTF-8 mode disabled. |
+| Ubuntu 24.04 (job `122685072938`) | Frozen install, **506 Node tests**, build, existing **10 Python tests** plus **3 portability tests**, all **five browser suites**, and headed Phase 3/Xvfb passed. |
+| Actual built Apache root/nested/UserDir | All three passed; **54/55/56 observed runtime responses** respectively, confined to the correct bases. The same independent hash/MIME/cache/range/404/font/assignment checks passed. Known software GPU loss remained explicitly classified. |
+
+This report-only follow-up is validated again at the final PR head; its immutable
+SHA and completed workflow are recorded in PR #7 and the final handoff. Windows
+CI is an automated Windows Server/Python compatibility test, distinct from the
+instructor's physical Windows 11 Production Build acceptance. No publication,
+distribution archive upload, deployment, merge or visibility change occurred.
 
 For an existing Windows checkout, first preserve local edits, update the branch,
 then restore only previously converted files that have no intentional edits
