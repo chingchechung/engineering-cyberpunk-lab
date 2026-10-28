@@ -21,6 +21,7 @@ export function createRenderLoop({
 
     cameraDirector.update(delta);
     onFrame?.(delta);
+    world.matrix?.update(delta, camera);
 
     world.collisionHeight?.update({
       camera,

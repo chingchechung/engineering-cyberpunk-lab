@@ -1,0 +1,22 @@
+{
+  "routes": {
+    "westOut": 159.97,
+    "westExplore": 159.52,
+    "westReturn": 160.04,
+    "eastOut": 332.94,
+    "eastExplore": 159.52,
+    "eastReturn": 332.86
+  },
+  "wallSamples": 8458,
+  "boundaryEdges": 18,
+  "supportSamples": 20214,
+  "lookBackRays": {
+    "west": 6.029070859432693,
+    "east": 13.682697595375714
+  },
+  "originalBoundsTriangles": 156,
+  "openedBoundsTriangles": 292,
+  "disposedResources": 20,
+  "glyphInstances": 10240,
+  "groundY": -5.398
+}

@@ -6,18 +6,24 @@ The original upstream instructions are retained below.
 
 ## Authorized phase and Git workflow
 
-- Phase 0–2 and the walking-speed adjustment are complete, accepted and merged.
-  Phase 2 PR #4 merged at `3142bd30534519669f545e835a078c8f4739ed1f`.
-- Phase 3 is explicitly authorized on `feature/phase-3-learning-workflow` from
-  latest main: complete the educational links, redistribute exactly five fixed
-  terminals within the original reachable city, and add trusted Close & Resume.
-- Survey actual GLBs/BVHs and preserve material sidedness in geometry tests.
-  Keep the city/model/bounds, original spawn, movement/collision algorithms,
-  mouse filters/pitch/settling/R/P, WebGPU/TSL and visual effects unchanged.
-- Complete automated checks, document evidence and Windows acceptance, open a
-  **Draft PR**, then stop for instructor review. Do not begin Phase 4, merge,
-  tag, release, deploy, publish coursework/fixtures or change private visibility.
-  See [docs/phase-3-results.md](docs/phase-3-results.md).
+- Phase 0–3 and the walking-speed adjustment are accepted and merged.
+  Phase 3 PR #5 merged at `39ee045893c8c3b456894fc0e1097ac942dcd912` after
+  instructor Windows 11 acceptance.
+- Phase 3.5 is authorized on `feature/phase-3-5-matrix-extension` from latest
+  main: two seamless digital zones beyond surveyed street-end gaps, original
+  procedural glyphs, lightweight ground, localized boundary openings and safe
+  exterior limits. Do not move terminals, original city assets or spawn.
+- Retain actual city/building/vehicle collisions and all bounds outside the two
+  documented opening boxes. Clip triangles locally; never remove all city or
+  bounds collisions. Preserve material sidedness in geometry tests. Keep the
+  original movement, mouse filters/pitch/settling/R/P and educational system.
+- Matrix effects use bounded instancing/TSL, local fades and the existing loop.
+  Never change global fog/lighting/weather or degrade original effects for this
+  feature. Hide glyphs/backdrops from the rain height pass, retain ground support,
+  and dispose generated resources. See [docs/phase-3-5-results.md](docs/phase-3-5-results.md).
+- Complete before/after automated suites, document Windows acceptance, open a
+  **Draft PR**, then stop. Phase 4, merging, releases, deployment, coursework
+  publication and visibility changes remain unauthorized.
 - Use feature branches and GitHub pull requests against
   `chingchechung/engineering-cyberpunk-lab`. Do not modify or push to
   `ektogamat/threejs-conference`.
@@ -44,7 +50,9 @@ The original upstream instructions are retained below.
   (Node regression tests) and `scripts/browser-phase-1.py` (Playwright with the
   real DOM/Pointer Lock and decoded GLB geometry, independent of GPU rendering).
   Phase 3 adds `scripts/browser-phase-3.py` and collision-verified survey/route
-  evidence. Provider fixture URLs must be intercepted before navigation.
+  evidence. Phase 3.5 adds `scripts/browser-phase-3-5.py` for round trips, support,
+  retained boundary surfaces, safe exterior edges and resource cleanup. Provider
+  fixture URLs must be intercepted before navigation.
   Build, HTTP, and geometry/input checks do not prove rendered visual parity.
 
 ## Requirements for later phases

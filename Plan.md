@@ -6,13 +6,13 @@ Target: `chingchechung/engineering-cyberpunk-lab`.
 Upstream: `ektogamat/threejs-conference` (Threejs-Punk), pinned to
 `8cc20593b2270e2ce832e7b7b44356705daddec4`.
 
-Phase 0–2 and the walking-speed adjustment are complete, accepted and merged.
-Phase 2 PR #4 merged at `3142bd30534519669f545e835a078c8f4739ed1f`.
-Phase 3 is explicitly authorized on `feature/phase-3-learning-workflow` from
-latest main: distribute five terminals across the existing reachable city,
-complete native video/explanation/Form actions, and improve trusted quiz resume.
-Finish tests/docs and open a Draft PR; stop for instructor acceptance before
-Phase 4. Keep the repository Private; no public release/deployment is authorized.
+Phase 0–3 and the walking-speed adjustment are accepted and merged.
+Phase 3 PR #5 merged at `39ee045893c8c3b456894fc0e1097ac942dcd912` after
+instructor Windows 11 acceptance. Phase 3.5 is authorized on
+`feature/phase-3-5-matrix-extension` from latest main: add two seamless, bounded
+Matrix-style extensions through surveyed street-end gaps. Complete automated
+validation/docs and open a Draft PR; stop for Windows 11 Chrome/Edge acceptance.
+Phase 4 is not authorized. Keep the repository Private; no release/deployment.
 Never modify the upstream repository, merge a PR, publish a release, or deploy
 without explicit approval. Retain the city, walking, BVH collision, rain,
 lighting, shaders, post-processing, and original visual quality.
@@ -98,7 +98,7 @@ Results, provenance, commands, remaining limits and the physical acceptance
 checklist are in [docs/phase-2-results.md](docs/phase-2-results.md). The instructor
 accepted this phase and merged PR #4; its earlier stop is historical.
 
-## Phase 3 — complete workflow, terminal redistribution and resume (implemented; acceptance pending)
+## Phase 3 — complete workflow, terminal redistribution and resume (accepted and merged)
 
 - Decode the original city/collision GLBs and determine a conservative connected
   walking region from the unchanged spawn using actual movement/BVH rules.
@@ -128,7 +128,31 @@ accepted this phase and merged PR #4; its earlier stop is historical.
 
 See [docs/phase-3-results.md](docs/phase-3-results.md) for final coordinates,
 distance table/diagram, methods, source preservation, tests and Windows checklist.
-Exit: a Draft PR and a stop for instructor acceptance. Phase 4 is not authorized.
+The instructor accepted Phase 3 on Windows 11 and merged PR #5. Its original
+Draft PR stop is historical. Phase 3.5 is the only newly authorized work.
+
+## Phase 3.5 — Matrix digital world extension (implemented; acceptance pending)
+
+- Inspect original GLBs, the accepted survey, bounds and reflective ground first.
+  The X-longitudinal street exits bend NW/SE between buildings; preserve both
+  buildings and all boundary geometry outside two explicit opening boxes.
+- Add dark local grid ground, two finite 44 × 44 m plazas, and narrow causeways
+  routed between existing buildings. Preserve original spawn/Q01–Q05. Use the
+  original movement controller recursively probing both ground types; protect
+  every exterior perimeter edge, leaving only the city entrances open.
+- Generate original glyph bitmap data and bounded GPU-instanced falling trails
+  with varied speeds/lengths/brightness, local transition/distance fades, dark
+  negative space and local plaza backdrops. No new dependencies or asset loads.
+- Keep one animation loop, original city visuals/global state, wet reflections,
+  rain/height map/shaders/post, education/assignments and controls. Add explicit
+  resource disposal and exclude nonphysical atmosphere from rain-height rendering.
+- Run all previous suites before/after plus continuous supported return routes,
+  retained original wall samples, every exterior edge/corner and cleanup/culling.
+  Separate geometry/software diagnostics from physical WebGPU acceptance.
+- Report coordinates, dimensions, tradeoffs, diagram, exact evidence, changed
+  files and Windows checklist in [docs/phase-3-5-results.md](docs/phase-3-5-results.md).
+
+Exit: Draft PR, no merge/release/deployment, stop before Phase 4.
 
 ## Phase 4 — regression and release preparation (not started)
 
