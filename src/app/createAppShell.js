@@ -108,6 +108,7 @@ export function createAppShell({
     walkControlsHint = createWalkControlsHint({
       state: uiState,
       domElement: renderer.domElement,
+      walkControls: walkFacade,
     });
 
     walkPrompt = createWalkPrompt({

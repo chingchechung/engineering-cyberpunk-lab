@@ -9,6 +9,8 @@ export function createWalkInputFacade(walkControls) {
     setMoveAxes: (...args) => walkControls.setMoveAxes(...args),
     subscribe: (listener) => walkControls.subscribe(listener),
     hasTouchLooked: () => walkControls.hasTouchLooked?.() ?? false,
+    getInputMethod: () => walkControls.getInputMethod(),
+    setInputMethod: (method) => walkControls.setInputMethod(method),
     requestPointerLock: () => walkControls.requestPointerLock?.(),
     exitPointerLock: () => walkControls.exitPointerLock?.(),
   };

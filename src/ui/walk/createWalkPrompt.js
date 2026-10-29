@@ -33,13 +33,14 @@ export function createWalkPrompt({ domElement, walkControls, state } = {}) {
   let enabled = false;
   let panelOpen = Boolean(state?.openedPanel);
   let hasTouchLooked = walkControls?.hasTouchLooked?.() ?? false;
+  let inputMethod = walkControls?.getInputMethod?.() ?? (isCoarsePointerDevice() ? "touch" : "mouse");
 
   function isPointerLocked() {
     return document.pointerLockElement != null;
   }
 
   function syncCopy() {
-    if (isCoarsePointerDevice()) {
+    if (inputMethod === "touch") {
       titleEl.textContent = "Drag to look around";
       root.setAttribute("aria-label", "Drag to look around");
       root.classList.add("walk-prompt--passive");
@@ -53,7 +54,7 @@ export function createWalkPrompt({ domElement, walkControls, state } = {}) {
   function sync() {
     syncCopy();
 
-    const coarse = isCoarsePointerDevice();
+    const coarse = inputMethod === "touch";
     const shouldShow = coarse
       ? enabled && !hasTouchLooked && !panelOpen
       : enabled && !isPointerLocked() && !panelOpen;
@@ -68,39 +69,38 @@ export function createWalkPrompt({ domElement, walkControls, state } = {}) {
   }
 
   function onPointerLockChange() {
-    if (isCoarsePointerDevice()) {
-      return;
-    }
-
     sync();
   }
 
   function onClick(event) {
-    if (isCoarsePointerDevice()) {
-      return;
-    }
+    if (!event.isTrusted || event.pointerType === "touch" || event.pointerType === "pen" ||
+      event.sourceCapabilities?.firesTouchEvents) return;
 
     event.preventDefault();
     event.stopPropagation();
 
-    if (!domElement || isPointerLocked() || panelOpen) {
+    if (!enabled || !domElement || isPointerLocked() || panelOpen) {
       return;
     }
 
     walkControls?.requestPointerLock?.();
   }
 
-  function onWalkChange({ hasTouchLooked: nextHasTouchLooked } = {}) {
-    if (!isCoarsePointerDevice()) {
-      return;
-    }
-
+  function onWalkChange({ hasTouchLooked: nextHasTouchLooked, inputMethod: nextMethod } = {}) {
+    inputMethod = nextMethod ?? inputMethod;
     hasTouchLooked = Boolean(nextHasTouchLooked);
     sync();
   }
 
+  function onPointerDown(event) {
+    if (!enabled || panelOpen || !["touch", "pen"].includes(event.pointerType)) return;
+    event.preventDefault();
+    walkControls?.setInputMethod?.("touch");
+  }
+
   document.addEventListener("pointerlockchange", onPointerLockChange);
   root.addEventListener("click", onClick);
+  root.addEventListener("pointerdown", onPointerDown);
   const unsubscribeWalk = walkControls?.subscribe?.(onWalkChange);
   const unsubscribeState = state?.subscribe?.(({ openedPanel }) => {
     panelOpen = Boolean(openedPanel);
@@ -121,6 +121,7 @@ export function createWalkPrompt({ domElement, walkControls, state } = {}) {
       unsubscribeState?.();
       document.removeEventListener("pointerlockchange", onPointerLockChange);
       root.removeEventListener("click", onClick);
+      root.removeEventListener("pointerdown", onPointerDown);
       root.remove();
     },
   };

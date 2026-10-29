@@ -31,16 +31,20 @@ export function createVirtualJoystick({ walkControls, state } = {}) {
   let forceHidden = false;
   let panelOpen = Boolean(state?.openedPanel);
   let activePointerId = null;
+  let inputAvailable = true;
   let baseCenter = { x: 0, y: 0 };
 
   function isSupportedLayout() {
+    if (walkControls?.getInputMethod) return walkControls.getInputMethod() === "touch";
     return isMobileLayout() || isCoarsePointerDevice();
   }
 
   function resetAxes() {
+    const pointerId = activePointerId;
+    activePointerId = null;
+    if (pointerId !== null && root.hasPointerCapture?.(pointerId)) root.releasePointerCapture?.(pointerId);
     walkControls?.setMoveAxes?.(0, 0);
     knob.style.transform = "translate(-50%, -50%)";
-    activePointerId = null;
   }
 
   function syncVisibility() {
@@ -49,6 +53,7 @@ export function createVirtualJoystick({ walkControls, state } = {}) {
       walkModeVisible &&
       !forceHidden &&
       !panelOpen &&
+      inputAvailable &&
       isSupportedLayout();
 
     root.hidden = !show;
@@ -95,9 +100,15 @@ export function createVirtualJoystick({ walkControls, state } = {}) {
   }
 
   function onPointerDown(event) {
-    if (!enabled || forceHidden || panelOpen || !isSupportedLayout()) {
+    if (!enabled || root.hidden || forceHidden || panelOpen || !inputAvailable || activePointerId !== null) {
       return;
     }
+
+    if (event.pointerType === "mouse") {
+      walkControls?.setInputMethod?.("mouse");
+      return;
+    }
+    if (event.pointerType !== "touch" && event.pointerType !== "pen") return;
 
     event.preventDefault();
     event.stopPropagation();
@@ -126,17 +137,23 @@ export function createVirtualJoystick({ walkControls, state } = {}) {
     event.preventDefault();
     event.stopPropagation();
 
-    if (root.hasPointerCapture?.(event.pointerId)) {
-      root.releasePointerCapture?.(event.pointerId);
-    }
-
     resetAxes();
+  }
+
+  function onLostPointerCapture(event) {
+    if (activePointerId === event.pointerId) resetAxes();
   }
 
   root.addEventListener("pointerdown", onPointerDown);
   root.addEventListener("pointermove", onPointerMove);
   root.addEventListener("pointerup", onPointerUp);
   root.addEventListener("pointercancel", onPointerUp);
+  root.addEventListener("lostpointercapture", onLostPointerCapture);
+
+  const unsubscribeWalk = walkControls?.subscribe?.((snapshot) => {
+    inputAvailable = snapshot.inputAvailable ?? true;
+    syncVisibility();
+  });
 
   const unsubscribeState = state?.subscribe?.(({ openedPanel }) => {
     panelOpen = Boolean(openedPanel);
@@ -159,10 +176,12 @@ export function createVirtualJoystick({ walkControls, state } = {}) {
     },
     destroy() {
       unsubscribeState?.();
+      unsubscribeWalk?.();
       root.removeEventListener("pointerdown", onPointerDown);
       root.removeEventListener("pointermove", onPointerMove);
       root.removeEventListener("pointerup", onPointerUp);
       root.removeEventListener("pointercancel", onPointerUp);
+      root.removeEventListener("lostpointercapture", onLostPointerCapture);
       resetAxes();
       root.remove();
     },
